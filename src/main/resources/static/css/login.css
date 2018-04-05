@@ -3,7 +3,7 @@
 	margin: auto;
 	border: 1px #CCC solid;
 	padding: 30px;
-	background-color: #29363f;
+	background-color: #d31334;
 	color: #FFF;
 	text-align: center;
 }
@@ -19,7 +19,10 @@
 	width: 216px;
 	color: #FFF;
 }
-
+.field::placeholder {
+	color: white;
+    opacity: 1; 
+}
 .login h1, .login p, .btn, .forgot {
 	color: #CCC;
 }
