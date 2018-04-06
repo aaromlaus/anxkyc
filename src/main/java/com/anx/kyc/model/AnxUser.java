@@ -1,6 +1,7 @@
 package com.anx.kyc.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,29 +13,45 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="anx_user")
+@Table(name = "anx_user")
 public class AnxUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name="anx_user_id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "anx_user_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
-	@Column(name="first_name")
+	
+	@Column(name = "first_name")
 	private String firstName;
-	@Column(name="middle_name")
+	
+	@Column(name = "middle_name")
 	private String middleName;
-	@Column(name="last_name")
+	
+	@Column(name = "last_name")
 	private String lastName;
-	@Column(name="username")
+	
+	@Column(name = "username")
 	private String username;
-	@Column(name="password")
+	
+	@Column(name = "password")
 	private String password;
+	
+	private String houseNumber;
+	private String street;
+	private String city;
+	private String province;
+	private String country;
+	private String postalCode;
+	private String sourceOfFund;
+	private Date birthDate;
+	
 	@ManyToOne(optional = false)
-	@JoinColumn(name="role_id")
+	@JoinColumn(name = "role_id")
 	private Role role;
+	
 	@ManyToOne(optional = false)
-	@JoinColumn(name="user_level_id")
+	@JoinColumn(name = "user_level_id")
 	private UserLevel userLevel;
 
 	public int getUserId() {
@@ -99,6 +116,70 @@ public class AnxUser implements Serializable {
 
 	public void setUserLevel(UserLevel userLevel) {
 		this.userLevel = userLevel;
+	}
+
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getSourceOfFund() {
+		return sourceOfFund;
+	}
+
+	public void setSourceOfFund(String sourceOfFund) {
+		this.sourceOfFund = sourceOfFund;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 
 }

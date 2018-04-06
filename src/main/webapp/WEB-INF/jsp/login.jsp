@@ -14,6 +14,7 @@
 </head>
 
 <body>
+	<jsp:include page="../common/header.jsp"></jsp:include>
 	<div class="login">
 		<h3>ANX Login</h3>
 		<form:form method="POST" modelAttribute="loginForm" action="/login" >
