@@ -11,10 +11,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-	<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../jsp/common/header.jsp"></jsp:include>
 	<div class="login">
 		<h3>ANX Login</h3>
 		<form:form method="POST" modelAttribute="loginForm" action="/login" >
