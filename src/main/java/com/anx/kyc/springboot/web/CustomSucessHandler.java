@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -49,7 +48,7 @@ public class CustomSucessHandler extends SimpleUrlAuthenticationSuccessHandler {
         if (isAdmin(roles)) {
             url = "/admin/main/";
         } else if (isUser(roles)) {
-            url = "/user/";
+            url = "/profile/main/";
         } else {
             url="/accessDenied";
         }

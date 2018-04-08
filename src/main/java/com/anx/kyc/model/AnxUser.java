@@ -36,14 +36,21 @@ public class AnxUser implements Serializable {
 	
 	@Column(name = "password")
 	private String password;
-	
+	@Column(name = "house_number")
 	private String houseNumber;
+	@Column(name = "street")
 	private String street;
+	@Column(name = "city")
 	private String city;
+	@Column(name = "province")
 	private String province;
+	@Column(name = "country")
 	private String country;
+	@Column(name = "postal_code")
 	private String postalCode;
+	@Column(name = "source_of_fund")
 	private String sourceOfFund;
+	@Column(name = "birth_date")
 	private Date birthDate;
 	
 	@ManyToOne(optional = false)
