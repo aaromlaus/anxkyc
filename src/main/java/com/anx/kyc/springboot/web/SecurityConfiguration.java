@@ -22,14 +22,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	DataSource dataSource;
+
 	@Autowired
 	CustomSucessHandler customSucessHandler;
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/admin/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers("/profile/**").hasAnyAuthority("user");
-		http.formLogin().failureUrl("/login?error").loginPage("/login").successHandler(customSucessHandler).permitAll().and().exceptionHandling()
-				.accessDeniedPage("/admin/login?accessDenied").and().logout()
+		http.formLogin().failureUrl("/login?error").loginPage("/login").successHandler(customSucessHandler).permitAll()
+				.and().exceptionHandling().accessDeniedPage("/admin/login?accessDenied").and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
 	}
 
@@ -52,8 +54,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@SuppressWarnings("deprecation")
 	@Bean
-	 public NoOpPasswordEncoder passwordEncoder() 
-	 {
-	    return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-	 }
+	public NoOpPasswordEncoder passwordEncoder() {
+		return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+	}
+
 }

@@ -36,5 +36,5 @@
 </div>
 
 <center>
-	Already have an account? <a href="#" target="blank">Sign in </a>
+	Already have an account? <a href="../login" target="blank">Sign in </a>
 </center>

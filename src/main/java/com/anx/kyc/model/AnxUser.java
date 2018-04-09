@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "anx_user")
 public class AnxUser implements Serializable {
@@ -59,6 +61,7 @@ public class AnxUser implements Serializable {
 	private String sourceOfFund;
 	
 	@Column(name = "birth_date")
+	@DateTimeFormat(pattern = "mm/dd/yyyy")
 	private Date birthDate;
 
 	@ManyToOne(optional = false)
