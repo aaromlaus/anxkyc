@@ -14,12 +14,15 @@ import javax.persistence.Table;
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name = "role_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int roleId;
+	
 	@Column(name = "role_name")
 	private String roleName;
+	
 	@Column(name = "description")
 	private String description;
 

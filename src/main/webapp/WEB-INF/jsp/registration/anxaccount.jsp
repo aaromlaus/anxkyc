@@ -23,16 +23,6 @@
 				placeholder="Middle Name" />
 			<form:input path="lastName" required="required" class="form"
 				placeholder="Last Name" />
-			<form:input path="role.roleName" list="rolelist" required="required" class="form"
-							placeholder="Role" />
-			<datalist id="rolelist"> 
-				<%-- <c:forEach items="${roleList}" var="item">
-				
-				</c:forEach> --%>
-				<option value="test1" />
-				<option value="test2" />
-			</datalist>
-			
 			<form:input path="username" required="required" class="form"
 				placeholder="Email Address or Mobile Number" />
 			<form:password path="password" required="required" class="form"
