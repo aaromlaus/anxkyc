@@ -1,7 +1,9 @@
 package com.anx.kyc.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -71,6 +74,8 @@ public class AnxUser implements Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "user_level_id")
 	private UserLevel userLevel;
+	@Transient
+	private List<LevelUser> levelUser = new ArrayList<>();
 
 	public int getUserId() {
 		return userId;
@@ -199,5 +204,15 @@ public class AnxUser implements Serializable {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
+
+	public List<LevelUser> getLevelUser() {
+		return levelUser;
+	}
+
+	public void setLevelUser(List<LevelUser> levelUser) {
+		this.levelUser = levelUser;
+	}
+
+	
 
 }

@@ -38,7 +38,7 @@ public class RegistrationController {
 		anxUser.setRole(urService.getRole("user"));
 		anxUser.setUserLevel(urService.getUserLevel("level1"));
 		urService.saveUser(anxUser);
-		
+		urService.saveNewLevelUser(anxUser);
 		model.put("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		model.put("msgDetails", AnxConstant.REGISTRATION_SUCCESS_MSG);
 		return "registration/anxuserdetails";

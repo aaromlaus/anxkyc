@@ -35,9 +35,31 @@ CONSTRAINT fk_anx_user_user_level FOREIGN KEY (user_level_id)
 );
 
 INSERT INTO user_level(user_level_name,description)
-values ('level1','currently register as level 1'),
- ('level2','currently register as level 2'),
- ('level2pending','currently register as level 1 pending to level 2');
+values ('level1','Level 1'),
+ ('level2','Level 2'),
+ ('level2pending','level 1 pending to level 2');
+ 
+ CREATE TABLE level(
+	level_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,	
+	description TEXT,
+	requirement TEXT,
+	cash_in VARCHAR(100),
+	cash_out VARCHAR(100),
+	enabled boolean default false
+);
+INSERT INTO level(description,requirement,cash_in,cash_out,enabled)
+values ('Level 1','Phone or email verification','2,000 PHP','0 PHP',true),
+('Level 2','ID, selfie, phone and email verification','50,000 PHP','50,000 PHP',true),
+('Level 3','Address verification','400,000 PHP','400,000 PHP',true),
+('Level 4','Custom limits application','Custom (up to 5 million PHP)','Custom(up to 5 million PHP)',true);
+
+
+CREATE TABLE level_user(
+	level_user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	user_id INT,
+	anx_user_id INT,
+	level_limit boolean default false
+);
 
  INSERT INTO role(role_name,description)
 values ('user','role for user'),

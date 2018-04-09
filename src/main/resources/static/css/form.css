@@ -95,3 +95,18 @@ input[type="submit"] {
 input[type="submit"]:hover {
 	background: #2288bb;
 }
+
+#main-user {
+	width: 900px;
+	margin: 0 auto;
+	margin-top: 8px;
+	margin-bottom: 2%;
+	transition: opacity 1s;
+	-webkit-transition: opacity 1s;
+}
+
+.color-white-text {
+	color:#ffffff;
+}
+
+
