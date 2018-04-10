@@ -41,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.jdbcAuthentication().dataSource(dataSource)
 				.usersByUsernameQuery("SELECT username,password,role_id FROM anx_kyc.anx_user WHERE username=?")
 				.authoritiesByUsernameQuery(
-						"SELECT u.username, r.role_name as role FROM anx_kyc.anx_user u INNER JOIN role r USING(role_id) WHERE u.username=?")
+						"SELECT u.username, r.role_name as role FROM anx_kyc.anx_user u INNER JOIN role r USING(role_name) WHERE u.username=?")
 				.passwordEncoder(passwordEncoder());
 
 	}

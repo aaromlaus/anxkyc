@@ -1,4 +1,4 @@
-package com.anx.kyc.common;
+package com.anx.kyc.constant;
 
 public class AnxConstant {
 

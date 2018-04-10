@@ -1,0 +1,32 @@
+#anxuser {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	margin-top: 2%;
+}
+
+#anxuser td, #anxuser th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#anxuser tr:nth-child(even) {
+	background-color: #34495E;
+	border-color: lighten(#34495E, 10%);
+}
+
+#anxuser tr:hover {
+	background-color: #418a95;
+}
+
+#anxuser th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #34495E;
+	color: #dd5;
+}
+
+#anxuser td {
+	color: white;
+}

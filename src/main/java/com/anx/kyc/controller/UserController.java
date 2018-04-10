@@ -9,19 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.anx.kyc.model.AnxUser;
-import com.anx.kyc.service.UserRegistrationService;
+import com.anx.kyc.service.UserService;
 
 @Controller
 @RequestMapping("/profile")
 public class UserController {
 	@Autowired
-	private UserRegistrationService urService;
-	@RequestMapping(value="/main")
+	private UserService userService;
+
+	@RequestMapping(value = "/main")
 	public String mainPage(Map<String, Object> model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
-		AnxUser anxUser = urService.findAnxUserByUsername(currentPrincipalName);
-		anxUser.setLevelUser(urService.findLevelUserById(anxUser));
+		AnxUser anxUser = userService.findAnxUserByUsername(currentPrincipalName);
+		anxUser.setLevelUser(userService.findLevelUserById(anxUser));
 		model.put("anxUser", anxUser);
 		return "main/user";
 	}

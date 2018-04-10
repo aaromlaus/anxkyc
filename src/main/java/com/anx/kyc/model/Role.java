@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NaturalId;
+
 @Entity
 @Table(name = "role")
 public class Role implements Serializable {
@@ -21,6 +23,7 @@ public class Role implements Serializable {
 	private int roleId;
 	
 	@Column(name = "role_name")
+	@NaturalId
 	private String roleName;
 	
 	@Column(name = "description")

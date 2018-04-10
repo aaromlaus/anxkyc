@@ -68,11 +68,11 @@ public class AnxUser implements Serializable {
 	private Date birthDate;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "role_id")
+	@JoinColumn(name = "role_name", referencedColumnName = "role_name")
 	private Role role;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "user_level_id")
+	@JoinColumn(name = "user_level_name", referencedColumnName = "user_level_name")
 	private UserLevel userLevel;
 	@Transient
 	private List<LevelUser> levelUser = new ArrayList<>();

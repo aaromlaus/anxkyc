@@ -1,14 +1,16 @@
 CREATE TABLE role (
 role_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-role_name TEXT,
-description TEXT
+role_name VARCHAR(255) NOT NULL,
+description TEXT,
+UNIQUE(role_name)
 );
 
 
 CREATE TABLE user_level(
 user_level_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-user_level_name TEXT,
-description TEXT
+user_level_name VARCHAR(255) NOT NULL,
+description TEXT,
+UNIQUE(user_level_name)
 );
 
 CREATE TABLE anx_user(
@@ -16,10 +18,10 @@ anx_user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 first_name TEXT,
 middle_name TEXT,
 last_name TEXT,
-username TEXT,
+username VARCHAR(255),
 password TEXT,
-role_id INT,
-user_level_id INT,
+role_name VARCHAR(255),
+user_level_name VARCHAR(255),
 house_number VARCHAR(255),
 street VARCHAR(255),
 city VARCHAR(255),
@@ -28,10 +30,11 @@ country VARCHAR(100),
 postal_code VARCHAR(100),
 source_of_fund VARCHAR(100),
 birth_date VARCHAR(100),
-CONSTRAINT fk_anx_user_role FOREIGN KEY (role_id)
-    REFERENCES role(role_id),
-CONSTRAINT fk_anx_user_user_level FOREIGN KEY (user_level_id)
-    REFERENCES user_level(user_level_id)
+CONSTRAINT fk_anx_user_role FOREIGN KEY (role_name)
+    REFERENCES role(role_name),
+CONSTRAINT fk_anx_useruser_leveluser_level_user_level FOREIGN KEY (user_level_name)
+    REFERENCES user_level(user_level_name),
+UNIQUE(username)
 );
 
 INSERT INTO user_level(user_level_name,description)

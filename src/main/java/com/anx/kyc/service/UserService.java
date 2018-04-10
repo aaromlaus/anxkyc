@@ -8,7 +8,7 @@ import com.anx.kyc.model.LevelUser;
 import com.anx.kyc.model.Role;
 import com.anx.kyc.model.UserLevel;
 
-public interface UserRegistrationService {
+public interface UserService {
 	
 	public int saveUser(AnxUser user);
 	
@@ -24,4 +24,8 @@ public interface UserRegistrationService {
 	
 	public AnxUser findAnxUserByUsername(String userName);
 	
+	public List<AnxUser> getUsersByRoleName(String roleName);
+	
+	public List<AnxUser> getUsersByUserLevelName(String userLevelName);
+
 }

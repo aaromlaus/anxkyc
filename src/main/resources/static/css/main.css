@@ -1,3 +1,8 @@
+body {
+	background: #567;
+	font-family: 'Open Sans', sans-serif;
+}
+
 #header {
 	height: 100px;
 	background: #cf2029;
