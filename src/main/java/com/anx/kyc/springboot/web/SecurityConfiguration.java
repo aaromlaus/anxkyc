@@ -32,14 +32,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/profile/**").hasAnyAuthority("user");
 		http.formLogin().failureUrl("/login?error").loginPage("/login").successHandler(customSucessHandler).permitAll()
 				.and().exceptionHandling().accessDeniedPage("/admin/login?accessDenied").and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// auth.userDetailsService(userDetailsService);
 		auth.jdbcAuthentication().dataSource(dataSource)
-				.usersByUsernameQuery("SELECT username,password,role_id FROM anx_kyc.anx_user WHERE username=?")
+				.usersByUsernameQuery("SELECT u.username,u.password,r.role_id FROM anx_kyc.anx_user u INNER JOIN role r USING(role_name) WHERE u.username=?")
 				.authoritiesByUsernameQuery(
 						"SELECT u.username, r.role_name as role FROM anx_kyc.anx_user u INNER JOIN role r USING(role_name) WHERE u.username=?")
 				.passwordEncoder(passwordEncoder());
