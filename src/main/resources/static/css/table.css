@@ -1,25 +1,25 @@
-#anxuser {
+#anxtable {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
 	margin-top: 2%;
 }
 
-#anxuser td, #anxuser th {
+#anxtable td, #anxtable th {
 	border: 1px solid #ddd;
 	padding: 8px;
 }
 
-#anxuser tr:nth-child(even) {
+#anxtable tr:nth-child(even) {
 	background-color: #34495E;
 	border-color: lighten(#34495E, 10%);
 }
 
-#anxuser tr:hover {
+#anxtable tr:hover {
 	background-color: #418a95;
 }
 
-#anxuser th {
+#anxtable th {
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
@@ -27,6 +27,51 @@
 	color: #dd5;
 }
 
-#anxuser td {
+#anxtable td {
 	color: white;
+}
+
+<!-- DATA TABLE -->
+#anxtable_length {
+	float: left;
+}
+
+#anxtable_filter {
+	float: right;
+}
+
+#anxtable_info {
+	display: none;
+}
+
+.dataTables_paginate {
+    background-color: lightslategrey;
+    float: right;
+}
+
+.dataTables_paginate a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.dataTables_paginate a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.dataTables_paginate a:hover:not(.active) {background-color: #ddd;}
+
+.btnApprove {
+	background-color: cadetblue;
+	width: 90px;
+}
+
+.btnReject {
+	background-color: crimson;
+	width: 90px;
 }

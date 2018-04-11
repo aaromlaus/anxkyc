@@ -25,9 +25,7 @@
 			</div>
 		</c:if>
 		<form:form id="myFormId" method="POST" modelAttribute="anxUserForm" action="save" >
-			<form:input path="birthDate" required="required" class="form" id="birthDateId" />
-			<form:errors path="birthDate" />
-			
+			<form:input path="birthDate" required="required" class="form" id="birthDateId" placeholder="Date of Birth" />
 			<form:input path="houseNumber" placeholder="House or Building #" required="required" class="form" />
 			<form:input path="street" placeholder="Street" required="required" class="form" />
 			<form:input path="city" placeholder="City" required="required" class="form" />

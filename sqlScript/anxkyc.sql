@@ -38,9 +38,9 @@ UNIQUE(username)
 );
 
 INSERT INTO user_level(user_level_name,description)
-values ('level1','Level 1'),
- ('level2','Level 2'),
- ('level2pending','level 1 pending to level 2');
+values ('level1','Registered as Level 1'),
+ ('level2','Registered as Level 2'),
+ ('level2pending','Pending Level 2 Approval');
  
  CREATE TABLE level(
 	level_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,	

@@ -46,5 +46,5 @@ public class RegistrationController {
 		model.put("msgDetails", AnxConstant.REGISTRATION_SUCCESS_MSG);
 		return "registration/anxuserdetails";
 	}
-
+	
 }
