@@ -2,12 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <head>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/form.css">
 </head>
 <br />
 <jsp:include page="../common/header.jsp"></jsp:include>
+<jsp:include page="../common/headerMenu.jsp"></jsp:include>
 <div class="inner contact">
 	<div class="col-sm-12 clearfix row">		
 		<div id="main-user">
@@ -55,7 +59,7 @@
 			</div>
 			<div class="clear"></div>
 			<div class="col-sm-12 bg-info">
-				<table class="table table-hover">
+				<table class="table table-hover" id="levelTable">
 					 <thead>
 				      <tr>
 				        <th class="col-sm-2">Levels</th>
@@ -67,7 +71,7 @@
 				    </thead>
 				    <tbody>
 				    	<c:forEach items="${anxUser.levelUser}" var="levelUser">
-					    	<tr>
+					    	<tr class="accordion-toggle" data-toggle="collapse" data-target="#${levelUser.levelUserId}">
 								<td class="col-sm-2">
 						           <c:out value = "${levelUser.level.description}"/>
 						        </td>
@@ -79,11 +83,47 @@
 						        </td>
 						        <td>
 						          <c:out value = "${levelUser.level.cashOut}"/>
-						       </td>
-						        <td>
-						          <c:out value = "${levelUser.levelLimit}"/>&nbsp
 						        </td>
-						    </tr> 
+						        <td>
+						        	<span class="${levelUser.levelLimit ? 'glyphicon glyphicon-ok':''}"></span>&nbsp
+						        </td>
+						    </tr>
+						    <c:if test="${levelUser.level.description.equalsIgnoreCase('Level 2')}">
+							    <tr class="collapse out ${levelUser.levelUserId}" id="${levelUser.levelUserId}">
+							    	<td colspan="5">
+								    	<form:form method="POST" action="/profile/upload/" enctype="multipart/form-data">
+								    		
+								    			<!-- <label>Upload Image</label>
+								    			<img id="img-upload" />
+								    			<div class="input-group">
+								    				<div class="btn btn-default btn-file">
+								    					Browse <input type="file" id="imgInp">
+								    				</div>
+								    				<input type="text" class="form-control" readonly>
+								    			</div> -->
+								    	<div class="input-group image-preview">
+							                <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+							                <span class="input-group-btn">
+							                    <!-- image-preview-clear button -->
+							                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+							                        <span class="glyphicon glyphicon-remove"></span> Clear
+							                    </button>
+							                    <!-- image-preview-input -->
+							                    <div class="btn btn-default image-preview-input">
+							                        <span class="glyphicon glyphicon-folder-open"></span>
+							                        <span class="image-preview-input-title">Browse</span>
+							                        <input type="file" accept="image/png, image/jpeg, image/gif" name="file"/> <!-- rename it -->
+							                    </div>
+							                </span>
+							            </div>		
+								    				<button type="submit" class="btn btn-primary start" data-ng-click="submit()">
+									                    <i class="glyphicon glyphicon-upload"></i>
+									                    <span>Start upload</span>
+									                </button>							    
+										</form:form>
+							    	</td>
+							    </tr> 
+						    </c:if>
 		       			</c:forEach>
 				    </tbody>
 				</table>
@@ -94,5 +134,66 @@
 	</div>	
 	
 </div>
+
+ <script>
+ $(document).on('click', '#close-preview', function(){ 
+	    $('.image-preview').popover('hide');
+	    // Hover befor close the preview
+	    $('.image-preview').hover(
+	        function () {
+	           $('.image-preview').popover('show');
+	        }, 
+	         function () {
+	           $('.image-preview').popover('hide');
+	        }
+	    );    
+	});
+
+	$(function() {
+	    // Create the close button
+	    var closebtn = $('<button/>', {
+	        type:"button",
+	        text: 'x',
+	        id: 'close-preview',
+	        style: 'font-size: initial;',
+	    });
+	    closebtn.attr("class","close pull-right");
+	    // Set the popover default content
+	    $('.image-preview').popover({
+	        trigger:'manual',
+	        html:true,
+	        title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+	        content: "There's no image",
+	        placement:'bottom'
+	    });
+	    // Clear event
+	    $('.image-preview-clear').click(function(){
+	        $('.image-preview').attr("data-content","").popover('hide');
+	        $('.image-preview-filename').val("");
+	        $('.image-preview-clear').hide();
+	        $('.image-preview-input input:file').val("");
+	        $(".image-preview-input-title").text("Browse"); 
+	    }); 
+	    // Create the preview image
+	    $(".image-preview-input input:file").change(function (){     
+	        var img = $('<img/>', {
+	            id: 'dynamic',
+	            width:250,
+	            height:200
+	        });      
+	        var file = this.files[0];
+	        var reader = new FileReader();
+	        // Set preview image into the popover data-content
+	        reader.onload = function (e) {
+	            $(".image-preview-input-title").text("Change");
+	            $(".image-preview-clear").show();
+	            $(".image-preview-filename").val(file.name);            
+	            img.attr('src', e.target.result);
+	            $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+	        }        
+	        reader.readAsDataURL(file);
+	    });  
+	});
+</script>
 
 
