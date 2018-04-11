@@ -17,7 +17,7 @@
 .field {
 	background: #29363f;
 	margin: 5px 25px;
-	width: 216px;
+	width: 187px;
 	color: #FFF;
 }
 .field::placeholder {
@@ -32,5 +32,5 @@
 	background-color: #29363f;
 	font-weight: bold;
 	margin: 10px 25px;
-	width: 238px;
+	width: 187px;
 }

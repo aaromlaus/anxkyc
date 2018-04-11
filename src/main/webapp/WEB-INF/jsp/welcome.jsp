@@ -1,47 +1,42 @@
 <!DOCTYPE html>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html lang="en">
 <head>
-
-<link rel="stylesheet" type="text/css"
-	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-<!-- 
-	<spring:url value="/css/main.css" var="springCss" />
-	<link href="${springCss}" rel="stylesheet" />
-	 -->
-<link href="${jstlCss}" rel="stylesheet" />
-
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Spring Boot</a>
-			</div>
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#about">About</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <jsp:include page="../jsp/common/header.jsp"></jsp:include>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">      
+    </div>
+    <div class="col-sm-8 text-left"> 
+      <h1>Welcome</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <hr>
+      <h3>Test</h3>
+      <p>Lorem ipsum...</p>
+    </div>
+    <div class="col-sm-2 sidenav">
+     
+    </div>
+  </div>
+</div>
 
-	<div class="container">
-
-		<div class="starter-template">
-			<h1>Spring Boot Web JSP Example</h1>
-			<h2>Message: ${message}</h2>
-		</div>
-
-	</div>
-	<!-- /.container -->
-
-	<script type="text/javascript"
-		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer>
 
 </body>
-
 </html>
