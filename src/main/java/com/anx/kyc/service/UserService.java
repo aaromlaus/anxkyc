@@ -27,5 +27,7 @@ public interface UserService {
 	public List<AnxUser> getUsersByRoleName(String roleName);
 	
 	public List<AnxUser> getUsersByUserLevelName(String userLevelName);
+	
+	public AnxUser getUserById(int userId);
 
 }

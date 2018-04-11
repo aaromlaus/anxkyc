@@ -2,43 +2,63 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/table.css">
-<!-- DATA TABLE -->
-<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
 </head>
 <br />
 <jsp:include page="../common/header.jsp"></jsp:include>
 
 <div class="container">
-	<table id="anxuser" >
-		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Username</th>
-			<th>User Level</th>
-			<th></th>
-		</tr>
-		<c:forEach items="${userList }" var="user">
+	<div style="margin-top: 3%;">
+	<table id="anxtable" class="table">
+		<thead>
 			<tr>
-				<td>${user.userId }</td>
-				<td>${user.firstName } ${user.middleName } ${user.lastName } </td>
-				<td>${user.username }</td>
-				<td>${user.userLevel.description }</td>
-				<td><a href="./">Approve</a></td>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Username</th>
+				<th>User Level</th>
+				<th></th>
 			</tr>
-		</c:forEach>
+		</thead>
+		<tbody>
+			<c:choose>
+				<c:when test="${empty userList }">
+					<tr><td colspan="5" align="center">Nothing to approve</td></tr>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${userList }" var="user">
+						<tr>
+							<td>${user.userId }</td>
+							<td>${user.firstName } ${user.middleName } ${user.lastName } </td>
+							<td>${user.username }</td>
+							<td>${user.userLevel.description }</td>
+							<td>
+								<%-- <a href="#" onclick="updateUserLevel('${user.userId }')">Approve</a>
+								<a href="#" onclick="updateUserLevel('${user.userId }')">Reject</a> --%>
+								<button class="btnApprove" onclick="updateUserLevel('${user.userId }', 'approve')">Approve</button>
+								<button class="btnReject" onclick="updateUserLevel('${user.userId }', 'reject')">Reject</button>
+							</td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</tbody>
 	</table>
-
+	</div>
 </div>
 
-<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#anxuser').dataTable();
-    });
+
+	$(document).ready(function() {
+		$('#anxtable').DataTable();
+	});
+
+	function updateUserLevel(userId, status) {
+		location.href = "./updateUserLevel?userId=" + userId + "&status=" + status;
+	}
 </script>
 

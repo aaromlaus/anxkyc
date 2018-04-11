@@ -32,8 +32,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserLevelRepository ulRepository;
+	
 	@Autowired
 	private LevelRepository levelRepository;
+	
 	@Autowired
 	private LevelUserRepository levelUserRepository;
 
@@ -41,6 +43,10 @@ public class UserServiceImpl implements UserService {
 		AnxUser anx = auRepository.save(user);
 		auRepository.flush();
 		return anx.getUserId();
+	}
+	
+	public AnxUser getUserById(int userId) {
+		return auRepository.getOne(userId);
 	}
 
 	public Role getRole(String roleName) {
