@@ -24,10 +24,13 @@ public interface UserService {
 	
 	public AnxUser findAnxUserByUsername(String userName);
 	
+	public List<AnxUser> getAllUsers();
+	
 	public List<AnxUser> getUsersByRoleName(String roleName);
 	
 	public List<AnxUser> getUsersByUserLevelName(String userLevelName);
 	
 	public AnxUser getUserById(int userId);
+	
 
 }

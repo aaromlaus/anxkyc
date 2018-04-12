@@ -42,6 +42,8 @@ public class AnxUser implements Serializable {
 	@Column(name = "password")
 	private String password;
 	
+	private transient String confirmPassword;
+	
 	@Column(name = "house_number")
 	private String houseNumber;
 	
@@ -211,6 +213,14 @@ public class AnxUser implements Serializable {
 
 	public void setLevelUser(List<LevelUser> levelUser) {
 		this.levelUser = levelUser;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	

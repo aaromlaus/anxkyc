@@ -14,6 +14,11 @@
 	<div id="signup">
 		<div id="triangle"></div>
 		<h1>Registration</h1>
+		<c:if test="${not empty msgDetails}">
+			<div class="${msgCss }">
+			    ${msgDetails }
+			</div>
+		</c:if>
 		<form:form id="contact-us" method="POST" modelAttribute="anxUserForm"
 			action="createaccount">
 
@@ -23,10 +28,17 @@
 				placeholder="Middle Name" />
 			<form:input path="lastName" required="required" class="form"
 				placeholder="Last Name" />
+				
+			<form:errors path="username" class="formerror" />
 			<form:input path="username" required="required" class="form"
 				placeholder="Email Address or Mobile Number" />
+				
+			<form:errors path="password" class="formerror" />
 			<form:password path="password" required="required" class="form"
 				placeholder="Password" />
+			
+			<form:password path="confirmPassword" required="required" class="form"
+				placeholder="Confirm Password" />
 			<input type="submit" class="form-btn semibold" value="Create Account" />
 		</form:form>
 		<div class="clear"></div>

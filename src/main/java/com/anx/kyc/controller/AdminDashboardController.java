@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.anx.kyc.constant.UserLevelType;
+import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.service.UserService;
 

@@ -64,6 +64,10 @@ public class UserServiceImpl implements UserService {
 	public List<AnxUser> getUsersByUserLevelName(String userLevelName) {
 		return auRepository.findByUserLevelName(userLevelName);
 	}
+	
+	public List<AnxUser> getAllUsers() {
+		return auRepository.findAll();
+	}
 
 	public List<Level> getAllLevel() {
 		return levelRepository.findAll();

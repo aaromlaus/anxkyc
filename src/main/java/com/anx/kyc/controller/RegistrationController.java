@@ -4,15 +4,19 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.anx.kyc.common.AlertStyleMessages;
-import com.anx.kyc.constant.AnxConstant;
-import com.anx.kyc.constant.RoleType;
-import com.anx.kyc.constant.UserLevelType;
+import com.anx.kyc.common.AnxMessageService;
+import com.anx.kyc.common.RoleType;
+import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.service.UserService;
+import com.anx.kyc.validator.RegistrationFormValidator;
 
 @Controller
 @RequestMapping("/signup")
@@ -21,15 +25,36 @@ public class RegistrationController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private RegistrationFormValidator rfValidator;
+	
+	@Autowired
+	private AnxMessageService amService;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.setValidator(rfValidator);
+	}
+	
 	@RequestMapping("/")
 	public String signup(Map<String, Object> model) {
 		model.put("anxUserForm", new AnxUser());
 		return "registration/anxaccount";
 	}
 	
+	
 	@RequestMapping(value="/createaccount")
-	public String createAccount(@ModelAttribute("anxUserForm") AnxUser anxUser, Map<String, Object> model) {
+	public String createAccount(@ModelAttribute("anxUserForm") AnxUser anxUser, BindingResult result, Map<String, Object> model) {
 		model.put("anxUserForm", anxUser);
+		
+		rfValidator.validate(anxUser, result);
+		if(result.hasErrors()) {
+			model.put("msgCss", AlertStyleMessages.DANGER.getValue());
+			model.put("msgDetails", amService.get("registration.error"));
+			model.put("anxUserForm", anxUser);
+			return "registration/anxaccount";
+		}
+		
 		return "registration/anxuserdetails";
 	}
 	
@@ -43,7 +68,7 @@ public class RegistrationController {
 		userService.saveNewLevelUser(anxUser);
 		
 		model.put("msgCss", AlertStyleMessages.SUCCESS.getValue());
-		model.put("msgDetails", AnxConstant.REGISTRATION_SUCCESS_MSG);
+		model.put("msgDetails", amService.get("registration.success"));
 		return "registration/anxuserdetails";
 	}
 	

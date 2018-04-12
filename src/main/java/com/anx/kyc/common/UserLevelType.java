@@ -1,4 +1,4 @@
-package com.anx.kyc.constant;
+package com.anx.kyc.common;
 
 public class UserLevelType {
 	
