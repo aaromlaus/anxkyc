@@ -22,7 +22,7 @@ import com.anx.kyc.service.UserService;
 
 @Controller
 @RequestMapping("/profile")
-public class UserController {
+public class UserDashboardController {
 	@Autowired
 	private UserService userService;
 

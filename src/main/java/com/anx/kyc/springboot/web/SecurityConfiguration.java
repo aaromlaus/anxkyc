@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -28,10 +27,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/admin/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers("/administrator/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers("/profile/**").hasAnyAuthority("user");
 		http.formLogin().failureUrl("/login?error").loginPage("/login").successHandler(customSucessHandler).permitAll()
-				.and().exceptionHandling().accessDeniedPage("/admin/login?accessDenied").and().logout()
+				.and().exceptionHandling().accessDeniedPage("/accessDenied").and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
 	}
 
