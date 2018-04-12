@@ -15,6 +15,11 @@
 <div class="inner contact">
 	<div class="col-sm-12 clearfix row">		
 		<div id="main-user">
+			<c:if test="${not empty msgDetails}">
+				<div class="${msgCss }">
+				    ${msgDetails }
+				</div>
+			</c:if>
 			<div class="bg-primary text-center">				
 				Your Current Limits: <strong>${anxUser.userLevel.description}</strong>
 			</div>
