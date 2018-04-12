@@ -43,7 +43,9 @@
 			<form:hidden path="lastName" required="required" class="form" />
 			<form:hidden path="username" required="required" class="form" />
 			<form:hidden path="password" required="required" class="form" />
-				
+			<form:hidden path="usePhoneNumber" required="required" class="form" />
+			<form:hidden path="phoneNumber" required="required" class="form" />
+			<form:hidden path="phoneCode.phoneCodeId" required="required" class="form" />	
 			<input type="submit" class="form-btn semibold" value="Save Changes" />
 		</form:form>
 		<div class="clear"></div>

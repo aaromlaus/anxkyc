@@ -25,7 +25,7 @@
 			<form:password path="password" class="field" placeholder="Password" />
 			<a href=# class="forgot">Forgot Password?</a>
 			<input class="btn" type="submit" value="SIGN IN"/>
-			<label>Don't have an Account? <a href="#" class="forgot">Sign Up</a></label>
+			<label>Don't have an Account? <a href="/signup/" class="forgot">Sign Up</a></label>
 		</form:form>
 	</div>	
 </body>

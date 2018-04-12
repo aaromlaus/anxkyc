@@ -68,3 +68,7 @@ footer {
 		height: auto;
 	}
 }
+
+.displayNone {
+	display:none
+}

@@ -20,19 +20,31 @@
 			</div>
 		</c:if>
 		<form:form id="contact-us" method="POST" modelAttribute="anxUserForm"
-			action="createaccount">
-
+			action="createaccount">			
+			<form:hidden path="usePhoneNumber" value="false"/>
 			<form:input path="firstName" required="required" class="form"
 				placeholder="First Name" />
 			<form:input path="middleName" required="required" class="form"
 				placeholder="Middle Name" />
 			<form:input path="lastName" required="required" class="form"
 				placeholder="Last Name" />
+			<div id="userNameLink">	
+				<form:errors path="username" class="formerror" />
+				<form:input path="username" required="required" class="form"
+					placeholder="Email Address" />
+				<a href="#" onclick="myFunction();return false;">Use Phone number instead </a>
+			</div>
+			
+			<div id="phoneNumberLink" class="displayNone">	
+				 <form:select class="form-control"  path="phoneCode.phoneCodeId" >
+				 	<form:options items="${phoneCodeLookUp}" itemValue="phoneCodeId" itemLabel="phoneCodeCountry" />
+				 </form:select>
+				<form:input path="phoneNumber" class="form"
+					placeholder="Mobile Number" />	
+				<a href="#" onclick="myFunction();return false;">Use Email instead </a>
 				
-			<form:errors path="username" class="formerror" />
-			<form:input path="username" required="required" class="form"
-				placeholder="Email Address or Mobile Number" />
-				
+			</div>	
+
 			<form:errors path="password" class="formerror" />
 			<form:password path="password" required="required" class="form"
 				placeholder="Password" />
@@ -50,3 +62,25 @@
 <center>
 	Already have an account? <a href="../login" target="blank">Sign in </a>
 </center>
+<script>
+function myFunction() {
+    var userNameLink = document.getElementById("userNameLink");
+    var phoneNumberLink = document.getElementById("phoneNumberLink"); 
+    var phoneNumber = document.getElementById("phoneNumber");
+    var username = document.getElementById("username");
+    var usePhoneNumber =  document.getElementById("usePhoneNumber");
+    if (userNameLink.style.display === "none") {
+    	userNameLink.style.display = "block";
+    	phoneNumberLink.style.display = "none";
+    	phoneNumber.required = false;
+    	username.required = true;
+    	usePhoneNumber.value = false;
+    } else {
+    	userNameLink.style.display = "none";
+    	phoneNumberLink.style.display = "block";
+    	phoneNumber.required = true;
+    	username.required = false;
+    	usePhoneNumber.value = true;
+    }
+}
+</script>

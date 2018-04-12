@@ -11,11 +11,13 @@ import org.springframework.stereotype.Service;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.Level;
 import com.anx.kyc.model.LevelUser;
+import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.model.Role;
 import com.anx.kyc.model.UserLevel;
 import com.anx.kyc.repository.AnxUserRepository;
 import com.anx.kyc.repository.LevelRepository;
 import com.anx.kyc.repository.LevelUserRepository;
+import com.anx.kyc.repository.PhoneCodeRepository;
 import com.anx.kyc.repository.RoleRepository;
 import com.anx.kyc.repository.UserLevelRepository;
 import com.anx.kyc.service.UserService;
@@ -38,6 +40,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private LevelUserRepository levelUserRepository;
+	@Autowired
+	private PhoneCodeRepository phoneCodeRepository;
 
 	public int saveUser(AnxUser user) {
 		AnxUser anx = auRepository.save(user);
@@ -89,6 +93,14 @@ public class UserServiceImpl implements UserService {
 
 	public AnxUser findAnxUserByUsername(String userName) {
 		return auRepository.findAnxUserByUsername(userName);
+	}
+	
+	public List<PhoneCode> getAllPhoneCode(){
+		return phoneCodeRepository.findAll();
+	}
+	
+	public PhoneCode findPhoneCodeById(Long id){
+		return phoneCodeRepository.getOne(id);
 	}
 
 }

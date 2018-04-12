@@ -21,49 +21,52 @@ import com.anx.kyc.validator.RegistrationFormValidator;
 @Controller
 @RequestMapping("/signup")
 public class RegistrationController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private RegistrationFormValidator rfValidator;
-	
+
 	@Autowired
 	private AnxMessageService amService;
-	
+
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		binder.setValidator(rfValidator);
 	}
-	
+
 	@RequestMapping("/")
 	public String signup(Map<String, Object> model) {
 		model.put("anxUserForm", new AnxUser());
+		model.put("phoneCodeLookUp", userService.getAllPhoneCode());
 		return "registration/anxaccount";
 	}
-	
-	
-	@RequestMapping(value="/createaccount")
-	public String createAccount(@ModelAttribute("anxUserForm") AnxUser anxUser, BindingResult result, Map<String, Object> model) {
+
+	@RequestMapping(value = "/createaccount")
+	public String createAccount(@ModelAttribute("anxUserForm") AnxUser anxUser, BindingResult result,
+			Map<String, Object> model) {
 		model.put("anxUserForm", anxUser);
-		
+
 		rfValidator.validate(anxUser, result);
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			model.put("msgCss", AlertStyleMessages.DANGER.getValue());
-			model.put("msgDetails", amService.get("registration.error"));
+			model.put("msgDetails", amService.get("registration.error"));			
 			model.put("anxUserForm", anxUser);
 			return "registration/anxaccount";
 		}
-		
+
 		return "registration/anxuserdetails";
 	}
-	
-	
-	@RequestMapping(value="/save")
+
+	@RequestMapping(value = "/save")
 	public String saveUserDetails(@ModelAttribute("anxUserForm") AnxUser anxUser, Map<String, Object> model) {
-		
+
 		anxUser.setRole(userService.getRole(RoleType.USER));
 		anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_1));
+		if (null != anxUser && null != anxUser.getPhoneCode() && null != anxUser.getPhoneCode().getPhoneCodeId()) {
+			anxUser.setPhoneCode(userService.findPhoneCodeById(anxUser.getPhoneCode().getPhoneCodeId()));
+		}
 		userService.saveUser(anxUser);
 		userService.saveNewLevelUser(anxUser);
 		
@@ -71,5 +74,5 @@ public class RegistrationController {
 		model.put("msgDetails", amService.get("registration.success"));
 		return "registration/anxuserdetails";
 	}
-	
+
 }

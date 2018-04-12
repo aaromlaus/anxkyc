@@ -5,6 +5,7 @@ import java.util.List;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.Level;
 import com.anx.kyc.model.LevelUser;
+import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.model.Role;
 import com.anx.kyc.model.UserLevel;
 
@@ -31,6 +32,8 @@ public interface UserService {
 	public List<AnxUser> getUsersByUserLevelName(String userLevelName);
 	
 	public AnxUser getUserById(int userId);
-	
 
+	public List<PhoneCode> getAllPhoneCode();
+	
+	public PhoneCode findPhoneCodeById(Long id);
 }

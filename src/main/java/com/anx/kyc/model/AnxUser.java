@@ -78,7 +78,14 @@ public class AnxUser implements Serializable {
 	private UserLevel userLevel;
 	@Transient
 	private List<LevelUser> levelUser = new ArrayList<>();
-
+	@Column(name = "phone_number")
+	private String phoneNumber;
+	@Transient
+	private boolean usePhoneNumber;
+	@ManyToOne
+	@JoinColumn(name = "phone_code_id", referencedColumnName = "phone_code_id")
+	private PhoneCode phoneCode;
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -222,7 +229,28 @@ public class AnxUser implements Serializable {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
-	
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public boolean isUsePhoneNumber() {
+		return usePhoneNumber;
+	}
+
+	public void setUsePhoneNumber(boolean usePhoneNumber) {
+		this.usePhoneNumber = usePhoneNumber;
+	}
+
+	public PhoneCode getPhoneCode() {
+		return phoneCode;
+	}
+
+	public void setPhoneCode(PhoneCode phoneCode) {
+		this.phoneCode = phoneCode;
+	}
 
 }
