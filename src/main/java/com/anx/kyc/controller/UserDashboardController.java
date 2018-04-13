@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,13 +25,16 @@ import com.anx.kyc.service.UserService;
 @Controller
 @RequestMapping("/profile")
 public class UserDashboardController {
+	
 	@Autowired
 	private UserService userService;
 
 	@Autowired
 	private AnxMessageService amService;
+	
 	@Value("${file.path.upload:test}")
 	private String UPLOAD_PATH;
+	
 	@RequestMapping(value = "/main")
 	public String mainPage(Map<String, Object> model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -42,6 +44,7 @@ public class UserDashboardController {
 		model.put("anxUser", anxUser);
 		return "main/user";
 	}
+	
 	@PostMapping("/upload")
 	public String singleFileUpload(Map<String, Object> model,@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 
@@ -52,7 +55,6 @@ public class UserDashboardController {
 		}
 
 		try {
-
 			// Get the file and save it somewhere
 			byte[] bytes = file.getBytes();
 			String fileName = String.valueOf(System.currentTimeMillis());

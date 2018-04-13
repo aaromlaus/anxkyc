@@ -19,7 +19,7 @@ first_name TEXT,
 middle_name TEXT,
 last_name TEXT,
 email_address VARCHAR(255),
-mobile_number VARCHAR(255),
+phone_number VARCHAR(255),
 password TEXT,
 role_name VARCHAR(255),
 user_level_name VARCHAR(255),
@@ -31,7 +31,6 @@ country VARCHAR(100),
 postal_code VARCHAR(100),
 source_of_fund VARCHAR(100),
 birth_date VARCHAR(100),
-phone_number varchar(50),
 phone_code_id INT,
 CONSTRAINT fk_anx_user_role FOREIGN KEY (role_name)
     REFERENCES role(role_name),
@@ -74,8 +73,8 @@ values ('user','role for user'),
 
 CREATE TABLE phone_code(
 	phone_code_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	phone_code_name VARCHAR(25),
-	country VARCHAR(25)
+	phone_code_name VARCHAR(50),
+	country VARCHAR(50)
 );
 INSERT INTO phone_code(phone_code_name,country)
 VALUES

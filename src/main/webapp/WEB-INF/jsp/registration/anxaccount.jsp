@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <head>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/main.css">
@@ -21,25 +23,28 @@
 		</c:if>
 		<form:form id="contact-us" method="POST" modelAttribute="anxUserForm"
 			action="createaccount">			
-			<form:hidden path="usePhoneNumber" value="false"/>
 			<form:input path="firstName" required="required" class="form" placeholder="First Name" />
 			<form:input path="middleName" required="required" class="form" placeholder="Middle Name" />
 			<form:input path="lastName" required="required" class="form" placeholder="Last Name" />
 			
-			<div id="userNameLink">	
-				<form:errors path="username" class="formerror" />
+			<div id="emailAddressGroupId">	
+				<form:errors path="emailAddress" class="formerror" />
 				<form:input path="emailAddress" required="required" class="form"
 					placeholder="Email Address" />
-				<a href="#" onclick="myFunction();return false;">Use Phone number instead </a>
+				<div class="usernameChooserLink">
+					<a id="usePhonelinkId" href="#" onclick="myFunction();return false;">Sign up using Mobile Number </a>
+				</div>
 			</div>
 			
-			<div id="phoneNumberLink" class="displayNone">	
-				 <form:select class="form-control"  path="phoneCode.phoneCodeId" >
+			<div id="phoneGroupId">
+				<form:errors path="phoneNumber" class="formerror" />
+				<form:select class="form-control"  path="phoneCode.phoneCodeId" >
 				 	<form:options items="${phoneCodeLookUp}" itemValue="phoneCodeId" itemLabel="phoneCodeCountry" />
 				 </form:select>
-				<form:input path="phoneNumber" class="form"
-					placeholder="Mobile Number" />	
-				<a href="#" onclick="myFunction();return false;">Use Email instead </a>
+				<form:input path="phoneNumber" class="form" placeholder="Mobile Number" />	
+				<div class="usernameChooserLink">
+					<a href="#" onclick="myFunction();return false;">Sign up using Email Address </a>
+				</div>
 				
 			</div>	
 
@@ -61,24 +66,41 @@
 	Already have an account? <a href="../login" target="blank">Sign in </a>
 </center>
 <script>
+
+$( document ).ready(function() {
+	 var phoneGroupId = document.getElementById("phoneGroupId"); 
+	 var usePhonelink = document.getElementById("usePhonelinkId"); 
+	 var phoneNumber = document.getElementById("phoneNumber");
+
+	 phoneGroupId.style.display = "none";
+	 usePhonelink.style.display = "block";
+	 if(phoneNumber.value != "") {
+		 usePhonelink.style.display = "none";
+		 phoneGroupId.style.display = "block";
+	 }
+});
+
 function myFunction() {
-    var userNameLink = document.getElementById("userNameLink");
-    var phoneNumberLink = document.getElementById("phoneNumberLink"); 
+    
+	var emailAddressGroupId = document.getElementById("emailAddressGroupId");
+    var phoneGroupId = document.getElementById("phoneGroupId"); 
+    
     var phoneNumber = document.getElementById("phoneNumber");
-    var username = document.getElementById("username");
+    var emailAddress = document.getElementById("emailAddress");
     var usePhoneNumber =  document.getElementById("usePhoneNumber");
-    if (userNameLink.style.display === "none") {
-    	userNameLink.style.display = "block";
-    	phoneNumberLink.style.display = "none";
+    
+    if (emailAddressGroupId.style.display === "none") {
+    	emailAddressGroupId.style.display = "block";
+    	phoneGroupId.style.display = "none";
     	phoneNumber.required = false;
-    	username.required = true;
-    	usePhoneNumber.value = false;
+    	emailAddress.required = true;
+    	phoneNumber.value = "";
     } else {
-    	userNameLink.style.display = "none";
-    	phoneNumberLink.style.display = "block";
+    	emailAddressGroupId.style.display = "none";
+    	phoneGroupId.style.display = "block";
     	phoneNumber.required = true;
-    	username.required = false;
-    	usePhoneNumber.value = true;
+    	emailAddress.required = false;
+    	emailAddress.value = "";
     }
 }
 </script>

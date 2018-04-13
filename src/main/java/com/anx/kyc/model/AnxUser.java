@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -66,9 +67,6 @@ public class AnxUser implements Serializable {
 	@Column(name = "source_of_fund")
 	private String sourceOfFund;
 
-	@Column(name = "mobile_number")
-	private String mobileNumber;
-
 	@Column(name = "birth_date")
 	@DateTimeFormat(pattern = "mm/dd/yyyy")
 	private Date birthDate;
@@ -87,10 +85,7 @@ public class AnxUser implements Serializable {
 	@Column(name = "phone_number")
 	private String phoneNumber;
 
-	@Transient
-	private boolean usePhoneNumber;
-
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "phone_code_id", referencedColumnName = "phone_code_id")
 	private PhoneCode phoneCode;
 
@@ -206,14 +201,6 @@ public class AnxUser implements Serializable {
 		this.sourceOfFund = sourceOfFund;
 	}
 
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
-
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -252,14 +239,6 @@ public class AnxUser implements Serializable {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-
-	public boolean isUsePhoneNumber() {
-		return usePhoneNumber;
-	}
-
-	public void setUsePhoneNumber(boolean usePhoneNumber) {
-		this.usePhoneNumber = usePhoneNumber;
 	}
 
 	public PhoneCode getPhoneCode() {

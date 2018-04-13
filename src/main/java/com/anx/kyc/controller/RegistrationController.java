@@ -38,15 +38,20 @@ public class RegistrationController {
 
 	@RequestMapping("/")
 	public String signup(Map<String, Object> model) {
-		model.put("anxUserForm", new AnxUser());
-		model.put("phoneCodeLookUp", userService.getAllPhoneCode());
+		populate(model, null);
 		return "registration/anxaccount";
+	}
+
+	private void populate(Map<String, Object> model, AnxUser user) {
+		model.put("anxUserForm", user == null? new AnxUser() : user);
+		model.put("phoneCodeLookUp", userService.getAllPhoneCode());
 	}
 
 	@RequestMapping(value = "/createaccount")
 	public String createAccount(@ModelAttribute("anxUserForm") AnxUser anxUser, BindingResult result,
 			Map<String, Object> model) {
-		model.put("anxUserForm", anxUser);
+		
+		populate(model, anxUser);
 
 		rfValidator.validate(anxUser, result);
 		if (result.hasErrors()) {
@@ -62,6 +67,7 @@ public class RegistrationController {
 	@RequestMapping(value = "/save")
 	public String saveUserDetails(@ModelAttribute("anxUserForm") AnxUser anxUser, Map<String, Object> model) {
 
+		populate(model, anxUser);
 		anxUser.setRole(userService.getRole(RoleType.USER));
 		anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_1));
 		if (null != anxUser && null != anxUser.getPhoneCode() && null != anxUser.getPhoneCode().getPhoneCodeId()) {
