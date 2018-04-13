@@ -18,7 +18,8 @@ anx_user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 first_name TEXT,
 middle_name TEXT,
 last_name TEXT,
-username VARCHAR(255),
+email_address VARCHAR(255),
+mobile_number VARCHAR(255),
 password TEXT,
 role_name VARCHAR(255),
 user_level_name VARCHAR(255),
@@ -36,7 +37,7 @@ CONSTRAINT fk_anx_user_role FOREIGN KEY (role_name)
     REFERENCES role(role_name),
 CONSTRAINT fk_anx_useruser_leveluser_level_user_level FOREIGN KEY (user_level_name)
     REFERENCES user_level(user_level_name),
-UNIQUE(username),
+UNIQUE(email_address),
 UNIQUE(phone_number)
 );
 

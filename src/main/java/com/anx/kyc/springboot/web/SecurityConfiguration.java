@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -20,10 +20,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	DataSource dataSource;
+	private DataSource dataSource;
 
 	@Autowired
-	CustomSucessHandler customSucessHandler;
+	private CustomSucessHandler customSucessHandler;
+	
+	private static final String USER_QUERY = "SELECT u.email_address,u.password,r.role_id FROM anx_kyc.anx_user u INNER JOIN role r USING(role_name) WHERE u.email_address=?";
+	private static final String ROLE_QUERY = "SELECT u.email_address, r.role_name as role FROM anx_kyc.anx_user u INNER JOIN role r USING(role_name) WHERE u.email_address=?";
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -36,25 +39,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// auth.userDetailsService(userDetailsService);
 		auth.jdbcAuthentication().dataSource(dataSource)
-				.usersByUsernameQuery("SELECT u.username,u.password,r.role_id FROM anx_kyc.anx_user u INNER JOIN role r USING(role_name) WHERE u.username=?")
-				.authoritiesByUsernameQuery(
-						"SELECT u.username, r.role_name as role FROM anx_kyc.anx_user u INNER JOIN role r USING(role_name) WHERE u.username=?")
+				.usersByUsernameQuery(USER_QUERY)
+				.authoritiesByUsernameQuery(ROLE_QUERY)
 				.passwordEncoder(passwordEncoder());
 
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/api/**"); // excluding all API for now.
-												// Handle security later
+		web.ignoring().antMatchers("/api/**");
 	}
 
-	@SuppressWarnings("deprecation")
 	@Bean
-	public NoOpPasswordEncoder passwordEncoder() {
-		return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+	public BCryptPasswordEncoder passwordEncoder() {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		return bCryptPasswordEncoder;
 	}
 
 }

@@ -22,15 +22,13 @@
 		<form:form id="contact-us" method="POST" modelAttribute="anxUserForm"
 			action="createaccount">			
 			<form:hidden path="usePhoneNumber" value="false"/>
-			<form:input path="firstName" required="required" class="form"
-				placeholder="First Name" />
-			<form:input path="middleName" required="required" class="form"
-				placeholder="Middle Name" />
-			<form:input path="lastName" required="required" class="form"
-				placeholder="Last Name" />
+			<form:input path="firstName" required="required" class="form" placeholder="First Name" />
+			<form:input path="middleName" required="required" class="form" placeholder="Middle Name" />
+			<form:input path="lastName" required="required" class="form" placeholder="Last Name" />
+			
 			<div id="userNameLink">	
 				<form:errors path="username" class="formerror" />
-				<form:input path="username" required="required" class="form"
+				<form:input path="emailAddress" required="required" class="form"
 					placeholder="Email Address" />
 				<a href="#" onclick="myFunction();return false;">Use Phone number instead </a>
 			</div>

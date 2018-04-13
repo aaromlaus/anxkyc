@@ -22,6 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class AnxUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "anx_user_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,35 +37,38 @@ public class AnxUser implements Serializable {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "username")
-	private String username;
+	@Column(name = "email_address")
+	private String emailAddress;
 
 	@Column(name = "password")
 	private String password;
-	
+
 	private transient String confirmPassword;
-	
+
 	@Column(name = "house_number")
 	private String houseNumber;
-	
+
 	@Column(name = "street")
 	private String street;
-	
+
 	@Column(name = "city")
 	private String city;
-	
+
 	@Column(name = "province")
 	private String province;
-	
+
 	@Column(name = "country")
 	private String country;
-	
+
 	@Column(name = "postal_code")
 	private String postalCode;
-	
+
 	@Column(name = "source_of_fund")
 	private String sourceOfFund;
-	
+
+	@Column(name = "mobile_number")
+	private String mobileNumber;
+
 	@Column(name = "birth_date")
 	@DateTimeFormat(pattern = "mm/dd/yyyy")
 	private Date birthDate;
@@ -76,16 +80,20 @@ public class AnxUser implements Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "user_level_name", referencedColumnName = "user_level_name")
 	private UserLevel userLevel;
+
 	@Transient
 	private List<LevelUser> levelUser = new ArrayList<>();
+
 	@Column(name = "phone_number")
 	private String phoneNumber;
+
 	@Transient
 	private boolean usePhoneNumber;
+
 	@ManyToOne
 	@JoinColumn(name = "phone_code_id", referencedColumnName = "phone_code_id")
 	private PhoneCode phoneCode;
-	
+
 	public int getUserId() {
 		return userId;
 	}
@@ -118,12 +126,12 @@ public class AnxUser implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
 
 	public String getPassword() {
@@ -134,20 +142,12 @@ public class AnxUser implements Serializable {
 		this.password = password;
 	}
 
-	public Role getRole() {
-		return role;
+	public String getConfirmPassword() {
+		return confirmPassword;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	public UserLevel getUserLevel() {
-		return userLevel;
-	}
-
-	public void setUserLevel(UserLevel userLevel) {
-		this.userLevel = userLevel;
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public String getHouseNumber() {
@@ -206,12 +206,36 @@ public class AnxUser implements Serializable {
 		this.sourceOfFund = sourceOfFund;
 	}
 
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
 	public Date getBirthDate() {
 		return birthDate;
 	}
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public UserLevel getUserLevel() {
+		return userLevel;
+	}
+
+	public void setUserLevel(UserLevel userLevel) {
+		this.userLevel = userLevel;
 	}
 
 	public List<LevelUser> getLevelUser() {
@@ -222,13 +246,6 @@ public class AnxUser implements Serializable {
 		this.levelUser = levelUser;
 	}
 
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}

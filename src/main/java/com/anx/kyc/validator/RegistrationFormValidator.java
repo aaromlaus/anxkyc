@@ -32,8 +32,9 @@ public class RegistrationFormValidator implements Validator {
 
 		List<AnxUser> users = userSvc.getAllUsers();
 		for (AnxUser user : users) {
-			if (null != anxUser.getUsername() &&  user.getUsername().equals(anxUser.getUsername())) {
-				errors.rejectValue("username", "user.username.exist");
+			
+			if (null != anxUser.getEmailAddress() && user.getEmailAddress().equals(anxUser.getEmailAddress())) {
+				errors.rejectValue("emailAddress", "user.username.exist");
 				break;
 			}
 			if(null != anxUser.getPhoneNumber() && user.getPhoneNumber().equals(anxUser.getPhoneNumber())){

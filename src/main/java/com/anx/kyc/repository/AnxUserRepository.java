@@ -10,8 +10,8 @@ import com.anx.kyc.model.AnxUser;
 
 public interface AnxUserRepository extends JpaRepository<AnxUser, Integer> {
 	
-	@Query("SELECT c FROM AnxUser c WHERE c.username = :username ")
-	AnxUser findAnxUserByUsername(@Param("username") String userName);
+	@Query("SELECT c FROM AnxUser c WHERE c.emailAddress = :emailAddress ")
+	AnxUser findAnxUserByUsername(@Param("emailAddress") String emailAddress);
 
 	@Query("SELECT c FROM AnxUser c WHERE c.role.roleName = :roleName")
 	List<AnxUser> findByRoleName(@Param("roleName") String roleName);

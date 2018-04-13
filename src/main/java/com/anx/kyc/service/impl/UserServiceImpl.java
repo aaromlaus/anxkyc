@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.anx.kyc.model.AnxUser;
@@ -34,21 +35,25 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserLevelRepository ulRepository;
-	
+
 	@Autowired
 	private LevelRepository levelRepository;
-	
+
 	@Autowired
 	private LevelUserRepository levelUserRepository;
 	@Autowired
 	private PhoneCodeRepository phoneCodeRepository;
 
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 	public int saveUser(AnxUser user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		AnxUser anx = auRepository.save(user);
 		auRepository.flush();
 		return anx.getUserId();
 	}
-	
+
 	public AnxUser getUserById(int userId) {
 		return auRepository.getOne(userId);
 	}
@@ -68,7 +73,7 @@ public class UserServiceImpl implements UserService {
 	public List<AnxUser> getUsersByUserLevelName(String userLevelName) {
 		return auRepository.findByUserLevelName(userLevelName);
 	}
-	
+
 	public List<AnxUser> getAllUsers() {
 		return auRepository.findAll();
 	}
