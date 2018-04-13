@@ -31,7 +31,7 @@
 			<form:input path="city" placeholder="City" required="required" class="form" />
 			<form:input path="province" placeholder="Province" required="required" class="form" />
 			<form:input path="country" placeholder="Country" required="required" class="form" />
-			<form:input path="sourceOfFund" list="sourceOfFundList" placeHolder="Source of Fund" required="required" class="form" />
+			<form:input path="sourceOfFund" list="sourceOfFundList" placeHolder="Source of Fund" required="required" class="form" readonly="readonly" />
 			<datalist id="sourceOfFundList">
 				<option value="Salary" />
 				<option value="Family member or remittance" />
@@ -43,7 +43,6 @@
 			<form:hidden path="lastName" required="required" class="form" />
 			<form:hidden path="emailAddress" required="required" class="form" />
 			<form:hidden path="password" required="required" class="form" />
-			<form:hidden path="usePhoneNumber" required="required" class="form" />
 			<form:hidden path="phoneNumber" required="required" class="form" />
 			<form:hidden path="phoneCode.phoneCodeId" required="required" class="form" />	
 			<input type="submit" class="form-btn semibold" value="Save Changes" />

@@ -1,6 +1,9 @@
 package com.anx.kyc.controller;
 
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import com.anx.kyc.common.AnxMessageService;
 import com.anx.kyc.common.RoleType;
 import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.model.AnxUser;
+import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.service.UserService;
 import com.anx.kyc.validator.RegistrationFormValidator;
 
@@ -37,21 +41,23 @@ public class RegistrationController {
 	}
 
 	@RequestMapping("/")
-	public String signup(Map<String, Object> model) {
-		populate(model, null);
+	public String signup(Map<String, Object> model, HttpSession session) {
+		populate(model, null, session);
 		return "registration/anxaccount";
 	}
 
-	private void populate(Map<String, Object> model, AnxUser user) {
+	private void populate(Map<String, Object> model, AnxUser user, HttpSession session) {
 		model.put("anxUserForm", user == null? new AnxUser() : user);
-		model.put("phoneCodeLookUp", userService.getAllPhoneCode());
+		List<PhoneCode> countryCodeList = userService.getAllPhoneCode();
+		model.put("countryCodeList", countryCodeList);
+		session.setAttribute("countryCodeList", countryCodeList);
 	}
 
 	@RequestMapping(value = "/createaccount")
 	public String createAccount(@ModelAttribute("anxUserForm") AnxUser anxUser, BindingResult result,
-			Map<String, Object> model) {
+			Map<String, Object> model, HttpSession session) {
 		
-		populate(model, anxUser);
+		populate(model, anxUser, session);
 
 		rfValidator.validate(anxUser, result);
 		if (result.hasErrors()) {
@@ -65,9 +71,9 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/save")
-	public String saveUserDetails(@ModelAttribute("anxUserForm") AnxUser anxUser, Map<String, Object> model) {
+	public String saveUserDetails(@ModelAttribute("anxUserForm") AnxUser anxUser, Map<String, Object> model, HttpSession session) {
 
-		populate(model, anxUser);
+		populate(model, anxUser, session);
 		anxUser.setRole(userService.getRole(RoleType.USER));
 		anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_1));
 		if (null != anxUser && null != anxUser.getPhoneCode() && null != anxUser.getPhoneCode().getPhoneCodeId()) {

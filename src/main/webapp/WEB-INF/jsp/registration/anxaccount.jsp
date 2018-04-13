@@ -4,8 +4,7 @@
 <head>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/form.css">
 </head>
@@ -38,8 +37,8 @@
 			
 			<div id="phoneGroupId">
 				<form:errors path="phoneNumber" class="formerror" />
-				<form:select class="form-control"  path="phoneCode.phoneCodeId" >
-				 	<form:options items="${phoneCodeLookUp}" itemValue="phoneCodeId" itemLabel="phoneCodeCountry" />
+				<form:select class="selectpicker" data-live-search="true"  path="phoneCode.phoneCodeId" >
+				 	<form:options items="${countryCodeList}" itemValue="phoneCodeId" itemLabel="phoneCodeCountry" />
 				 </form:select>
 				<form:input path="phoneNumber" class="form" placeholder="Mobile Number" />	
 				<div class="usernameChooserLink">
@@ -87,7 +86,6 @@ function myFunction() {
     
     var phoneNumber = document.getElementById("phoneNumber");
     var emailAddress = document.getElementById("emailAddress");
-    var usePhoneNumber =  document.getElementById("usePhoneNumber");
     
     if (emailAddressGroupId.style.display === "none") {
     	emailAddressGroupId.style.display = "block";
