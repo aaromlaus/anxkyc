@@ -40,7 +40,7 @@ public class UserDashboardController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		AnxUser anxUser = userService.findAnxUserByUsername(currentPrincipalName);
-		anxUser.setLevelUser(userService.findLevelUserById(anxUser));
+		anxUser.setUserLevelDetails(userService.findLevelUserById(anxUser));
 		model.put("anxUser", anxUser);
 		return "main/user";
 	}

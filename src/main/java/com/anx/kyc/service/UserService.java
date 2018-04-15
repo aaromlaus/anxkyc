@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.Level;
-import com.anx.kyc.model.LevelUser;
+import com.anx.kyc.model.UserLevelDetails;
 import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.model.Role;
 import com.anx.kyc.model.UserLevel;
@@ -19,7 +19,7 @@ public interface UserService {
 	
 	public List<Level> getAllLevel();
 	
-	public List<LevelUser> findLevelUserById(AnxUser anxUserId);
+	public List<UserLevelDetails> findLevelUserById(AnxUser anxUserId);
 	
 	public void saveNewLevelUser(AnxUser anxUser);
 	

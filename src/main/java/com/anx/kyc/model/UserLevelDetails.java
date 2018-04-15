@@ -10,13 +10,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="level_user")
-public class LevelUser {
+@Table(name="user_level_details")
+public class UserLevelDetails {
 	
 	@Id
-	@Column(name="level_user_id")
+	@Column(name="user_level_details_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long levelUserId;
+	private Long userLevelDetailsId;
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "level_id")
 	private Level level;
@@ -25,20 +25,15 @@ public class LevelUser {
 	private AnxUser anxUser;
 	@Column(name="level_limit")
 	private boolean levelLimit;
-	public LevelUser(){
+	public UserLevelDetails(){
 		super();
 	}
-	public LevelUser(AnxUser anxUser,Level level,boolean levelLimit){
+	public UserLevelDetails(AnxUser anxUser,Level level,boolean levelLimit){
 		this.level = level;
 		this.anxUser = anxUser;
 		this.levelLimit = levelLimit;
 	}
-	public Long getLevelUserId() {
-		return levelUserId;
-	}
-	public void setLevelUserId(Long levelUserId) {
-		this.levelUserId = levelUserId;
-	}
+	
 	public Level getLevel() {
 		return level;
 	}
@@ -56,6 +51,12 @@ public class LevelUser {
 	}
 	public void setLevelLimit(boolean levelLimit) {
 		this.levelLimit = levelLimit;
+	}
+	public Long getUserLevelDetailsId() {
+		return userLevelDetailsId;
+	}
+	public void setUserLevelDetailsId(Long userLevelDetailsId) {
+		this.userLevelDetailsId = userLevelDetailsId;
 	}
 
 }

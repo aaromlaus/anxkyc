@@ -75,26 +75,26 @@
 				      </tr>
 				    </thead>
 				    <tbody>
-				    	<c:forEach items="${anxUser.levelUser}" var="levelUser">
-					    	<tr class="accordion-toggle" data-toggle="collapse" data-target="#${levelUser.levelUserId}">
+				    	<c:forEach items="${anxUser.userLevelDetails}" var="userLevelDetails">
+					    	<tr class="accordion-toggle" data-toggle="collapse" data-target="#${userLevelDetails.userLevelDetailsId}">
 								<td class="col-sm-2">
-						           <c:out value = "${levelUser.level.description}"/>
+						           <c:out value = "${userLevelDetails.level.description}"/>
 						        </td>
 						        <td>
-						         <c:out value = "${levelUser.level.requirement}"/>
+						         <c:out value = "${userLevelDetails.level.requirement}"/>
 						       	</td>
 						        <td>
-						          <c:out value = "${levelUser.level.cashIn}"/>
+						          <c:out value = "${userLevelDetails.level.cashIn}"/>
 						        </td>
 						        <td>
-						          <c:out value = "${levelUser.level.cashOut}"/>
+						          <c:out value = "${userLevelDetails.level.cashOut}"/>
 						        </td>
 						        <td>
-						        	<span class="${levelUser.levelLimit ? 'glyphicon glyphicon-ok':''}"></span>&nbsp
+						        	<span class="${userLevelDetails.levelLimit ? 'glyphicon glyphicon-ok':''}"></span>&nbsp
 						        </td>
 						    </tr>
-						    <c:if test="${levelUser.level.description.equalsIgnoreCase('Level 2')}">
-							    <tr class="collapse out ${levelUser.levelUserId}" id="${levelUser.levelUserId}">
+						    <c:if test="${userLevelDetails.level.description.equalsIgnoreCase('Level 2')}">
+							    <tr class="collapse out ${userLevelDetails.userLevelDetailsId}" id="${userLevelDetails.userLevelDetailsId}">
 							    	<td colspan="5">
 								    	<form:form method="POST" action="/profile/upload/" enctype="multipart/form-data">
 								    		

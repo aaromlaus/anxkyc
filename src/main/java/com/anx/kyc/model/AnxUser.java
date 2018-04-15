@@ -80,7 +80,7 @@ public class AnxUser implements Serializable {
 	private UserLevel userLevel;
 
 	@Transient
-	private List<LevelUser> levelUser = new ArrayList<>();
+	private List<UserLevelDetails> userLevelDetails = new ArrayList<>();
 
 	@Column(name = "phone_number")
 	private String phoneNumber;
@@ -225,13 +225,6 @@ public class AnxUser implements Serializable {
 		this.userLevel = userLevel;
 	}
 
-	public List<LevelUser> getLevelUser() {
-		return levelUser;
-	}
-
-	public void setLevelUser(List<LevelUser> levelUser) {
-		this.levelUser = levelUser;
-	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -247,6 +240,14 @@ public class AnxUser implements Serializable {
 
 	public void setPhoneCode(PhoneCode phoneCode) {
 		this.phoneCode = phoneCode;
+	}
+
+	public List<UserLevelDetails> getUserLevelDetails() {
+		return userLevelDetails;
+	}
+
+	public void setUserLevelDetails(List<UserLevelDetails> userLevelDetails) {
+		this.userLevelDetails = userLevelDetails;
 	}
 
 }

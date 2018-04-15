@@ -60,8 +60,8 @@ values ('Level 1','Phone or email verification','2,000 PHP','0 PHP',true),
 ('Level 4','Custom limits application','Custom (up to 5 million PHP)','Custom(up to 5 million PHP)',true);
 
 
-CREATE TABLE level_user(
-	level_user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE user_level_details(
+	user_level_details_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	user_id INT,
 	anx_user_id INT,
 	level_limit boolean default false
