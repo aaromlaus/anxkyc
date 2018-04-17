@@ -12,4 +12,6 @@ import com.anx.kyc.model.UserLevelDetails;
 public interface UserLevelDetailsRepository extends JpaRepository<UserLevelDetails, Integer> {
 	@Query("SELECT c FROM UserLevelDetails c WHERE c.anxUser = :anxUser ORDER BY level ")
 	List<UserLevelDetails> findUserLevelDetailsById(@Param("anxUser") AnxUser anxUserId);
+	@Query("SELECT c FROM UserLevelDetails c WHERE c.anxUser = :anxUser AND  c.level.description = :levelName")
+	UserLevelDetails findDetailsByUserIdLevelId(@Param("anxUser") AnxUser anxUserId, @Param("levelName") String levelName);
 }

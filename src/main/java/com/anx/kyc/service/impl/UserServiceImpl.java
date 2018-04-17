@@ -14,12 +14,14 @@ import com.anx.kyc.model.Level;
 import com.anx.kyc.model.UserLevelDetails;
 import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.model.Role;
+import com.anx.kyc.model.UserImage;
 import com.anx.kyc.model.UserLevel;
 import com.anx.kyc.repository.AnxUserRepository;
 import com.anx.kyc.repository.LevelRepository;
 import com.anx.kyc.repository.UserLevelDetailsRepository;
 import com.anx.kyc.repository.PhoneCodeRepository;
 import com.anx.kyc.repository.RoleRepository;
+import com.anx.kyc.repository.UserImageRepository;
 import com.anx.kyc.repository.UserLevelRepository;
 import com.anx.kyc.service.UserService;
 
@@ -46,15 +48,21 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+	@Autowired UserImageRepository uIrepository;
 	@Override
 	public int saveUser(AnxUser user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		
+		return saveUser(user,true);
+	}
+	@Override
+	public int saveUser(AnxUser user,boolean isEncodePassword) {
+		if(isEncodePassword) {
+			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		}
 		AnxUser anx = auRepository.save(user);
 		auRepository.flush();
 		return anx.getUserId();
 	}
-
 	@Override
 	public AnxUser getUserById(int userId) {
 		return auRepository.getOne(userId);
@@ -102,7 +110,8 @@ public class UserServiceImpl implements UserService {
 	}
 	@Override
 	public AnxUser findAnxUserByUsername(String userName) {
-		return auRepository.findAnxUserByUsername(userName);
+		AnxUser anx = auRepository.findAnxUserByUsername(userName);
+		return anx;
 	}
 	@Override
 	public List<PhoneCode> getAllPhoneCode(){
@@ -112,5 +121,12 @@ public class UserServiceImpl implements UserService {
 	public PhoneCode findPhoneCodeById(Long id){
 		return phoneCodeRepository.getOne(id);
 	}
-
+	@Override
+	public void saveUserImage(UserImage image) {
+		uIrepository.save(image);
+	}
+	
+	public UserLevelDetails findDetailsByUserIdLevelId(AnxUser anxUser,String levelName) {
+		return levelUserRepository.findDetailsByUserIdLevelId(anxUser, levelName);
+	}
 }

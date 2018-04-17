@@ -7,11 +7,14 @@ import com.anx.kyc.model.Level;
 import com.anx.kyc.model.UserLevelDetails;
 import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.model.Role;
+import com.anx.kyc.model.UserImage;
 import com.anx.kyc.model.UserLevel;
 
 public interface UserService {
 	
 	public int saveUser(AnxUser user);
+	
+	public int saveUser(AnxUser user,boolean isEncodePassword);
 	
 	public Role getRole(String roleName);
 	
@@ -36,4 +39,8 @@ public interface UserService {
 	public List<PhoneCode> getAllPhoneCode();
 	
 	public PhoneCode findPhoneCodeById(Long id);
+	
+	public void saveUserImage(UserImage image);
+	
+	public UserLevelDetails findDetailsByUserIdLevelId(AnxUser anxUserId,String levelName);
 }

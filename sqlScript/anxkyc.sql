@@ -76,6 +76,12 @@ CREATE TABLE phone_code(
 	phone_code_name VARCHAR(50),
 	country VARCHAR(50)
 );
+CREATE TABLE user_image(
+	user_image_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	anx_user_id INT,
+	link VARCHAR(255),
+	user_level_details_id INT
+);
 INSERT INTO phone_code(phone_code_name,country)
 VALUES
 ('+63','Philippines'),

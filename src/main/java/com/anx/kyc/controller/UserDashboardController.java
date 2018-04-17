@@ -19,7 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.anx.kyc.common.AlertStyleMessages;
 import com.anx.kyc.common.AnxMessageService;
+import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.model.AnxUser;
+import com.anx.kyc.model.UserImage;
 import com.anx.kyc.service.UserService;
 
 @Controller
@@ -60,6 +62,13 @@ public class UserDashboardController {
 			String fileName = String.valueOf(System.currentTimeMillis());
 			Path path = Paths.get(UPLOAD_PATH + fileName);
 			Files.write(path, bytes);
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String currentPrincipalName = authentication.getName();
+			AnxUser anxUser = userService.findAnxUserByUsername(currentPrincipalName);
+			anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_2_PENDING));
+			userService.saveUser(anxUser,false);
+			UserImage image = new UserImage(anxUser, path.toString());
+			userService.saveUserImage(image);
 			redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.SUCCESS.getValue());
 			redirectAttributes.addFlashAttribute("msgDetails", amService.get("user.upload.image.success"));
 
