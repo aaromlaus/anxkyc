@@ -13,7 +13,6 @@
 <div class="inner contact">
 
 	<div id="signup">
-		<div id="triangle"></div>
 		<h1>Registration</h1>
 		<c:if test="${not empty msgDetails}">
 			<div class="${msgCss }">

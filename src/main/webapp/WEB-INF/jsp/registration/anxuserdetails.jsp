@@ -17,7 +17,6 @@
 <div class="inner contact">
 
 	<div id="signup">
-		<div id="triangle"></div>
 		<h1>User Details</h1>
 		<c:if test="${not empty msgDetails}">
 			<div class="${msgCss }">
@@ -45,7 +44,9 @@
 			<form:hidden path="password" required="required" class="form" />
 			<form:hidden path="phoneNumber" required="required" class="form" />
 			<form:hidden path="phoneCode.phoneCodeId" required="required" class="form" />	
-			<input type="submit" class="form-btn semibold" value="Save Changes" />
+			<c:if test="${empty msgDetails}">
+				<input type="submit" class="form-btn semibold" value="Save Changes" />
+			</c:if>
 		</form:form>
 		<div class="clear"></div>
 
