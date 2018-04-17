@@ -3,8 +3,6 @@ package com.anx.kyc.service;
 import java.util.List;
 
 import com.anx.kyc.model.AnxUser;
-import com.anx.kyc.model.Level;
-import com.anx.kyc.model.UserLevelDetails;
 import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.model.Role;
 import com.anx.kyc.model.UserImage;
@@ -20,11 +18,11 @@ public interface UserService {
 	
 	public UserLevel getUserLevel(String userLevelName);
 	
-	public List<Level> getAllLevel();
+	public List<UserLevel> getAllUserLevel();
 	
-	public List<UserLevelDetails> findLevelUserById(AnxUser anxUserId);
+	//public List<UserLevelDetails> findLevelUserById(AnxUser anxUserId);
 	
-	public void saveNewLevelUser(AnxUser anxUser);
+	//public void saveNewLevelUser(AnxUser anxUser);
 	
 	public AnxUser findAnxUserByUsername(String userName);
 	
@@ -42,5 +40,4 @@ public interface UserService {
 	
 	public void saveUserImage(UserImage image);
 	
-	public UserLevelDetails findDetailsByUserIdLevelId(AnxUser anxUserId,String levelName);
 }

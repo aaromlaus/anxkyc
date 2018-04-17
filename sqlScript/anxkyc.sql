@@ -7,10 +7,15 @@ UNIQUE(role_name)
 
 
 CREATE TABLE user_level(
-user_level_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-user_level_name VARCHAR(255) NOT NULL,
-description TEXT,
-UNIQUE(user_level_name)
+	user_level_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	user_level_group INT NOT NULL,
+	user_level_name VARCHAR(255) NOT NULL,
+	description TEXT,
+	requirement TEXT,
+	cash_in VARCHAR(100),
+	cash_out VARCHAR(100),
+	enabled boolean default false,
+	UNIQUE(user_level_name)
 );
 
 CREATE TABLE anx_user(
@@ -35,37 +40,16 @@ phone_code_id INT,
 CONSTRAINT fk_anx_user_role FOREIGN KEY (role_name)
     REFERENCES role(role_name),
 CONSTRAINT fk_anx_useruser_leveluser_level_user_level FOREIGN KEY (user_level_name)
-    REFERENCES user_level(user_level_name),
-UNIQUE(email_address),
-UNIQUE(phone_number)
+    REFERENCES user_level(user_level_name)
 );
 
-INSERT INTO user_level(user_level_name,description)
-values ('level1','Registered as Level 1'),
- ('level2','Registered as Level 2'),
- ('level2pending','Pending Level 2 Approval');
- 
- CREATE TABLE level(
-	level_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,	
-	description TEXT,
-	requirement TEXT,
-	cash_in VARCHAR(100),
-	cash_out VARCHAR(100),
-	enabled boolean default false
-);
-INSERT INTO level(description,requirement,cash_in,cash_out,enabled)
-values ('Level 1','Phone or email verification','2,000 PHP','0 PHP',true),
-('Level 2','ID, selfie, phone and email verification','50,000 PHP','50,000 PHP',true),
-('Level 3','Address verification','400,000 PHP','400,000 PHP',true),
-('Level 4','Custom limits application','Custom (up to 5 million PHP)','Custom(up to 5 million PHP)',true);
+INSERT INTO user_level(user_level_group,user_level_name,description,requirement,cash_in,cash_out,enabled)
+values (1,'level1','Registered as Level 1','Phone or email verification','2,000 PHP','0 PHP',true),
+ (1,'level2pending','Pending Level 2 Approval','Phone or email verification','2,000 PHP','0 PHP',true),
+ (2,'level2','Registered as Level 2','ID, selfie, phone and email verification','50,000 PHP','50,000 PHP',true),
+ (3,'level3','Registered as Level 3','Address verification','400,000 PHP','400,000 PHP',true),
+ (4,'level4','Registered as Level 4','Custom limits application','Custom (up to 5 million PHP)','Custom(up to 5 million PHP)',true);
 
-
-CREATE TABLE user_level_details(
-	user_level_details_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	user_id INT,
-	anx_user_id INT,
-	level_limit boolean default false
-);
 
  INSERT INTO role(role_name,description)
 values ('user','role for user'),
@@ -76,12 +60,14 @@ CREATE TABLE phone_code(
 	phone_code_name VARCHAR(50),
 	country VARCHAR(50)
 );
+
 CREATE TABLE user_image(
 	user_image_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	anx_user_id INT,
 	link VARCHAR(255),
 	user_level_details_id INT
 );
+
 INSERT INTO phone_code(phone_code_name,country)
 VALUES
 ('+63','Philippines'),

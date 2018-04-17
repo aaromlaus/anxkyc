@@ -27,12 +27,14 @@ public class AdminDashboardController {
 	@RequestMapping(value="/updateUserLevel")
 	public String updateUserLevel(@RequestParam("userId") int userId, @RequestParam("status") String status, Map<String, Object> model) {
 		AnxUser user = userService.getUserById(userId);
+		//userService.findLevelUserByIdAndLevel(userId,user.getUserLevel())
 		if(status.equalsIgnoreCase("approve")) {
 			user.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_2));
+			
 		} else if (status.equalsIgnoreCase("reject")) {
 			user.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_1));
 		}
-		userService.saveUser(user);
+		userService.saveUser(user,false);
 		return "admin/dashboard";
 	}
 

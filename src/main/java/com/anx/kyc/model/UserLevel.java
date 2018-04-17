@@ -20,12 +20,40 @@ public class UserLevel implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userLevelId;
 	
+	@Column(name = "user_level_group")
+	private int userLevelGroup;
+
 	@Column(name = "user_level_name")
 	private String userLevelName;
 	
 	@Column(name = "description")
 	private String description;
+	
+	@Column(name="requirement")
+	private String requirement;
+	
+	@Column(name="cash_in")
+	private String cashIn;
 
+	@Column(name="cash_out")
+	private String cashOut;	
+
+	
+	public int getUserLevelId() {
+		return userLevelId;
+	}
+
+	public void setUserLevelId(int userLevelId) {
+		this.userLevelId = userLevelId;
+	}
+
+	public int getUserLevelGroup() {
+		return userLevelGroup;
+	}
+
+	public void setUserLevelGroup(int userLevelGroup) {
+		this.userLevelGroup = userLevelGroup;
+	}
 
 	public String getUserLevelName() {
 		return userLevelName;
@@ -43,12 +71,42 @@ public class UserLevel implements Serializable {
 		this.description = description;
 	}
 
-	public int getUserLevelId() {
-		return userLevelId;
+	public String getRequirement() {
+		return requirement;
 	}
 
-	public void setUserLevelId(int userLevelId) {
-		this.userLevelId = userLevelId;
+	public void setRequirement(String requirement) {
+		this.requirement = requirement;
 	}
+
+	public String getCashIn() {
+		return cashIn;
+	}
+
+	public void setCashIn(String cashIn) {
+		this.cashIn = cashIn;
+	}
+
+	public String getCashOut() {
+		return cashOut;
+	}
+
+	public void setCashOut(String cashOut) {
+		this.cashOut = cashOut;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "UserLevel [userLevelId=" + userLevelId + ", userLevelGroup=" + userLevelGroup + ", userLevelName="
+				+ userLevelName + ", description=" + description + ", requirement=" + requirement + ", cashIn=" + cashIn
+				+ ", cashOut=" + cashOut + "]";
+	}
+	
+	
 
 }

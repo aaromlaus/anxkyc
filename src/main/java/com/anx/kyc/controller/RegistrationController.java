@@ -80,7 +80,7 @@ public class RegistrationController {
 			anxUser.setPhoneCode(userService.findPhoneCodeById(anxUser.getPhoneCode().getPhoneCodeId()));
 		}
 		userService.saveUser(anxUser);
-		userService.saveNewLevelUser(anxUser);
+		//userService.saveNewLevelUser(anxUser);
 		
 		model.put("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		model.put("msgDetails", amService.get("registration.success"));

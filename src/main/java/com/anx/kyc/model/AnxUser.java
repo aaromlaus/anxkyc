@@ -79,15 +79,13 @@ public class AnxUser implements Serializable {
 	@JoinColumn(name = "user_level_name", referencedColumnName = "user_level_name")
 	private UserLevel userLevel;
 
-	@Transient
-	private List<UserLevelDetails> userLevelDetails = new ArrayList<>();
-
 	@Column(name = "phone_number")
 	private String phoneNumber;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "phone_code_id", referencedColumnName = "phone_code_id")
 	private PhoneCode phoneCode;
+	
 
 	public int getUserId() {
 		return userId;
@@ -240,14 +238,6 @@ public class AnxUser implements Serializable {
 
 	public void setPhoneCode(PhoneCode phoneCode) {
 		this.phoneCode = phoneCode;
-	}
-
-	public List<UserLevelDetails> getUserLevelDetails() {
-		return userLevelDetails;
-	}
-
-	public void setUserLevelDetails(List<UserLevelDetails> userLevelDetails) {
-		this.userLevelDetails = userLevelDetails;
 	}
 
 }

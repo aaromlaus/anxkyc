@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.anx.kyc.common.AnxMessageService;
 import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.UserImage;
+import com.anx.kyc.model.UserLevel;
 import com.anx.kyc.service.UserService;
 
 @Controller
@@ -42,7 +44,9 @@ public class UserDashboardController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		AnxUser anxUser = userService.findAnxUserByUsername(currentPrincipalName);
-		anxUser.setUserLevelDetails(userService.findLevelUserById(anxUser));
+		//anxUser.setUserLevelDetails(userService.findLevelUserById(anxUser));
+		List<UserLevel> userLevels = userService.getAllUserLevel();
+		model.put("userLevels", userLevels);
 		model.put("anxUser", anxUser);
 		return "main/user";
 	}
@@ -80,3 +84,4 @@ public class UserDashboardController {
 	}
 
 }
+

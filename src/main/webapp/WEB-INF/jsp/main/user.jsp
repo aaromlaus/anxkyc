@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <head>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -75,26 +76,28 @@
 				      </tr>
 				    </thead>
 				    <tbody>
-				    	<c:forEach items="${anxUser.userLevelDetails}" var="userLevelDetails">
-					    	<tr class="accordion-toggle" data-toggle="collapse" data-target="#${userLevelDetails.userLevelDetailsId}">
-								<td class="col-sm-2">
-						           <c:out value = "${userLevelDetails.level.description}"/>
-						        </td>
-						        <td>
-						         <c:out value = "${userLevelDetails.level.requirement}"/>
-						       	</td>
-						        <td>
-						          <c:out value = "${userLevelDetails.level.cashIn}"/>
-						        </td>
-						        <td>
-						          <c:out value = "${userLevelDetails.level.cashOut}"/>
-						        </td>
-						        <td>
-						        	<span class="${userLevelDetails.levelLimit ? 'glyphicon glyphicon-ok':''}"></span>&nbsp
-						        </td>
-						    </tr>
-						    <c:if test="${userLevelDetails.level.description.equalsIgnoreCase('Level 2')}">
-							    <tr class="collapse out ${userLevelDetails.userLevelDetailsId}" id="${userLevelDetails.userLevelDetailsId}">
+				    	<c:forEach items="${userLevels}" var="userLevels">
+					    	<c:if test="${not userLevels.userLevelName.contains('pending')}">
+						    	<tr class="accordion-toggle" data-toggle="collapse" data-target="#${userLevels.userLevelId}">
+									<td class="col-sm-2">
+							           Level <c:out value = "${userLevels.userLevelGroup}"/>
+							        </td>
+							        <td>
+							         <c:out value = "${userLevels.requirement}"/>
+							       	</td>
+							        <td>
+							          <c:out value = "${userLevels.cashIn}"/>
+							        </td>
+							        <td>
+							          <c:out value = "${userLevels.cashOut}"/>
+							        </td>
+							        <td>
+							        	<span class="${(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup) ? 'glyphicon glyphicon-ok':''}"></span>&nbsp
+							        </td>
+							    </tr>
+						    </c:if>
+						    <c:if test="${userLevels.userLevelName.equalsIgnoreCase('level2')}">
+							    <tr class="collapse out ${userLevels.userLevelId}" id="${userLevels.userLevelId}">
 							    	<td colspan="5">
 								    	<form:form method="POST" action="/profile/upload/" enctype="multipart/form-data">
 								    		

@@ -32,7 +32,7 @@
 						<tr>
 							<td>${user.userId }</td>
 							<td>${user.firstName } ${user.middleName } ${user.lastName } </td>
-							<td>${user.username }</td>
+							<td>${user.emailAddress }</td>
 							<td>${user.userLevel.description }</td>
 							<td>
 								<%-- <a href="#" onclick="updateUserLevel('${user.userId }')">Approve</a>
