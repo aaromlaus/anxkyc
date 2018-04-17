@@ -17,7 +17,8 @@
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
-				<th>Username</th>
+				<th>Email Address</th>
+				<th>Mobile Number</th>
 				<th>User Level</th>
 				<th></th>
 			</tr>
@@ -25,7 +26,7 @@
 		<tbody>
 			<c:choose>
 				<c:when test="${empty userList }">
-					<tr><td colspan="5" align="center">Nothing to approve</td></tr>
+					<tr><td colspan="6" align="center">Nothing to approve</td></tr>
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${userList }" var="user">
@@ -33,10 +34,9 @@
 							<td>${user.userId }</td>
 							<td>${user.firstName } ${user.middleName } ${user.lastName } </td>
 							<td>${user.emailAddress }</td>
+							<td>${user.phoneNumber }</td>
 							<td>${user.userLevel.description }</td>
 							<td>
-								<%-- <a href="#" onclick="updateUserLevel('${user.userId }')">Approve</a>
-								<a href="#" onclick="updateUserLevel('${user.userId }')">Reject</a> --%>
 								<button class="btnApprove" onclick="updateUserLevel('${user.userId }', 'approve')">Approve</button>
 								<button class="btnReject" onclick="updateUserLevel('${user.userId }', 'reject')">Reject</button>
 							</td>
@@ -58,7 +58,10 @@
 	});
 
 	function updateUserLevel(userId, status) {
-		location.href = "./updateUserLevel?userId=" + userId + "&status=" + status;
+		var strconfirm = confirm("Are you sure you want to " + status + "?");
+		if(strconfirm) {
+			location.href = "./updateUserLevel?userId=" + userId + "&status=" + status;
+		}
 	}
 </script>
 
