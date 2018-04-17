@@ -20,11 +20,7 @@ public interface UserService {
 	
 	public List<UserLevel> getAllUserLevel();
 	
-	//public List<UserLevelDetails> findLevelUserById(AnxUser anxUserId);
-	
-	//public void saveNewLevelUser(AnxUser anxUser);
-	
-	public AnxUser findAnxUserByUsername(String userName);
+	public AnxUser findByEmailAddressOrPhoneNumber(String userName);
 	
 	public List<AnxUser> getAllUsers();
 	

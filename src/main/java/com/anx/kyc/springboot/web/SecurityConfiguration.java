@@ -1,7 +1,5 @@
 package com.anx.kyc.springboot.web;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,8 +9,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.anx.kyc.service.impl.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -20,18 +21,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private DataSource dataSource;
-
-	@Autowired
 	private CustomSucessHandler customSucessHandler;
-	
-	private static final String USER_QUERY = "SELECT u.email_address,u.password,r.role_id FROM anx_kyc.anx_user u INNER JOIN role r USING(role_name) WHERE u.email_address=?";
-	private static final String ROLE_QUERY = "SELECT u.email_address, r.role_name as role FROM anx_kyc.anx_user u INNER JOIN role r USING(role_name) WHERE u.email_address=?";
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/administrator/**").hasAnyAuthority("admin");
-		http.authorizeRequests().antMatchers("/profile/**").hasAnyAuthority("user");
+		http.authorizeRequests().antMatchers("/administrator/**").hasAnyAuthority("ROLE_admin");
+		http.authorizeRequests().antMatchers("/profile/**").hasAnyAuthority("ROLE_user");
 		http.formLogin().failureUrl("/login?error").loginPage("/login").successHandler(customSucessHandler).permitAll()
 				.and().exceptionHandling().accessDeniedPage("/accessDenied").and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
@@ -39,11 +34,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource)
-				.usersByUsernameQuery(USER_QUERY)
-				.authoritiesByUsernameQuery(ROLE_QUERY)
-				.passwordEncoder(passwordEncoder());
-
+		
+		auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
 	}
 
 	@Override
@@ -56,5 +48,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		return bCryptPasswordEncoder;
 	}
-
+	
+	@Bean
+	public UserDetailsService userDetailsService() {
+		return new UserDetailsServiceImpl();
+	};
+	
 }
