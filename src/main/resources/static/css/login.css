@@ -6,7 +6,20 @@
 	background-color: #d31334;
 	color: #FFF;
 	text-align: center;
-	margin-top: 4%;
+}
+
+.message {
+	width: 280px;
+	margin: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+	margin-top: 2%;
+	text-align: center;
+}
+
+.alert {
+    padding-left: 28px;
+    padding-right: 28px;
 }
 
 .field, .btn {
@@ -16,7 +29,7 @@
 
 .field {
 	background: #29363f;
-	margin: 5px 25px;
+	margin: 5px;
 	width: 187px;
 	color: #FFF;
 }
@@ -31,6 +44,6 @@
 .btn {
 	background-color: #29363f;
 	font-weight: bold;
-	margin: 10px 25px;
+	margin: 10px;
 	width: 187px;
 }
