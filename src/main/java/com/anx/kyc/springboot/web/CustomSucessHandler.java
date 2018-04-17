@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -15,25 +16,30 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import com.anx.kyc.common.AnxSession;
+
 @Component
 public class CustomSucessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+	
+	@Autowired
+	private AnxSession anxSession;
 
 	@Override
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException {
-		String targetUrl = determineTargetUrl(authentication);
-
+		String targetUrl = determineTargetUrl(authentication, request);
+		
 		if (response.isCommitted()) {
 			System.out.println("Can't redirect");
 			return;
 		}
-
+		
 		redirectStrategy.sendRedirect(request, response, targetUrl);
 	}
 
-	protected String determineTargetUrl(Authentication authentication) {
+	protected String determineTargetUrl(Authentication authentication, HttpServletRequest request) {
 		String url = "";
 
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
@@ -52,7 +58,8 @@ public class CustomSucessHandler extends SimpleUrlAuthenticationSuccessHandler {
 			url = "/accessDenied";
 		}
 
-		return url;
+		anxSession.setHomeUrl(url);
+		return "/home";
 	}
 
 	@Override
@@ -82,5 +89,6 @@ public class CustomSucessHandler extends SimpleUrlAuthenticationSuccessHandler {
 		}
 		return false;
 	}
+	
 
 }

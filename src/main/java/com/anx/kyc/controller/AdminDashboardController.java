@@ -21,7 +21,7 @@ public class AdminDashboardController {
 	@RequestMapping(value="/")
 	public String administrator(Map<String, Object> model) {
 		model.put("userList", userService.getUsersByUserLevelName(UserLevelType.LEVEL_2_PENDING));
-		return "admin/dashboard";
+		return "admin/admindashboard";
 	}
 	
 	@RequestMapping(value="/updateUserLevel")

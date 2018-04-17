@@ -12,7 +12,7 @@
 </head>
 <br />
 <jsp:include page="../common/header.jsp"></jsp:include>
-<jsp:include page="../common/headerMenu.jsp"></jsp:include>
+<jsp:include page="../common/headermenu.jsp"></jsp:include>
 <div class="inner contact">
 	<div class="col-sm-12 clearfix row">		
 		<div id="main-user">

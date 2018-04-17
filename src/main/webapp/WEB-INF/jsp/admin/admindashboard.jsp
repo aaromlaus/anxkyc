@@ -9,6 +9,7 @@
 </head>
 <br />
 <jsp:include page="../common/header.jsp"></jsp:include>
+<jsp:include page="../common/headermenu.jsp"></jsp:include>
 
 <div class="container">
 	<div style="margin-top: 3%;">

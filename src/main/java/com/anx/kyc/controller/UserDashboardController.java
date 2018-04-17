@@ -47,7 +47,7 @@ public class UserDashboardController {
 		List<UserLevel> userLevels = userService.getAllUserLevel();
 		model.put("userLevels", userLevels);
 		model.put("anxUser", anxUser);
-		return "main/user";
+		return "main/userdashboard";
 	}
 	
 	@PostMapping("/upload")
