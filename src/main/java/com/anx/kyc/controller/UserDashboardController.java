@@ -41,7 +41,8 @@ public class UserDashboardController {
 	public String mainPage(Map<String, Object> model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
-		AnxUser anxUser = userService.findAnxUserByUsername(currentPrincipalName);
+		
+		AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
 		anxUser.setUserLevelDetails(userService.findLevelUserById(anxUser));
 		model.put("anxUser", anxUser);
 		return "main/user";
@@ -64,7 +65,8 @@ public class UserDashboardController {
 			Files.write(path, bytes);
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String currentPrincipalName = authentication.getName();
-			AnxUser anxUser = userService.findAnxUserByUsername(currentPrincipalName);
+			AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
+			
 			anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_2_PENDING));
 			userService.saveUser(anxUser,false);
 			UserImage image = new UserImage(anxUser, path.toString());

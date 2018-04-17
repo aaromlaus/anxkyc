@@ -48,21 +48,25 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	@Autowired UserImageRepository uIrepository;
+	@Autowired
+	UserImageRepository uIrepository;
+
 	@Override
 	public int saveUser(AnxUser user) {
-		
-		return saveUser(user,true);
+
+		return saveUser(user, true);
 	}
+
 	@Override
-	public int saveUser(AnxUser user,boolean isEncodePassword) {
-		if(isEncodePassword) {
+	public int saveUser(AnxUser user, boolean isEncodePassword) {
+		if (isEncodePassword) {
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		}
 		AnxUser anx = auRepository.save(user);
 		auRepository.flush();
 		return anx.getUserId();
 	}
+
 	@Override
 	public AnxUser getUserById(int userId) {
 		return auRepository.getOne(userId);
@@ -82,51 +86,60 @@ public class UserServiceImpl implements UserService {
 	public List<AnxUser> getUsersByRoleName(String roleName) {
 		return auRepository.findByRoleName(roleName);
 	}
+
 	@Override
 	public List<AnxUser> getUsersByUserLevelName(String userLevelName) {
 		return auRepository.findByUserLevelName(userLevelName);
 	}
+
 	@Override
 	public List<AnxUser> getAllUsers() {
 		return auRepository.findAll();
 	}
+
 	@Override
 	public List<Level> getAllLevel() {
 		return levelRepository.findAll();
 	}
+
 	@Override
 	public List<UserLevelDetails> findLevelUserById(AnxUser anxUserId) {
 		return levelUserRepository.findUserLevelDetailsById(anxUserId);
 	}
+
 	@Override
 	public void saveNewLevelUser(AnxUser anxUser) {
 		List<Level> allLevel = getAllLevel();
 		List<UserLevelDetails> levelUsers = new ArrayList<>();
 		for (Level level : allLevel) {
-			UserLevelDetails levelUser = new UserLevelDetails(anxUser, level, level.getDescription().equalsIgnoreCase("level 1"));
+			UserLevelDetails levelUser = new UserLevelDetails(anxUser, level,
+					level.getDescription().equalsIgnoreCase("level 1"));
 			levelUsers.add(levelUser);
 		}
 		levelUserRepository.saveAll(levelUsers);
 	}
+
 	@Override
-	public AnxUser findAnxUserByUsername(String userName) {
-		AnxUser anx = auRepository.findAnxUserByUsername(userName);
-		return anx;
+	public AnxUser findByEmailAddressOrPhoneNumber(String userName) {
+		return auRepository.findByEmailAddressOrPhoneNumber(userName, userName);
 	}
+
 	@Override
-	public List<PhoneCode> getAllPhoneCode(){
+	public List<PhoneCode> getAllPhoneCode() {
 		return phoneCodeRepository.findAll();
 	}
+
 	@Override
-	public PhoneCode findPhoneCodeById(Long id){
+	public PhoneCode findPhoneCodeById(Long id) {
 		return phoneCodeRepository.getOne(id);
 	}
+
 	@Override
 	public void saveUserImage(UserImage image) {
 		uIrepository.save(image);
 	}
-	
-	public UserLevelDetails findDetailsByUserIdLevelId(AnxUser anxUser,String levelName) {
+
+	public UserLevelDetails findDetailsByUserIdLevelId(AnxUser anxUser, String levelName) {
 		return levelUserRepository.findDetailsByUserIdLevelId(anxUser, levelName);
 	}
 }

@@ -35,9 +35,7 @@ phone_code_id INT,
 CONSTRAINT fk_anx_user_role FOREIGN KEY (role_name)
     REFERENCES role(role_name),
 CONSTRAINT fk_anx_useruser_leveluser_level_user_level FOREIGN KEY (user_level_name)
-    REFERENCES user_level(user_level_name),
-UNIQUE(email_address),
-UNIQUE(phone_number)
+    REFERENCES user_level(user_level_name)
 );
 
 INSERT INTO user_level(user_level_name,description)

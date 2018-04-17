@@ -26,7 +26,7 @@ public interface UserService {
 	
 	public void saveNewLevelUser(AnxUser anxUser);
 	
-	public AnxUser findAnxUserByUsername(String userName);
+	public AnxUser findByEmailAddressOrPhoneNumber(String userName);
 	
 	public List<AnxUser> getAllUsers();
 	
