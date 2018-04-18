@@ -25,7 +25,7 @@
 		<div class="forgotContainer">
 			<span class="reset-password__note">Please enter your email or mobile number, and we'll send you a reset code</span>
 		</div>
-		<form:form method="POST" modelAttribute="loginForm" action="/sendCode" >
+		<form:form method="POST" modelAttribute="command" action="/sendCode" >
 			<form:input path="username" class="field" placeholder="Email or Mobile Number" />
 			<input class="btn" type="submit" value="SEND CODE"/>
 			<label>Don't have an Account? <a href="/signup/">Sign Up</a></label>

@@ -156,4 +156,19 @@ input[type="submit"]:hover {
 	width:72% !important;
 }
 
+.btn-sign-in{
+	width: 100%;
+	background: #3399cc;
+	border: 0;
+	padding: 4%;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 100%;
+	color: #fff;
+	cursor: pointer;
+	transition: background .3s;
+	-webkit-transition: background .3s;
+	margin-bottom:5%;
+	margin-top:8%;
+}
+
 

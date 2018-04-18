@@ -25,19 +25,21 @@ public class EmailServiceImpl implements EmailService {
     private EmailHelper emailHelper;
 	
 	@Override
-	public void sendVerificationCodeEmail(String emailAddress) {
+	public int sendVerificationCodeEmail(String emailAddress) {
         MimeMessage mail = javaMailSender.createMimeMessage();
+        int code = AnxUtil.generateVerificationCode();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);
             helper.setTo(emailAddress);
             helper.setReplyTo("someone@localhost");
             helper.setFrom("someone@localhost");
             helper.setSubject("Reset your password");
-            helper.setText(emailHelper.buildVerificationCodeEmail(AnxUtil.generateVerificationCode()),true);
+            helper.setText(emailHelper.buildVerificationCodeEmail(code),true);
         } catch (MessagingException e) {
             e.printStackTrace();
         } finally {}
         javaMailSender.send(mail);
+        return code;
 	}
 	
 	public void sendEmail(List<String> emailToList, String subject, String content) {

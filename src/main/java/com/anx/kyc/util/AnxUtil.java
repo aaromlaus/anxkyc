@@ -13,7 +13,9 @@ public class AnxUtil {
 		int code = 0;
 		try {
 		     SecureRandom number = SecureRandom.getInstanceStrong();
-		     code = number.nextInt(999999);
+		     while(code < 100000) {
+		    	 code = number.nextInt(999999);
+		     }
 		   } catch (NoSuchAlgorithmException nsae) {
 			   
 		   }

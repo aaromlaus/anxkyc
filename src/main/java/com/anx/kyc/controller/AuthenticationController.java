@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.anx.kyc.common.AnxSession;
-import com.anx.kyc.model.Login;
+import com.anx.kyc.model.AnxUser;
+import com.anx.kyc.model.AuthenticationForm;
 import com.anx.kyc.service.EmailService;
 import com.anx.kyc.service.UserService;
 import com.anx.kyc.util.AnxUtil;
@@ -51,32 +52,87 @@ public class AuthenticationController {
 		if (error != null) {
 			model.put("errorMsg", "Username or password is incorrect!");
 		}
-		model.put("loginForm", new Login());
+		model.put("loginForm", new AuthenticationForm());
 		return "login";
 	}
 
 	@RequestMapping(value = "/doLogin")
-	public String doLogin(@ModelAttribute("loginForm") Login login) {
+	public String doLogin(@ModelAttribute("loginForm") AuthenticationForm login) {
 		return "welcome";
 	}
 
 	@RequestMapping("/forgotPassword")
 	public String forgotPassword(Map<String, Object> model, HttpSession session) {
-		model.put("loginForm", new Login());
+		model.put("command", new AuthenticationForm());
 		return "auth/forgotpassword";
 	}
-
+	
 	@RequestMapping("/sendCode")
-	public String sendCode(@ModelAttribute("loginForm") Login login) {
-		if (AnxUtil.isValidEmail(login.getUsername())) {
-			emailService.sendVerificationCodeEmail(login.getUsername());
-			return "redirect:/login";
-		} else {
-			Map<String, Object> model = new HashMap<String, Object>();
+	public String sendCode(@RequestParam("username") String username,Map<String, Object> model, HttpSession session) {
+		model.put("command", new AuthenticationForm());
+		if(AnxUtil.isValidEmail(username)) {
+			if(userService.findByEmailAddressOrPhoneNumber(username) != null) {
+				int code = emailService.sendVerificationCodeEmail(username);
+				session.getServletContext().setAttribute("vCode", code);
+				session.getServletContext().setAttribute("username", username);
+				model.put("command", new AuthenticationForm());
+				return "redirect:/verifyCode";
+			}else {
+				model.put("errorMsg", "User account not found!");
+				return "auth/forgotpassword";
+			}
+			
+		}else {
 			model.put("errorMsg", "Value is not a valid email address!");
 			return "auth/forgotpassword";
 		}
 	}
+	
+	@RequestMapping("/verifyCode")
+	public String verifyCode(Map<String, Object> model, HttpSession session) {
+		model.put("command", new AuthenticationForm());
+		return "auth/verifycode";
+	}
+	
+	@RequestMapping("/doVerify")
+	public String verifyCode(Map<String, Object> model, @RequestParam("code") String code, HttpSession session) {
+		String vCode = String.valueOf(session.getServletContext().getAttribute("vCode"));
+		model.put("command", new AuthenticationForm());
+		if(vCode.equals(code)) {
+			return "redirect:/resetPassword";
+		}else {
+			model.put("errorMsg", "Incorrect Verification code!");
+			return "auth/forgotpassword";
+		}
+		
+	}
+	
+	
+	@RequestMapping("/resetPassword")
+	public String resetPasword(Map<String, Object> model, HttpSession session) {
+		model.put("command", new AuthenticationForm());
+		return "auth/resetpassword";
+	}
+	
+	@RequestMapping("/doResetPassword")
+	public String resetPasword(Map<String, Object> model, @ModelAttribute("command") AuthenticationForm form, HttpSession session) {
+		if(form.getPassword().equals(form.getConfirmPassword())) {
+			String username = String.valueOf(session.getServletContext().getAttribute("username"));
+			AnxUser user = userService.findByEmailAddressOrPhoneNumber(username);
+			user.setPassword(form.getConfirmPassword());
+			userService.saveUser(user);
+			return "redirect:/resetSuccess";
+		}
+		
+		return "redirect:/resetPassword";
+	}	
+	
+	@RequestMapping("/resetSuccess")
+	public String resetSuccess(Map<String, Object> model, HttpSession session) {
+		model.put("command", new AuthenticationForm());
+		return "auth/resetsuccess";
+	}
+
 
 	@RequestMapping(value = "/verify")
 	public String verifyEmail(@RequestParam("details") String verificationCode, HttpServletRequest request) {

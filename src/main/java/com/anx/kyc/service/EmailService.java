@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface EmailService {
 	
-	void sendVerificationCodeEmail(String emailAddress);
+	int sendVerificationCodeEmail(String emailAddress);
 	
 	public void sendEmail(List<String> emailToList, String subject, String content);
 	
