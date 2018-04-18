@@ -111,4 +111,5 @@ public class UserServiceImpl implements UserService {
 	public void saveUserImage(UserImage image) {
 		uIrepository.save(image);
 	}
+
 }

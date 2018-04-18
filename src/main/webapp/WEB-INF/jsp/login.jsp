@@ -18,12 +18,17 @@
 <body>
 	<jsp:include page="../jsp/common/header.jsp"></jsp:include>
 	<div class=""></div>
+	<div class="message">
+		<c:if test="${not empty errorMsg}">
+			<span class="alert alert-danger">${errorMsg}</span>
+		</c:if>
+	</div>
 	<div class="login">
 		<h3>ANX Login</h3>
 		<form:form method="POST" modelAttribute="loginForm" action="/login" >
 			<form:input path="username" class="field" placeholder="Email or Mobile Number" />
 			<form:password path="password" class="field" placeholder="Password" />
-			<a href=# class="forgot">Forgot Password?</a>
+			<a href="/forgotPassword" class="forgot">Forgot Password?</a>
 			<input class="btn" type="submit" value="SIGN IN"/>
 			<label>Don't have an Account? <a href="/signup/" class="forgot">Sign Up</a></label>
 		</form:form>
