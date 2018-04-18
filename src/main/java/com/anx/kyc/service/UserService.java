@@ -2,6 +2,8 @@ package com.anx.kyc.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.model.Role;
@@ -35,5 +37,13 @@ public interface UserService {
 	public PhoneCode findPhoneCodeById(Long id);
 	
 	public void saveUserImage(UserImage image);
-	
+
+	public AnxUser findByVerificationCode(String verificationCode);
+
+	public void verifyAndActivateUser(String verificationCode);
+
+	public String saveUserDetails(AnxUser anxUser);
+
+	public void prepareAndSendUserRegistrationEmail(AnxUser anxUser, String verificationCode, HttpServletRequest request);
+
 }

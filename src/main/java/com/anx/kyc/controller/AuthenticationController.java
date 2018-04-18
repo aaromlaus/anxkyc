@@ -26,7 +26,7 @@ public class AuthenticationController {
 
 	@Autowired
 	private AnxSession anxSession;
-	
+
 	@Autowired
 	private EmailService emailService;
 
@@ -42,12 +42,13 @@ public class AuthenticationController {
 
 	@RequestMapping(value = "/home")
 	public String home(HttpServletRequest request) {
+		System.out.println("test");
 		return "redirect:" + anxSession.getHomeUrl();
 	}
 
 	@RequestMapping("/login")
-	public String loginPage(Map<String, Object> model,@RequestParam(value = "error", required = false) String error) {
-		if(error != null) {
+	public String loginPage(Map<String, Object> model, @RequestParam(value = "error", required = false) String error) {
+		if (error != null) {
 			model.put("errorMsg", "Username or password is incorrect!");
 		}
 		model.put("loginForm", new Login());
@@ -58,25 +59,29 @@ public class AuthenticationController {
 	public String doLogin(@ModelAttribute("loginForm") Login login) {
 		return "welcome";
 	}
-	
-	
+
 	@RequestMapping("/forgotPassword")
 	public String forgotPassword(Map<String, Object> model, HttpSession session) {
 		model.put("loginForm", new Login());
 		return "auth/forgotpassword";
 	}
-	
+
 	@RequestMapping("/sendCode")
 	public String sendCode(@ModelAttribute("loginForm") Login login) {
-		if(AnxUtil.isValidEmail(login.getUsername())) {
+		if (AnxUtil.isValidEmail(login.getUsername())) {
 			emailService.sendVerificationCodeEmail(login.getUsername());
 			return "redirect:/login";
-		}else {
+		} else {
 			Map<String, Object> model = new HashMap<String, Object>();
 			model.put("errorMsg", "Value is not a valid email address!");
 			return "auth/forgotpassword";
 		}
 	}
-	
+
+	@RequestMapping(value = "/verify")
+	public String verifyEmail(@RequestParam("details") String verificationCode, HttpServletRequest request) {
+		userService.verifyAndActivateUser(verificationCode);
+		return "welcome";
+	}
 
 }

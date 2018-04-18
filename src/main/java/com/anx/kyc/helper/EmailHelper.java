@@ -1,5 +1,7 @@
 package com.anx.kyc.helper;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -32,6 +34,13 @@ public class EmailHelper {
 			.append("</body>") 
 			.append("</html>");
 		
+		return sb.toString();
+	}
+	
+	public String buildUserSignupVerificationEmailContent(Map<String, String> param) {
+		StringBuilder sb = new StringBuilder("");
+		String verificationCode = param.get("verificationCode");
+		sb.append(verificationCode);
 		return sb.toString();
 	}
 }

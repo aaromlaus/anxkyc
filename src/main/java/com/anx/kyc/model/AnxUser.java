@@ -63,6 +63,9 @@ public class AnxUser implements Serializable {
 
 	@Column(name = "source_of_fund")
 	private String sourceOfFund;
+	
+	@Column(name = "verification_code")
+	private String verificationCode;
 
 	@Column(name = "birth_date")
 	@DateTimeFormat(pattern = "mm/dd/yyyy")
@@ -82,6 +85,9 @@ public class AnxUser implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "phone_code_id", referencedColumnName = "phone_code_id")
 	private PhoneCode phoneCode;
+	
+	@Column(name = "active")
+	private boolean active;
 
 	public int getUserId() {
 		return userId;
@@ -233,6 +239,22 @@ public class AnxUser implements Serializable {
 
 	public void setPhoneCode(PhoneCode phoneCode) {
 		this.phoneCode = phoneCode;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
 	}
 
 }

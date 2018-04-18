@@ -5,6 +5,8 @@ import java.security.SecureRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class AnxUtil {
 
 	public static int generateVerificationCode() {
@@ -24,5 +26,9 @@ public class AnxUtil {
         Matcher mat = pattern.matcher(email);
 
         return(mat.matches());
+	}
+	
+	public static String getRequestPath(HttpServletRequest request) {
+		return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
 	}
 }

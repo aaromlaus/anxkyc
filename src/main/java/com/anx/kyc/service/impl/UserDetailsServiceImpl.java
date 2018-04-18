@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		AnxUser user = auRepository.findByEmailAddressOrPhoneNumber(username, username);
 
 		UserBuilder builder = null;
-		if (user != null) {
+		if (user != null && user.isActive()) {
 			builder = org.springframework.security.core.userdetails.User.withUsername(username);
 			builder.password(user.getPassword());
 			builder.roles(user.getRole().getRoleName());

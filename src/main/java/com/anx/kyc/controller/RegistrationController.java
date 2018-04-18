@@ -3,6 +3,7 @@ package com.anx.kyc.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.anx.kyc.common.AlertStyleMessages;
-import com.anx.kyc.common.RoleType;
-import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.helper.AnxMessageHelper;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.PhoneCode;
@@ -71,19 +70,17 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/save")
-	public String saveUserDetails(@ModelAttribute("anxUserForm") AnxUser anxUser, Map<String, Object> model, HttpSession session) {
+	public String saveUserDetails(@ModelAttribute("anxUserForm") AnxUser anxUser, Map<String, Object> model, HttpSession session, 
+			HttpServletRequest request) {
 
 		populate(model, anxUser, session);
-		anxUser.setRole(userService.getRole(RoleType.USER));
-		anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_1));
-		if (null != anxUser && null != anxUser.getPhoneCode() && null != anxUser.getPhoneCode().getPhoneCodeId()) {
-			anxUser.setPhoneCode(userService.findPhoneCodeById(anxUser.getPhoneCode().getPhoneCodeId()));
-		}
-		userService.saveUser(anxUser);
-		//userService.saveNewLevelUser(anxUser);
+		
+		String verificationCode = userService.saveUserDetails(anxUser);
+		userService.prepareAndSendUserRegistrationEmail(anxUser, verificationCode, request);
 		
 		model.put("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		model.put("msgDetails", amHelper.get("registration.success"));
+		
 		return "registration/anxuserdetails";
 	}
 
