@@ -162,3 +162,13 @@ footer {
 .headermenu a {
 	color: white;
 }
+
+.row-header-headings {
+	color: blue;
+	font-size: 18px;
+}
+
+.level-2-grp {
+	margin-right: 1.5%;
+	margin-top: -5%;
+}

@@ -19,8 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.anx.kyc.common.AlertStyleMessages;
-import com.anx.kyc.common.AnxMessageService;
 import com.anx.kyc.common.UserLevelType;
+import com.anx.kyc.helper.AnxMessageHelper;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.UserImage;
 import com.anx.kyc.model.UserLevel;
@@ -34,7 +34,7 @@ public class UserDashboardController {
 	private UserService userService;
 
 	@Autowired
-	private AnxMessageService amService;
+	private AnxMessageHelper amService;
 	
 	@Value("${file.path.upload:test}")
 	private String UPLOAD_PATH;

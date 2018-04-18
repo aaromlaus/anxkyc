@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.anx.kyc.common.AlertStyleMessages;
-import com.anx.kyc.common.AnxMessageService;
 import com.anx.kyc.common.RoleType;
 import com.anx.kyc.common.UserLevelType;
+import com.anx.kyc.helper.AnxMessageHelper;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.service.UserService;
@@ -33,7 +33,7 @@ public class RegistrationController {
 	private RegistrationFormValidator rfValidator;
 
 	@Autowired
-	private AnxMessageService amService;
+	private AnxMessageHelper amHelper;
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -62,7 +62,7 @@ public class RegistrationController {
 		rfValidator.validate(anxUser, result);
 		if (result.hasErrors()) {
 			model.put("msgCss", AlertStyleMessages.DANGER.getValue());
-			model.put("msgDetails", amService.get("registration.error"));			
+			model.put("msgDetails", amHelper.get("registration.error"));			
 			model.put("anxUserForm", anxUser);
 			return "registration/anxaccount";
 		}
@@ -83,7 +83,7 @@ public class RegistrationController {
 		//userService.saveNewLevelUser(anxUser);
 		
 		model.put("msgCss", AlertStyleMessages.SUCCESS.getValue());
-		model.put("msgDetails", amService.get("registration.success"));
+		model.put("msgDetails", amHelper.get("registration.success"));
 		return "registration/anxuserdetails";
 	}
 

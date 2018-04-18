@@ -39,6 +39,10 @@ body {
 	-webkit-transition: opacity 1s;
 }
 
+#form-block {
+	
+}
+
 #triangle {
 	width: 0;
 	border-top: 12x solid transparent;
@@ -46,6 +50,15 @@ body {
 	border-bottom: 12px solid #3399cc;
 	border-left: 12px solid transparent;
 	margin: 0 auto;
+}
+
+#form-block h1{
+	background: #3399cc;
+	padding: 20px 0;
+	font-size: 140%;
+	font-weight: 300;
+	text-align: center;
+	color: #fff;
 }
 
 #signup h1{

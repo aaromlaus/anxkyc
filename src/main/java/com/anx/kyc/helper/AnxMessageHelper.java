@@ -1,4 +1,4 @@
-package com.anx.kyc.common;
+package com.anx.kyc.helper;
 
 import java.util.Locale;
 
@@ -10,7 +10,7 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AnxMessageService {
+public class AnxMessageHelper {
 
 	@Autowired
 	private MessageSource messageSource;
