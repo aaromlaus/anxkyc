@@ -72,14 +72,17 @@ public class RegistrationController {
 	@RequestMapping(value = "/save")
 	public String saveUserDetails(@ModelAttribute("anxUserForm") AnxUser anxUser, Map<String, Object> model, HttpSession session, 
 			HttpServletRequest request) {
-
 		populate(model, anxUser, session);
+		String successMessage = amHelper.get("registration.phone.success");
 		
 		String verificationCode = userService.saveUserDetails(anxUser);
-		userService.prepareAndSendUserRegistrationEmail(anxUser, verificationCode, request);
+		if(anxUser.getEmailAddress() != null && !anxUser.getEmailAddress().isEmpty()) {
+			userService.prepareAndSendUserRegistrationEmail(anxUser, verificationCode, request);
+			successMessage = amHelper.get("registration.email.success");
+		}
 		
 		model.put("msgCss", AlertStyleMessages.SUCCESS.getValue());
-		model.put("msgDetails", amHelper.get("registration.success"));
+		model.put("msgDetails", successMessage);
 		
 		return "registration/anxuserdetails";
 	}

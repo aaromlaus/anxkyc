@@ -148,14 +148,15 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public String saveUserDetails(AnxUser anxUser) {
+		String verificationCode = "";
+		
 		anxUser.setRole(getRole(RoleType.USER));
 		anxUser.setUserLevel(getUserLevel(UserLevelType.LEVEL_1));
 		if (null != anxUser && null != anxUser.getPhoneCode() && null != anxUser.getPhoneCode().getPhoneCodeId()) {
 			anxUser.setPhoneCode(findPhoneCodeById(anxUser.getPhoneCode().getPhoneCodeId()));
 		}
 		
-		UUID uuid = UUID.randomUUID();
-		String verificationCode = uuid.toString();
+		verificationCode = UUID.randomUUID().toString();
 		anxUser.setVerificationCode(verificationCode);
 		saveUser(anxUser);
 		return verificationCode;
