@@ -37,6 +37,8 @@ postal_code VARCHAR(100),
 source_of_fund VARCHAR(100),
 birth_date VARCHAR(100),
 phone_code_id INT,
+active TINYINT(1),
+verification_code VARCHAR(255),
 CONSTRAINT fk_anx_user_role FOREIGN KEY (role_name)
     REFERENCES role(role_name),
 CONSTRAINT fk_anx_useruser_leveluser_level_user_level FOREIGN KEY (user_level_name)

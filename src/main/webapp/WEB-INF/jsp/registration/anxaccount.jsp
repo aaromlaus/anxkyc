@@ -25,7 +25,7 @@
 			<form:input path="middleName" required="required" class="form" placeholder="Middle Name" />
 			<form:input path="lastName" required="required" class="form" placeholder="Last Name" />
 			
-			<div id="emailAddressGroupId">	
+			<div id="emailAddressGroupId" style="display:${emailDisplay};">	
 				<form:errors path="emailAddress" class="formerror" />
 				<form:input path="emailAddress" required="required" class="form"
 					placeholder="Email Address" />
@@ -34,7 +34,7 @@
 				</div>
 			</div>
 			
-			<div id="phoneGroupId">
+			<div id="phoneGroupId" style="display:${phoneDisplay};">
 				<form:errors path="phoneNumber" class="formerror" />
 				<form:select class="selectpicker phone-code-width" data-live-search="true"  path="phoneCode.phoneCodeId" >
 				 	<form:options items="${countryCodeList}" itemValue="phoneCodeId" itemLabel="phoneCodeCountry" />
