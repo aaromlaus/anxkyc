@@ -36,10 +36,10 @@
 			
 			<div id="phoneGroupId">
 				<form:errors path="phoneNumber" class="formerror" />
-				<form:select class="selectpicker" data-live-search="true"  path="phoneCode.phoneCodeId" >
+				<form:select class="selectpicker phone-code-width" data-live-search="true"  path="phoneCode.phoneCodeId" >
 				 	<form:options items="${countryCodeList}" itemValue="phoneCodeId" itemLabel="phoneCodeCountry" />
 				 </form:select>
-				<form:input path="phoneNumber" class="form" placeholder="Mobile Number" />	
+				<form:input path="phoneNumber" class="form phone-number-width" placeholder="Mobile Number" />	
 				<div class="usernameChooserLink">
 					<a href="#" onclick="myFunction();return false;">Sign up using Email Address </a>
 				</div>

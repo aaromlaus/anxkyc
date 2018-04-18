@@ -148,4 +148,12 @@ input[type="submit"]:hover {
     margin-left:2px;
 }
 
+.phone-code-width {
+	width:27% !important;
+}
+
+.phone-number-width {
+	width:72% !important;
+}
+
 

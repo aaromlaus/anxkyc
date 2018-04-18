@@ -34,7 +34,7 @@ public class UserDashboardController {
 	private UserService userService;
 
 	@Autowired
-	private AnxMessageHelper amService;
+	private AnxMessageHelper amHelper;
 	
 	@Value("${file.path.upload:test}")
 	private String UPLOAD_PATH;
@@ -55,7 +55,7 @@ public class UserDashboardController {
 
 		if (file.isEmpty()) {
 			redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.DANGER.getValue());
-			redirectAttributes.addFlashAttribute("msgDetails",amService.get("user.upload.image.error"));
+			redirectAttributes.addFlashAttribute("msgDetails",amHelper.get("user.upload.image.error"));
 			return "redirect:/profile/main";
 		}
 
@@ -74,13 +74,22 @@ public class UserDashboardController {
 			UserImage image = new UserImage(anxUser, path.toString());
 			userService.saveUserImage(image);
 			redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.SUCCESS.getValue());
-			redirectAttributes.addFlashAttribute("msgDetails", amService.get("user.upload.image.success"));
+			redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("user.upload.image.success"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		return "redirect:/profile/main";
+	}
+	
+	@RequestMapping(value = "/myaccount")
+	public String myAccount(Map<String, Object> model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
+		model.put("anxUserForm", anxUser);
+		return "main/account";
 	}
 
 }
