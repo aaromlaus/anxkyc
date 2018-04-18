@@ -61,7 +61,7 @@ body {
 	color: #fff;
 }
 
-#signup h1{
+#signup h1,#container h1{
 	background: #3399cc;
 	padding: 20px 0;
 	font-size: 140%;
