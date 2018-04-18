@@ -171,4 +171,11 @@ input[type="submit"]:hover {
 	margin-top:8%;
 }
 
+.my-account-input {	
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    margin-bottom: - !important;
+    margin-bottom: 0px !important;
+}
+
 

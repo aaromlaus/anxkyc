@@ -172,3 +172,18 @@ footer {
 	margin-right: 1.5%;
 	margin-top: -5%;
 }
+
+.mar-t-b-10 {
+		
+    margin-top: 10px;
+    margin-bottom: 10px;
+		
+}
+
+.mar-bot-0{
+	margin-bottom: 0px;
+}
+
+.mar-r-10 {
+	margin-right:10px;
+}

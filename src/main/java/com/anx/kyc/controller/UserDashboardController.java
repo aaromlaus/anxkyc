@@ -89,7 +89,7 @@ public class UserDashboardController {
 		String currentPrincipalName = authentication.getName();
 		AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
 		model.put("anxUserForm", anxUser);
-		return "main/account";
+		return "main/myaccount";
 	}
 
 }
