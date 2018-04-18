@@ -9,7 +9,7 @@
 							Home</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-left">
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+					<li><a href="/profile/myaccount/"><span class="glyphicon glyphicon-user"></span>
 							Account</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

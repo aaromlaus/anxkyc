@@ -82,6 +82,15 @@ public class UserDashboardController {
 
 		return "redirect:/profile/main";
 	}
+	
+	@RequestMapping(value = "/myaccount")
+	public String myAccount(Map<String, Object> model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
+		model.put("anxUserForm", anxUser);
+		return "main/account";
+	}
 
 }
 

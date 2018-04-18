@@ -78,6 +78,7 @@ public class RegistrationController {
 		anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_1));
 		if (null != anxUser && null != anxUser.getPhoneCode() && null != anxUser.getPhoneCode().getPhoneCodeId()) {
 			anxUser.setPhoneCode(userService.findPhoneCodeById(anxUser.getPhoneCode().getPhoneCodeId()));
+			anxUser.setPhoneNumber(anxUser.getPhoneCode().getPhoneCodeName().replaceAll(" ", "")+ anxUser.getPhoneNumber());
 		}
 		userService.saveUser(anxUser);
 		//userService.saveNewLevelUser(anxUser);
