@@ -49,7 +49,7 @@
 	<div class="col-sm-12 clearfix row">		
 		<div id="main-user">
 			<div id="form-block">
-				<h1>To increase your limits, click a level and complete the steps below.</strong></h1>
+				<h1>To increase your limits, click a level and complete the steps below.</h1>
 				<div class="clear"></div>
 				<div class="col-sm-12 bg-info">
 					<table class="table table-hover" id="levelTable">

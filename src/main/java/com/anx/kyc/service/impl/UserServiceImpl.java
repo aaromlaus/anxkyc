@@ -7,9 +7,11 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,6 +33,9 @@ import com.anx.kyc.repository.UserLevelRepository;
 import com.anx.kyc.service.EmailService;
 import com.anx.kyc.service.UserService;
 import com.anx.kyc.util.AnxUtil;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 @Service
 @Transactional
@@ -59,6 +64,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private EmailHelper emailHelper;
+	
+	private Gson gson = new Gson();
 	
 	@Override
 	public int saveUser(AnxUser user) {
@@ -196,6 +203,88 @@ public class UserServiceImpl implements UserService {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		return findByEmailAddressOrPhoneNumber(currentPrincipalName);
+	}
+	
+	@Override
+	public String sendEmailChangeCode(String requestBody, HttpSession session) {
+		JsonElement element = gson.fromJson(requestBody, JsonElement.class);
+		JsonObject requestJson = element.getAsJsonObject();
+
+		if (!requestJson.get("emailAddress").isJsonNull()
+				&& AnxUtil.isValidEmail(requestJson.get("emailAddress").getAsString())) {
+			AnxUser duplicateUser = findByEmailAddress(requestJson.get("emailAddress").getAsString());
+			if (null != duplicateUser) {
+				return "Email Already Exists";
+			}
+			int code = emailService.sendChangeEmailVerificationCode(requestJson.get("emailAddress").getAsString());
+			session.getServletContext().setAttribute("myAccountCode", code);
+			session.getServletContext().setAttribute("myAccountEmail", requestJson.get("emailAddress").getAsString());
+			return "ok";
+		}
+		return "Error";
+	}
+
+	@Override
+	public String changeEmailCode(String requestBody, HttpSession session) {
+		JsonElement element = gson.fromJson(requestBody, JsonElement.class);
+		JsonObject requestJson = element.getAsJsonObject();
+		String verificationCode = String.valueOf(session.getServletContext().getAttribute("myAccountCode"));
+		if (!requestJson.get("verificationCode").isJsonNull()
+				&& !requestJson.get("verificationCode").getAsString().equals("")
+				&& verificationCode.equals(requestJson.get("verificationCode").getAsString())) {
+			session.getServletContext().removeAttribute("verificationCode");
+			String userNamePhone = null;
+			if (!requestJson.get("currentPhone").isJsonNull()
+					&& !requestJson.get("currentPhone").getAsString().equals("")) {
+				userNamePhone = requestJson.get("currentPhone").getAsString();
+			}
+			if (!requestJson.get("currentEmail").isJsonNull()
+					&& !requestJson.get("currentEmail").getAsString().equals("")) {
+				userNamePhone = requestJson.get("currentEmail").getAsString();
+			}
+			AnxUser user = findByEmailAddressOrPhoneNumber(userNamePhone);
+			if (null != user) {
+				
+				user.setEmailAddress(String.valueOf(session.getServletContext().getAttribute("myAccountEmail")));
+				saveUser(user, false);
+				session.getServletContext().removeAttribute("myAccountCode");
+				session.getServletContext().removeAttribute("myAccountEmail");
+				return "ok";
+			}
+			return "No user found";
+
+		}
+		return "ok";
+	}
+
+	@Override
+	public String changePhoneNumber(String requestBody, HttpSession session) {
+		JsonElement element = gson.fromJson(requestBody, JsonElement.class);
+		JsonObject requestJson = element.getAsJsonObject();
+		if (!requestJson.get("phoneNumber").isJsonNull() && !requestJson.get("phoneNumber").getAsString().equals("")) {
+			if (null != findByPhoneNumber(requestJson.get("phoneNumber").getAsString())) {
+				return "Phone Number Already Exists";
+			}
+			String userNamePhone = null;
+			if (!requestJson.get("currentPhone").isJsonNull()
+					&& !requestJson.get("currentPhone").getAsString().equals("")) {
+				userNamePhone = requestJson.get("currentPhone").getAsString();
+			}
+			if (!requestJson.get("currentEmail").isJsonNull()
+					&& !requestJson.get("currentEmail").getAsString().equals("")) {
+				userNamePhone = requestJson.get("currentEmail").getAsString();
+			}
+			AnxUser user = findByEmailAddressOrPhoneNumber(userNamePhone);
+			if (null != user) {
+				user.setPhoneNumber(requestJson.get("phoneNumber").getAsString());
+				user.setPhoneCode(findPhoneCodeById(Long.valueOf(requestJson.get("phoneCodeId").getAsString())));
+				saveUser(user, false);
+				return "ok";
+			}
+			ResponseEntity.ok("No user found");
+
+		}
+		return "Add phone number";
 	}
 	
 }
