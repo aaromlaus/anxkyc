@@ -87,4 +87,27 @@ public class ApiController {
 
 		return ResponseEntity.ok("Invalid Code");
 	}
+	
+
+
+	@RequestMapping(value = "/getUploadedId", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String getUploadedId(@RequestBody String requestBody, HttpSession session) {
+		try {
+			Gson gson = new Gson();
+			JsonElement element = gson.fromJson(requestBody, JsonElement.class);
+			JsonObject requestJson = element.getAsJsonObject();
+			if (!requestJson.get("id").isJsonNull()) {
+				String imagePath = "C:\\Users\\emmanuel.quizon\\Desktop\\ID.png";//todo get the saved image from user
+
+				String img64 = AnxUtil.encodeBase64(imagePath);
+				return "data:image/png;base64,"+img64;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+
+	}
+	
 }

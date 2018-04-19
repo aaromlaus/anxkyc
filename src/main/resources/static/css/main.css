@@ -198,3 +198,7 @@ footer {
 .mar-r-10 {
 	margin-right:10px;
 }
+
+.modal-dialog {
+	margin-top: 7%;
+}

@@ -4,7 +4,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Safespace Decentralize Exchange</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script
