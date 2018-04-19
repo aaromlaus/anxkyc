@@ -35,7 +35,7 @@ public class AdminDashboardController {
 			user.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_1));
 		}
 		userService.saveUser(user,false);
-		return "admin/dashboard";
+		return "redirect:/administrator/";
 	}
 
 }

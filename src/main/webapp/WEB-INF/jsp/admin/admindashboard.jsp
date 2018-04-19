@@ -42,9 +42,10 @@
 							<td>${user.emailAddress }</td>
 							<td>${user.phoneNumber }</td>
 							<td>${user.userLevel.description }</td>
-							<td>
-								<button class="btnApprove" onclick="updateUserLevel('${user.userId }', 'approve')">Approve</button>
-								<button class="btnReject" onclick="updateUserLevel('${user.userId }', 'reject')">Reject</button>
+							<td align="center">
+								<a title="Approve" href="#" class="icon_info" id="approveBtn" onclick="updateUserLevel('${user.userId }', 'approve'); return false;"><span class="glyphicon glyphicon-ok" style="font-size:24px"></span></a>
+								<a title="Reject" href="#" class="icon_info" id="rejectBtn" onclick="updateUserLevel('${user.userId }', 'reject'); return false;"><span class="glyphicon glyphicon-remove"  style="font-size:24px"></span></a>
+								<a title="Preview" href="#" class="icon_info" id="previewBtn" onclick="previewImage('${user.userId }'); return false;"><span class="glyphicon glyphicon-picture"  style="font-size:24px"></span></a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -108,36 +109,24 @@
 		}
 	}
 	
-	function addRowHandlers() {
-	    var table = document.getElementById("anxtable");
-	    var rows = table.getElementsByTagName("tr");
-	    for (i = 0; i < rows.length; i++) {
-	        var currentRow = table.rows[i];
-	        var createClickHandler = 
-	            function(row) 
-	            {
-	                return function() { 
-                          var cell = row.getElementsByTagName("td")[0];
-                          var id = cell.innerHTML;
-                          $.ajax({
-                      		url : '/api/getUploadedId',
-                      		data : JSON.stringify({"id":id}),
-                      		method : "POST",
-                      		contentType : 'application/json',
-                      		success : function(data) {
-                      			$('#imagepreview').attr("src",data);
-                				$('#imagemodal').modal('show');
-                      		},
-                      		error : function(data) {
-                      			alert("error loading image");
-                      		}
-                      	});
-                     };
-	            };
-
-	        currentRow.onclick = createClickHandler(currentRow);
-	    }
+	function previewImage(userId) {
+	    
+	        $.ajax({
+	    		url : '/api/getUploadedId',
+	    		data : JSON.stringify({"id":userId}),
+	    		method : "POST",
+	    		contentType : 'application/json',
+	    		success : function(data) {
+	    			$('#imagepreview').attr("src",data);
+				$('#imagemodal').modal('show');
+	    		},
+	    		error : function(data) {
+	    			alert("error loading image");
+	    		}
+	          	
+		})
 	}
-	window.onload = addRowHandlers();
+	
+	$(".icon_info").tooltip();
 </script>
 

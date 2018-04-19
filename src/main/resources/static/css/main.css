@@ -206,3 +206,30 @@ footer {
 .modal-dialog {
 	margin-top: 7%;
 }
+
+a#approveBtn:link, a#approveBtn:visited, a#approveBtn:active  {
+    color: #4CBB17;
+}
+
+a#approveBtn:hover {
+    color: #00A86B;
+}
+
+a#rejectBtn:link, a#rejectBtn:visited, a#rejectBtn:active {
+    color: #C21807;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+a#rejectBtn:hover {
+    color: #960018;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+a#previewBtn:link, a#previewBtn:visited, a#previewBtn:active {
+    color: 	#318CE7;
+}
+a#previewBtn:hover {
+    color: #1034A6;
+}
