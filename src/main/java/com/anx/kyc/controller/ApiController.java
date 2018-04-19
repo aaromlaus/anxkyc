@@ -81,6 +81,8 @@ public class ApiController {
 			}
 			AnxUser user = userService.findByEmailAddressOrPhoneNumber(userNamePhone);
 			if (null != user) {
+				session.getServletContext().removeAttribute("myAccountCode");
+				session.getServletContext().removeAttribute("myAccountEmail");
 				user.setEmailAddress(String.valueOf(session.getServletContext().getAttribute("myAccountEmail")));
 				userService.saveUser(user, false);
 				return ResponseEntity.ok("ok");

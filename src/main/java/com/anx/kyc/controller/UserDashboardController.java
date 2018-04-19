@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,6 +90,23 @@ public class UserDashboardController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
+		model.put("anxUserForm", anxUser);
+		return "main/myaccount";
+	}
+	@RequestMapping(value = "/myaccount/changePassword")
+	public String changePassword(Map<String, Object> model,@ModelAttribute("anxUserForm") AnxUser anxUser,RedirectAttributes redirectAttributes) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		if (!anxUser.getPassword().equals(anxUser.getConfirmPassword())) {
+			redirectAttributes.addFlashAttribute("passwordClassDisplay", "in");
+			redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.DANGER.getValue());
+			redirectAttributes.addFlashAttribute("msgDetails",amHelper.get("user.password.notMatch"));
+			return "redirect:/profile/myaccount/";
+		}
+		String password = anxUser.getPassword();
+		anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
+		anxUser.setPassword(password);
+		userService.saveUser(anxUser);
 		model.put("anxUserForm", anxUser);
 		return "main/myaccount";
 	}
