@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/table.css">
 </head>
-<br />
 <jsp:include page="../common/header.jsp"></jsp:include>
 <jsp:include page="../common/headermenu.jsp"></jsp:include>
 <body>

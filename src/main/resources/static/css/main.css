@@ -15,8 +15,8 @@ body {
 }
 
 #imagelogo {
-	height: 75px;
-	width: 280px;
+	height: 70px;
+	width: 95px;
 }
 
 #headertext {
@@ -155,7 +155,7 @@ footer {
 }
 
 .headermenu {
-	background-color: #0b5999;
+	background-color: brown;
 	margin-bottom: 1.5%;
 }
 
@@ -164,7 +164,7 @@ footer {
 }
 
 .row-header-headings {
-	color: blue;
+	color: #2e6da4;
 	font-size: 18px;
 }
 
