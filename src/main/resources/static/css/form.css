@@ -169,6 +169,7 @@ input[type="submit"]:hover {
 	-webkit-transition: background .3s;
 	margin-bottom:5%;
 	margin-top:8%;
+	border-radius: 4px;
 }
 
 .my-account-input {	
@@ -176,6 +177,11 @@ input[type="submit"]:hover {
     padding-bottom: 10px !important;
     margin-bottom: - !important;
     margin-bottom: 0px !important;
+}
+
+.marg-top-3-pc{
+	
+	margin-top: 3%;
 }
 
 

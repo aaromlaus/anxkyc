@@ -26,6 +26,7 @@
 				<div class="alert alert-danger">${param.errorMsg}</div>
 			</c:if>
 		</div>
+		<div class="marg-top-3-pc"></div>
 		<form:form method="POST" modelAttribute="command" action="/doResetPassword" >
 			<form:password path="password" class="field" placeholder="Password" />
 			<form:password path="confirmPassword" class="field" placeholder="Confirm Password" />

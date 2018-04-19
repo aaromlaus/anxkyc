@@ -71,6 +71,10 @@ public class AuthenticationController {
 	@RequestMapping("/sendCode")
 	public String sendCode(@RequestParam("username") String username,Map<String, Object> model, HttpSession session, RedirectAttributes redirectAttributes) {
 		model.put("command", new AuthenticationForm());
+		if(username.isEmpty()) {
+			redirectAttributes.addAttribute("errorMsg", "Please enter email address or password.");
+			return "redirect:/forgotPassword";
+		}
 		if(AnxUtil.isValidEmail(username)) {
 			if(userService.findByEmailAddressOrPhoneNumber(username) != null) {
 				int code = emailService.sendVerificationCodeEmail(username);
@@ -97,13 +101,17 @@ public class AuthenticationController {
 	
 	@RequestMapping("/doVerify")
 	public String verifyCode(Map<String, Object> model, @RequestParam("code") String code, HttpSession session, RedirectAttributes redirectAttributes) {
+		if(code.isEmpty()) {
+			redirectAttributes.addAttribute("errorMsg", "Please enter validation code.");
+			return "redirect:/verifyCode";
+		}
 		String vCode = String.valueOf(session.getServletContext().getAttribute("vCode"));
 		model.put("command", new AuthenticationForm());
 		if(vCode.equals(code)) {
 			return "redirect:/resetPassword";
 		}else {
 			redirectAttributes.addAttribute("errorMsg", "Incorrect Verification code!");
-			return "redirect:/forgotPassword";
+			return "redirect:/verifyCode";
 		}
 		
 	}
@@ -116,16 +124,21 @@ public class AuthenticationController {
 	}
 	
 	@RequestMapping("/doResetPassword")
-	public String resetPasword(Map<String, Object> model, @ModelAttribute("command") AuthenticationForm form, HttpSession session) {
+	public String resetPasword(Map<String, Object> model, @ModelAttribute("command") AuthenticationForm form, HttpSession session, RedirectAttributes redirectAttributes) {
+		if(form.getPassword().isEmpty() || form.getConfirmPassword().isEmpty() ) {
+			redirectAttributes.addAttribute("errorMsg", "Please enter a value for both fields.");
+			return "redirect:/resetPassword";
+		}
 		if(form.getPassword().equals(form.getConfirmPassword())) {
 			String username = String.valueOf(session.getServletContext().getAttribute("username"));
 			AnxUser user = userService.findByEmailAddressOrPhoneNumber(username);
 			user.setPassword(form.getConfirmPassword());
 			userService.saveUser(user);
 			return "redirect:/resetSuccess";
+		}else {
+			redirectAttributes.addAttribute("errorMsg", "Password did not match!");
+			return "redirect:/resetPassword";
 		}
-		
-		return "redirect:/resetPassword";
 	}	
 	
 	@RequestMapping("/resetSuccess")

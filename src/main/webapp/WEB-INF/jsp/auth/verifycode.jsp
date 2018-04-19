@@ -26,6 +26,7 @@
 				<div class="alert alert-danger">${param.errorMsg}</div>
 			</c:if>
 		</div>
+		<div class="marg-top-3-pc"></div>
 		<form:form method="POST" modelAttribute="command" action="/doVerify" >
 			<form:input path="code" class="field" placeholder="Verification Code" />
 			<input class="btn" type="submit" value="VERIFY"/>
