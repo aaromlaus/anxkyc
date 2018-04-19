@@ -61,13 +61,14 @@ public class UserDashboardController {
 
 		try {
 			// Get the file and save it somewhere
-			byte[] bytes = file.getBytes();
-			String fileName = String.valueOf(System.currentTimeMillis());
-			Path path = Paths.get(UPLOAD_PATH + fileName);
-			Files.write(path, bytes);
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String currentPrincipalName = authentication.getName();
 			AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
+			
+			byte[] bytes = file.getBytes();
+			String fileName = anxUser.getFirstName()+anxUser.getMiddleName()+anxUser.getLastName()+"Id"+anxUser.getUserId();
+			Path path = Paths.get(UPLOAD_PATH + fileName);
+			Files.write(path, bytes);
 			
 			anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_2_PENDING));
 			userService.saveUser(anxUser,false);

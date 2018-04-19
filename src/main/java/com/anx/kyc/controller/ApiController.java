@@ -3,6 +3,7 @@ package com.anx.kyc.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,6 +30,9 @@ public class ApiController {
 	@Autowired
 	private EmailService emailService;
 
+	@Value("${file.path.upload:test}")
+	private String UPLOAD_PATH;
+	
 	@RequestMapping(value = "/sendEmailChangeCode", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> sendEmailChangeCode(@RequestBody String requestBody, HttpSession session) {
 		try {
@@ -97,7 +101,9 @@ public class ApiController {
 			JsonElement element = gson.fromJson(requestBody, JsonElement.class);
 			JsonObject requestJson = element.getAsJsonObject();
 			if (!requestJson.get("id").isJsonNull()) {
-				String imagePath = "C:\\Users\\emmanuel.quizon\\Desktop\\ID.png";//todo get the saved image from user
+				AnxUser user = userService.getUserById(requestJson.get("id").getAsInt());
+				String fileName = user.getFirstName()+user.getMiddleName()+user.getLastName()+"Id"+user.getUserId();
+				String imagePath = UPLOAD_PATH+fileName;
 
 				String img64 = AnxUtil.encodeBase64(imagePath);
 				return "data:image/png;base64,"+img64;
