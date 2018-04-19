@@ -28,6 +28,10 @@ body {
 	display: none;
 }
 
+#logoutId {
+	margin-left: -10%;
+}
+
 .navbar {
 	margin-bottom: 0;
 	border-radius: 0;

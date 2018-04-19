@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.anx.kyc.model.AnxUser;
+
 public class AnxUtil {
 
 	public static int generateVerificationCode() {
@@ -54,4 +56,8 @@ public class AnxUtil {
 		}
 		return base64Image;
 	}
+ 	
+ 	public static String getAnxUserFullName(AnxUser anxUser) {
+ 		return anxUser.getFirstName().concat(" ").concat(anxUser.getMiddleName().concat(" ").concat(anxUser.getLastName()));
+ 	}
 }
