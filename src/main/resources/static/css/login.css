@@ -11,16 +11,11 @@
 .message {
 	width: 280px;
 	margin: auto;
-    padding-top: 30px;
-    padding-bottom: 30px;
 	margin-top: 2%;
 	text-align: center;
 }
 
-.alert {
-    padding-left: 28px;
-    padding-right: 28px;
-}
+
 
 .field, .btn {
 	border: 1px #525d65 solid;

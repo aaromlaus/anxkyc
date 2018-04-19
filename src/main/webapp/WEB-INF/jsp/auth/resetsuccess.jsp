@@ -25,6 +25,11 @@
 <div class="inner contact">
 	<div class="forgotContainer2">
 		<h1>Password Reset Complete</h1>
+		<div class="message">
+			<c:if test="${not empty param.errorMsg}">
+				<div class="alert alert-danger">${param.errorMsg}</div>
+			</c:if>
+		</div>
 		<div class="forgotContainer">
 			<span class="reset-password__note">Your password has been successfully reset.</span> 
 			<br>

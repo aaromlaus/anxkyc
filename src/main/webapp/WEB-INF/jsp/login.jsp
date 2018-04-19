@@ -20,7 +20,9 @@
 	<div class=""></div>
 	<div class="message">
 		<c:if test="${not empty errorMsg}">
-			<span class="alert alert-danger">${errorMsg}</span>
+			<div class="alert alert-danger">
+				${errorMsg}
+			</div>
 		</c:if>
 	</div>
 	<div class="login">

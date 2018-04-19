@@ -20,8 +20,12 @@
 	
 <div class="inner contact">
 	<div class="forgotContainer2">
-		<!-- <h3>ANX Login</h3> -->
 		<h1>Enter Verification Code</h1>
+		<div class="message">
+			<c:if test="${not empty param.errorMsg}">
+				<div class="alert alert-danger">${param.errorMsg}</div>
+			</c:if>
+		</div>
 		<form:form method="POST" modelAttribute="command" action="/doVerify" >
 			<form:input path="code" class="field" placeholder="Verification Code" />
 			<input class="btn" type="submit" value="VERIFY"/>

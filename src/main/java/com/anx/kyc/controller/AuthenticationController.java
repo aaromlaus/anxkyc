@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.anx.kyc.common.AnxSession;
 import com.anx.kyc.model.AnxUser;
@@ -60,6 +61,7 @@ public class AuthenticationController {
 		return "welcome";
 	}
 
+
 	@RequestMapping("/forgotPassword")
 	public String forgotPassword(Map<String, Object> model, HttpSession session) {
 		model.put("command", new AuthenticationForm());
@@ -67,7 +69,7 @@ public class AuthenticationController {
 	}
 	
 	@RequestMapping("/sendCode")
-	public String sendCode(@RequestParam("username") String username,Map<String, Object> model, HttpSession session) {
+	public String sendCode(@RequestParam("username") String username,Map<String, Object> model, HttpSession session, RedirectAttributes redirectAttributes) {
 		model.put("command", new AuthenticationForm());
 		if(AnxUtil.isValidEmail(username)) {
 			if(userService.findByEmailAddressOrPhoneNumber(username) != null) {
@@ -77,13 +79,13 @@ public class AuthenticationController {
 				model.put("command", new AuthenticationForm());
 				return "redirect:/verifyCode";
 			}else {
-				model.put("errorMsg", "User account not found!");
-				return "auth/forgotpassword";
+				redirectAttributes.addAttribute("errorMsg", "User account not found!");
+				return "redirect:/forgotPassword";
 			}
 			
 		}else {
-			model.put("errorMsg", "Value is not a valid email address!");
-			return "auth/forgotpassword";
+			redirectAttributes.addAttribute("errorMsg", "Value is not a valid email address!");
+			return "redirect:/forgotPassword";
 		}
 	}
 	
@@ -94,14 +96,14 @@ public class AuthenticationController {
 	}
 	
 	@RequestMapping("/doVerify")
-	public String verifyCode(Map<String, Object> model, @RequestParam("code") String code, HttpSession session) {
+	public String verifyCode(Map<String, Object> model, @RequestParam("code") String code, HttpSession session, RedirectAttributes redirectAttributes) {
 		String vCode = String.valueOf(session.getServletContext().getAttribute("vCode"));
 		model.put("command", new AuthenticationForm());
 		if(vCode.equals(code)) {
 			return "redirect:/resetPassword";
 		}else {
-			model.put("errorMsg", "Incorrect Verification code!");
-			return "auth/forgotpassword";
+			redirectAttributes.addAttribute("errorMsg", "Incorrect Verification code!");
+			return "redirect:/forgotPassword";
 		}
 		
 	}

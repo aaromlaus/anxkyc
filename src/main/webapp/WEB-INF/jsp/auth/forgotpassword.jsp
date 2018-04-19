@@ -18,10 +18,16 @@
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	
+
 <div class="inner contact">
 	<div class="forgotContainer2">
 		<!-- <h3>ANX Login</h3> -->
 		<h1>Forgot your password?</h1>
+		<div class="message">
+			<c:if test="${not empty param.errorMsg}">
+				<div class="alert alert-danger">${param.errorMsg}</div>
+			</c:if>
+		</div>
 		<div class="forgotContainer">
 			<span class="reset-password__note">Please enter your email or mobile number, and we'll send you a reset code</span>
 		</div>

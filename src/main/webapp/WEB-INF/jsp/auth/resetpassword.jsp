@@ -21,6 +21,11 @@
 <div class="inner contact">
 	<div class="forgotContainer2">
 		<h1>Reset Password</h1>
+		<div class="message">
+			<c:if test="${not empty param.errorMsg}">
+				<div class="alert alert-danger">${param.errorMsg}</div>
+			</c:if>
+		</div>
 		<form:form method="POST" modelAttribute="command" action="/doResetPassword" >
 			<form:password path="password" class="field" placeholder="Password" />
 			<form:password path="confirmPassword" class="field" placeholder="Confirm Password" />

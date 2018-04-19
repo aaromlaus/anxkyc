@@ -102,7 +102,7 @@ footer {
 	background-color: #f0f0f0;
 	color: #FFF;
 	text-align: center;
-	margin-top: 4%;
+	margin-top: 3%;
 	background: #f0f0f0;
 }
 
@@ -171,6 +171,17 @@ footer {
 .level-2-grp {
 	margin-right: 1.5%;
 	margin-top: -5%;
+}
+
+.forgotContainer2 .message {
+	width: 400px;
+	margin: auto;
+	margin-top: 2%;
+	text-align: center;
+}
+
+.forgotContainer2 .alert {
+	margin-bottom: 0px;
 }
 
 .mar-t-b-10 {
