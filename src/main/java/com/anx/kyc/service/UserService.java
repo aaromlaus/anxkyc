@@ -40,7 +40,7 @@ public interface UserService {
 
 	public AnxUser findByVerificationCode(String verificationCode);
 
-	public void verifyAndActivateUser(String verificationCode);
+	public AnxUser verifyAndActivateUser(String verificationCode);
 
 	public String saveUserDetails(AnxUser anxUser);
 

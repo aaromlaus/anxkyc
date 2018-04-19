@@ -136,11 +136,4 @@ public class AuthenticationController {
 		return "auth/resetsuccess";
 	}
 
-
-	@RequestMapping(value = "/verify")
-	public String verifyEmail(@RequestParam("details") String verificationCode, HttpServletRequest request) {
-		userService.verifyAndActivateUser(verificationCode);
-		return "welcome";
-	}
-
 }

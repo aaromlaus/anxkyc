@@ -135,15 +135,18 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void verifyAndActivateUser(String verificationCode) {
+	public AnxUser verifyAndActivateUser(String verificationCode) {
 		if(verificationCode != null && !verificationCode.isEmpty()) {
 			AnxUser user = findByVerificationCode(verificationCode);
 			if(user != null) {
 				user.setActive(true);
 				user.setVerificationCode("");
 				saveUser(user, false);
+				return user;
 			}
 		}
+		
+		return null;
 	}
 	
 	@Override
@@ -165,7 +168,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void prepareAndSendUserRegistrationEmail(AnxUser anxUser, String verificationCode, HttpServletRequest request) {
 		// Prepare email verification link
-		String emailLink = AnxUtil.getRequestPath(request) + "/verify?details=" + verificationCode;
+		String emailLink = AnxUtil.getRequestPath(request) + "/signup/verify?details=" + verificationCode;
 		Map<String, String> emailRegistrationParam = new HashMap<String, String>();
 		emailRegistrationParam.put("verificationCode", emailLink);
 		

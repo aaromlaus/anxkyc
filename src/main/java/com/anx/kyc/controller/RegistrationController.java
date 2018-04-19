@@ -14,6 +14,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.anx.kyc.common.AlertStyleMessages;
 import com.anx.kyc.helper.AnxMessageHelper;
@@ -24,6 +26,7 @@ import com.anx.kyc.validator.RegistrationFormValidator;
 
 @Controller
 @RequestMapping("/signup")
+@SessionAttributes
 public class RegistrationController {
 
 	@Autowired
@@ -79,7 +82,7 @@ public class RegistrationController {
 	public String saveUserDetails(@ModelAttribute("anxUserForm") AnxUser anxUser, Map<String, Object> model, HttpSession session, 
 			HttpServletRequest request) {
 		populate(model, anxUser, session);
-		String successMessage = amHelper.get("registration.phone.success");
+		String successMessage = amHelper.get("registration.mobile.success");
 		
 		String verificationCode = userService.saveUserDetails(anxUser);
 		if(anxUser.getEmailAddress() != null && !anxUser.getEmailAddress().isEmpty()) {
@@ -91,6 +94,18 @@ public class RegistrationController {
 		model.put("msgDetails", successMessage);
 		
 		return "registration/anxuserdetails";
+	}
+	
+	@RequestMapping(value = "/verify")
+	public String verifyEmail(@RequestParam("details") String verificationCode, HttpServletRequest request, Map<String, Object> model) {
+		AnxUser user = userService.verifyAndActivateUser(verificationCode);
+		String emailConfirmMsg = amHelper.get("registration.email.verify.new");
+		if(user == null) {
+			emailConfirmMsg = amHelper.get("registration.email.verify.existing");
+		} 
+		
+		model.put("emailConfirmMsg", emailConfirmMsg);
+		return "registration/emailconfirmationsuccess";
 	}
 
 }
