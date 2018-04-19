@@ -144,11 +144,11 @@
 					</h4>
 				</div>
 				<div class="modal-body">
-					<p><input type="text" placeholder="Email Address" class="my-account-input"></p>
+					<p><input type="text" placeholder="Verification Code" class="my-account-input" id="verificationCode"></p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Send</button>
+					<button type="button" class="btn btn-primary" onclick="enterVerificationCode();">Change Email</button>
 				</div>
 			</div>
 

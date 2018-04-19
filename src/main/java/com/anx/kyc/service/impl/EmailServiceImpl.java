@@ -1,5 +1,6 @@
 package com.anx.kyc.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -26,19 +27,12 @@ public class EmailServiceImpl implements EmailService {
 	
 	@Override
 	public int sendVerificationCodeEmail(String emailAddress) {
-        MimeMessage mail = javaMailSender.createMimeMessage();
-        int code = AnxUtil.generateVerificationCode();
-        try {
-            MimeMessageHelper helper = new MimeMessageHelper(mail, true);
-            helper.setTo(emailAddress);
-            helper.setReplyTo("someone@localhost");
-            helper.setFrom("someone@localhost");
-            helper.setSubject("Reset your password");
-            helper.setText(emailHelper.buildVerificationCodeEmail(code),true);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } finally {}
-        javaMailSender.send(mail);
+		int code = AnxUtil.generateVerificationCode();
+
+		List<String> array = new ArrayList<String>();
+		array.add(emailAddress);
+		sendEmail(array, "Reset your password", emailHelper.buildForgotPasswordContent(code));
+       
         return code;
 	}
 	
@@ -67,6 +61,16 @@ public class EmailServiceImpl implements EmailService {
         } finally { }
         
         javaMailSender.send(mail);
+	}
+
+	@Override
+	public int sendChangeEmailVerificationCode(String emailAddress) {
+		int code = AnxUtil.generateVerificationCode();
+
+		List<String> array = new ArrayList<String>();
+		array.add(emailAddress);
+		sendEmail(array, "Change Email", emailHelper.buildChangeEmailVerificationCode(code));
+		return code;
 	}
 
 }

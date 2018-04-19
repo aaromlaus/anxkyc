@@ -12,4 +12,6 @@ public interface EmailService {
 	
 	public void sendEmail(List<String> emailToList, List<String> emailCcList, List<String> emailBccList, String subject, String content);
 	
+	public int sendChangeEmailVerificationCode(String emailAddress);
+	
 }
