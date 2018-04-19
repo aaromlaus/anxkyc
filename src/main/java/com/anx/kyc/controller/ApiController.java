@@ -35,8 +35,13 @@ public class ApiController {
 			Gson gson = new Gson();
 			JsonElement element = gson.fromJson(requestBody, JsonElement.class);
 			JsonObject requestJson = element.getAsJsonObject();
+
 			if (!requestJson.get("emailAddress").isJsonNull()
 					&& AnxUtil.isValidEmail(requestJson.get("emailAddress").getAsString())) {
+				AnxUser duplicateUser = userService.findByEmailAddress(requestJson.get("emailAddress").getAsString());
+				if(null != duplicateUser) {
+					return ResponseEntity.ok("Email Already Exists");
+				}
 				int code = emailService.sendChangeEmailVerificationCode(requestJson.get("emailAddress").getAsString());
 				session.getServletContext().setAttribute("myAccountCode", code);
 				session.getServletContext().setAttribute("myAccountEmail",
@@ -57,7 +62,8 @@ public class ApiController {
 		JsonElement element = gson.fromJson(requestBody, JsonElement.class);
 		JsonObject requestJson = element.getAsJsonObject();
 		String verificationCode = String.valueOf(session.getServletContext().getAttribute("myAccountCode"));
-		if (!requestJson.get("verificationCode").isJsonNull() && !requestJson.get("verificationCode").getAsString().equals("") 
+		if (!requestJson.get("verificationCode").isJsonNull()
+				&& !requestJson.get("verificationCode").getAsString().equals("")
 				&& verificationCode.equals(requestJson.get("verificationCode").getAsString())) {
 			session.getServletContext().removeAttribute("verificationCode");
 			String userNamePhone = null;
@@ -70,13 +76,13 @@ public class ApiController {
 				userNamePhone = requestJson.get("currentEmail").getAsString();
 			}
 			AnxUser user = userService.findByEmailAddressOrPhoneNumber(userNamePhone);
-			if(null != user) {
+			if (null != user) {
 				user.setEmailAddress(String.valueOf(session.getServletContext().getAttribute("myAccountEmail")));
-				userService.saveUser(user, false);				
+				userService.saveUser(user, false);
 				return ResponseEntity.ok("ok");
 			}
 			ResponseEntity.ok("No user found");
-			
+
 		}
 
 		return ResponseEntity.ok("Invalid Code");

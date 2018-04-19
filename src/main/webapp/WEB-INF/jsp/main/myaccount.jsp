@@ -36,7 +36,7 @@
 					<form:hidden path="anxUserForm.emailAddress" id="currentEmail"/>
 				</div>
 				<div class="col-sm-4 text-right mar-t-b-10 h4">
-					<a href="#" data-toggle="modal" data-target="#sendEmailCode">Change
+					<a href="#" data-toggle="modal" data-target="#sendEmailCode" onClick="clearErrorMessage();">Change
 						email</a>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 					<c:out value="${anxUserForm.emailAddress}"></c:out>
 				</div>
 				<div class="col-sm-4 text-right mar-t-b-10 h4">
-					<a href="#" data-toggle="modal" data-target="#phoneVerification">Change
+					<a href="#" data-toggle="modal" data-target="#phoneVerification" onClick="clearErrorMessage();">Change
 						phone</a>
 				</div>
 			</div>
@@ -95,17 +95,19 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<div id="errorMessage"></div>
 					<h4 class="modal-title">
 						<span class="glyphicon glyphicon-envelope mar-r-10"></span>Email
 						Verification
 					</h4>
 				</div>
+				
 				<div class="modal-body">
 					<p><input type="text" placeholder="Email Address" class="my-account-input" id="emailVerificationAddress"></p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary" onclick="sendEmailVerification();">Send</button>
+					<button type="button" class="btn btn-primary" onclick="sendEmailVerification();"><span class="glyphicon glyphicon-send mar-r-10"></span>Send</button>
 				</div>
 			</div>
 

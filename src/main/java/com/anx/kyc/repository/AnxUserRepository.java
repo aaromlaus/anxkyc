@@ -19,5 +19,8 @@ public interface AnxUserRepository extends JpaRepository<AnxUser, Integer> {
 	AnxUser findByEmailAddressOrPhoneNumber(@Param("emailAddress") String emailAddress, @Param("phoneNumber") String phoneNumber);
 	
 	AnxUser findByVerificationCode(@Param("verificationCode") String verificationCode);
+	
+	@Query("SELECT a FROM AnxUser a WHERE LOWER(a.emailAddress) = :emailAddress")
+	AnxUser findByEmailAddress(@Param("emailAddress") String emailAddress);
 
 }

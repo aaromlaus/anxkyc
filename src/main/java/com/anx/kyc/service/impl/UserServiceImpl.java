@@ -178,4 +178,8 @@ public class UserServiceImpl implements UserService {
 		emailToList.add(anxUser.getEmailAddress());
 		emailService.sendEmail(emailToList, "Complete your Signup", emailContent);
 	}
+	@Override
+	public AnxUser findByEmailAddress(String emailAddress) {
+		return auRepository.findByEmailAddress(emailAddress);
+	}
 }
