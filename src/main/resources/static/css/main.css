@@ -233,3 +233,13 @@ a#previewBtn:link, a#previewBtn:visited, a#previewBtn:active {
 a#previewBtn:hover {
     color: #1034A6;
 }
+
+.success{
+	font-size:80px; 
+	margin-bottom: 20px; 
+	color: #3399cc;
+}
+
+.pad-bot-30{
+	padding-top: 30px;
+}

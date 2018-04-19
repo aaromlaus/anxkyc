@@ -33,7 +33,7 @@ public class AuthenticationController {
 
 	@RequestMapping("/")
 	public String welcome(Map<String, Object> model) {
-		return "welcome";
+		return "registration/accountregistrationsuccess";
 	}
 
 	@RequestMapping(value = "/accessDenied")

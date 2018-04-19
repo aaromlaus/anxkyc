@@ -93,7 +93,7 @@ public class RegistrationController {
 		model.put("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		model.put("msgDetails", successMessage);
 		
-		return "registration/anxuserdetails";
+		return "registration/accountregistrationsuccess";
 	}
 	
 	@RequestMapping(value = "/verify")
