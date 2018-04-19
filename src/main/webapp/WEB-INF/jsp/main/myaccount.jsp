@@ -95,7 +95,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<div id="errorMessage"></div>
+					
 					<h4 class="modal-title">
 						<span class="glyphicon glyphicon-envelope mar-r-10"></span>Email
 						Verification
@@ -103,6 +103,7 @@
 				</div>
 				
 				<div class="modal-body">
+					<div id="errorMessage"></div>
 					<p><input type="text" placeholder="Email Address" class="my-account-input" id="emailVerificationAddress"></p>
 				</div>
 				<div class="modal-footer">
