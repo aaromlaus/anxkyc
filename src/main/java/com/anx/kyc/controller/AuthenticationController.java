@@ -68,6 +68,8 @@ public class AuthenticationController {
 		return "auth/forgotpassword";
 	}
 	
+	
+	
 	@RequestMapping("/sendCode")
 	public String sendCode(@RequestParam("username") String username,Map<String, Object> model, HttpSession session, RedirectAttributes redirectAttributes) {
 		model.put("command", new AuthenticationForm());

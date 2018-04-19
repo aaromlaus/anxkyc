@@ -13,14 +13,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.anx.kyc.common.AnxSession;
+import com.anx.kyc.interceptor.ResetPasswordInterceptor;
 import com.anx.kyc.service.impl.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer{
 
 	@Autowired
 	private CustomSucessHandler customSucessHandler;
@@ -60,6 +63,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Scope("session")
 	public AnxSession homeSession() {
 		return new AnxSession();
+	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new ResetPasswordInterceptor());
 	}
 	
 }
