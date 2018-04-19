@@ -50,4 +50,6 @@ public interface UserService {
 	
 	public AnxUser findByPhoneNumber(String phoneNumber);
 
+	public AnxUser getLoggedInUser();
+
 }

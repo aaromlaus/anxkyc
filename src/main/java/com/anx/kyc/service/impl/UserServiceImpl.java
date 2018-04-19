@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -57,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private EmailHelper emailHelper;
-
+	
 	@Override
 	public int saveUser(AnxUser user) {
 
@@ -178,6 +180,7 @@ public class UserServiceImpl implements UserService {
 		emailToList.add(anxUser.getEmailAddress());
 		emailService.sendEmail(emailToList, "Complete your Signup", emailContent);
 	}
+	
 	@Override
 	public AnxUser findByEmailAddress(String emailAddress) {
 		return auRepository.findByEmailAddress(emailAddress);
@@ -185,7 +188,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public AnxUser findByPhoneNumber(String phoneNumber) {
-		// TODO Auto-generated method stub
 		return auRepository.findByPhoneNumber(phoneNumber);
 	}
+	
+	@Override
+	public AnxUser getLoggedInUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		return findByEmailAddressOrPhoneNumber(currentPrincipalName);
+	}
+	
 }
