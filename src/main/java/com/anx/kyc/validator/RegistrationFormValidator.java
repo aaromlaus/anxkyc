@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import com.anx.kyc.common.RoleType;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.service.UserService;
 
@@ -27,10 +28,10 @@ public class RegistrationFormValidator implements Validator {
 
 		// Password validation
 		if (!anxUser.getPassword().equals(anxUser.getConfirmPassword())) {
-			errors.rejectValue("password", "user.password.notMatch");
+			errors.rejectValue("password", "user.password.notMatch");	
 		}
 
-		List<AnxUser> users = userSvc.getAllUsers();
+		List<AnxUser> users = userSvc.getUsersByRoleName(RoleType.USER);
 		for (AnxUser user : users) {
 			
 			if (null != anxUser.getEmailAddress() && !anxUser.getEmailAddress().isEmpty()

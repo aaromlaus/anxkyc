@@ -61,7 +61,7 @@
 </div>
 
 <center>
-	Already have an account? <a href="../login" target="blank">Sign in </a>
+	Already have an account? <a href="../login">Sign in </a>
 </center>
 <script>
 
