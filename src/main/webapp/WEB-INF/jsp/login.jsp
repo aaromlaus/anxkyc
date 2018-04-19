@@ -22,6 +22,13 @@
 	<div class="login-form" style="margin-top: 2.5%;">
 		<img class="logo-container" src="/images/anxlogo.png" />
 		<form:form method="POST" id="loginInputFormId" class="login-form" modelAttribute="loginForm" action="/login" >
+		<div class="message">
+			<c:if test="${not empty errorMsg}">
+				<div class="alert alert-danger">
+					${errorMsg}
+				</div>
+			</c:if>
+		</div>
 			<h4>Login Form</h4>
 			<form:input path="username" class="field" placeholder="Email address or Mobile Number" />
 			<form:password path="password" class="field" placeholder="Password" />
@@ -29,6 +36,7 @@
 			<p class="message">
 				Not registered? <a href="/signup/">Create an account</a>
 			</p>
+			<a id="forgotPasswordBtnId" class="btn" href="/forgotPassword">Forgot your password?</a>
 		</form:form>
 	</div>
 	<script>
