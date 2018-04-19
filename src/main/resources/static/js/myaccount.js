@@ -1,7 +1,9 @@
 function sendEmailVerification() {
 
 	var secretCode = {
-		"emailAddress" : jQuery("#emailVerificationAddress").val()
+		"emailAddress" : jQuery("#emailVerificationAddress").val(),
+		"currentEmail" : jQuery("#currentEmail").val(),
+		"currentPhone" : jQuery("#currentPhone").val()
 	};
 	$.ajax({
 		url : '/api/sendCode',

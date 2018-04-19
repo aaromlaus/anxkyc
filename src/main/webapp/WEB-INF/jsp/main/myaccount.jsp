@@ -33,6 +33,7 @@
 				</div>
 				<div class="col-sm-5 text-left mar-t-b-10 h4">
 					<c:out value="${anxUserForm.emailAddress}"></c:out>
+					<form:hidden path="anxUserForm.emailAddress" id="currentEmail"/>
 				</div>
 				<div class="col-sm-4 text-right mar-t-b-10 h4">
 					<a href="#" data-toggle="modal" data-target="#sendEmailCode">Change
@@ -44,6 +45,7 @@
 					<strong>Phone</strong>
 				</div>
 				<div class="col-sm-5 text-left mar-t-b-10 h4">
+					<form:hidden path="anxUserForm.phoneNumber" id="currentPhone"/>
 					<c:out value="${anxUserForm.emailAddress}"></c:out>
 				</div>
 				<div class="col-sm-4 text-right mar-t-b-10 h4">
