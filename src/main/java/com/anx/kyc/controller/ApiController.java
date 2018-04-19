@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +29,7 @@ public class ApiController {
 
 	@Value("${file.path.upload:test}")
 	private String UPLOAD_PATH;
-	
+
 	@RequestMapping(value = "/sendEmailChangeCode", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> sendEmailChangeCode(@RequestBody String requestBody, HttpSession session) {
 		try {
@@ -43,7 +40,7 @@ public class ApiController {
 			if (!requestJson.get("emailAddress").isJsonNull()
 					&& AnxUtil.isValidEmail(requestJson.get("emailAddress").getAsString())) {
 				AnxUser duplicateUser = userService.findByEmailAddress(requestJson.get("emailAddress").getAsString());
-				if(null != duplicateUser) {
+				if (null != duplicateUser) {
 					return ResponseEntity.ok("Email Already Exists");
 				}
 				int code = emailService.sendChangeEmailVerificationCode(requestJson.get("emailAddress").getAsString());
@@ -91,10 +88,8 @@ public class ApiController {
 
 		}
 
-		return ResponseEntity.ok("Invalid Code");
+		return ResponseEntity.ok("Add Phone Number");
 	}
-	
-
 
 	@RequestMapping(value = "/getUploadedId", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String getUploadedId(@RequestBody String requestBody, HttpSession session) {
@@ -104,11 +99,12 @@ public class ApiController {
 			JsonObject requestJson = element.getAsJsonObject();
 			if (!requestJson.get("id").isJsonNull()) {
 				AnxUser user = userService.getUserById(requestJson.get("id").getAsInt());
-				String fileName = user.getFirstName()+user.getMiddleName()+user.getLastName()+"Id"+user.getUserId();
-				String imagePath = UPLOAD_PATH+fileName;
+				String fileName = user.getFirstName() + user.getMiddleName() + user.getLastName() + "Id"
+						+ user.getUserId();
+				String imagePath = UPLOAD_PATH + fileName;
 
 				String img64 = AnxUtil.encodeBase64(imagePath);
-				return "data:image/png;base64,"+img64;
+				return "data:image/png;base64," + img64;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,5 +113,39 @@ public class ApiController {
 		return null;
 
 	}
-	
+
+	@RequestMapping(value = "/changePhoneNumber", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> changePhoneNumber(@RequestBody String requestBody, HttpSession session) {
+
+		Gson gson = new Gson();
+		JsonElement element = gson.fromJson(requestBody, JsonElement.class);
+		JsonObject requestJson = element.getAsJsonObject();
+		if (!requestJson.get("phoneNumber").isJsonNull() && !requestJson.get("phoneNumber").getAsString().equals("")) {
+			if(null != userService.findByPhoneNumber(requestJson.get("phoneNumber").getAsString())) {
+				return ResponseEntity.ok("Phone Number Already Exists");
+			}
+			String userNamePhone = null;
+			if (!requestJson.get("currentPhone").isJsonNull()
+					&& !requestJson.get("currentPhone").getAsString().equals("")) {
+				userNamePhone = requestJson.get("currentPhone").getAsString();
+			}
+			if (!requestJson.get("currentEmail").isJsonNull()
+					&& !requestJson.get("currentEmail").getAsString().equals("")) {
+				userNamePhone = requestJson.get("currentEmail").getAsString();
+			}
+			AnxUser user = userService.findByEmailAddressOrPhoneNumber(userNamePhone);
+			if (null != user) {				
+				user.setPhoneNumber(requestJson.get("phoneNumber").getAsString());
+				user.setPhoneCode(userService.findPhoneCodeById(Long.valueOf(requestJson.get("phoneCodeId").getAsString())));
+				userService.saveUser(user, false);
+				return ResponseEntity.ok("ok");
+			}
+			ResponseEntity.ok("No user found");
+
+		}
+
+		return ResponseEntity.ok("Add phone number");
+
+	}
+
 }

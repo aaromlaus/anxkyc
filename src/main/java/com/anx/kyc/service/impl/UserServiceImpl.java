@@ -182,4 +182,10 @@ public class UserServiceImpl implements UserService {
 	public AnxUser findByEmailAddress(String emailAddress) {
 		return auRepository.findByEmailAddress(emailAddress);
 	}
+
+	@Override
+	public AnxUser findByPhoneNumber(String phoneNumber) {
+		// TODO Auto-generated method stub
+		return auRepository.findByPhoneNumber(phoneNumber);
+	}
 }

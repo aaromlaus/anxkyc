@@ -36,7 +36,7 @@
 				</div>
 				<div class="col-sm-4 text-right mar-t-b-10 h4">
 					<a href="#" data-toggle="modal" data-target="#sendEmailCode"
-						onClick="clearErrorMessage();">Change email</a>
+						onClick="clearErrorMessage();">${anxUserForm.phoneNumber.length() >0 ? 'Change Email':'Add Email' }</a>
 				</div>
 			</div>
 			<div class="col-sm-12 bg-info mar-bot-0">
@@ -45,11 +45,11 @@
 				</div>
 				<div class="col-sm-5 text-left mar-t-b-10 h4">
 					<form:hidden path="anxUserForm.phoneNumber" id="currentPhone" />
-					<c:out value="${anxUserForm.emailAddress}"></c:out>
+					<c:out value="${anxUserForm.phoneNumber}"></c:out>
 				</div>
 				<div class="col-sm-4 text-right mar-t-b-10 h4">
 					<a href="#" data-toggle="modal" data-target="#phoneVerification"
-						onClick="clearErrorMessage();">Change phone</a>
+						onClick="clearErrorMessage();">${anxUserForm.phoneNumber.length() >0 ? 'Change Phone':'Add Phone' }</a>
 				</div>
 			</div>
 			<div class="col-sm-12 bg-info mar-bot-0">
@@ -136,14 +136,23 @@
 					</h4>
 				</div>
 				<div class="modal-body">
+					<div id="errorMessagePhone"></div>
 					<p>
-						<input type="text" placeholder="Phone number"
-							class="my-account-input">
+						<form:select
+							class="selectpicker phone-code-width my-account-input"
+							data-live-search="true" path="anxUserForm.phoneCode.phoneCodeId"
+							id="phoneCodeNameId">
+							<form:options items="${countryCodeList}" itemValue="phoneCodeId"
+								itemLabel="phoneCodeCountry" />
+						</form:select>
+						<input type="text" placeholder="Mobile number"
+							class="my-account-input phone-number-width" id="phoneNumber">
 					</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Send</button>
+					<button type="button" class="btn btn-primary"
+						onclick="updatePhoneNumber();">Send</button>
 				</div>
 			</div>
 

@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -23,6 +25,7 @@ import com.anx.kyc.common.AlertStyleMessages;
 import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.helper.AnxMessageHelper;
 import com.anx.kyc.model.AnxUser;
+import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.model.UserImage;
 import com.anx.kyc.model.UserLevel;
 import com.anx.kyc.service.UserService;
@@ -30,16 +33,16 @@ import com.anx.kyc.service.UserService;
 @Controller
 @RequestMapping("/profile")
 public class UserDashboardController {
-	
+
 	@Autowired
 	private UserService userService;
 
 	@Autowired
 	private AnxMessageHelper amHelper;
-	
+
 	@Value("${file.path.upload:test}")
 	private String UPLOAD_PATH;
-	
+
 	@RequestMapping(value = "/main")
 	public String mainPage(Map<String, Object> model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -50,13 +53,14 @@ public class UserDashboardController {
 		model.put("anxUser", anxUser);
 		return "main/userdashboard";
 	}
-	
+
 	@PostMapping("/upload")
-	public String singleFileUpload(Map<String, Object> model,@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+	public String singleFileUpload(Map<String, Object> model, @RequestParam("file") MultipartFile file,
+			RedirectAttributes redirectAttributes) {
 
 		if (file.isEmpty()) {
 			redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.DANGER.getValue());
-			redirectAttributes.addFlashAttribute("msgDetails",amHelper.get("user.upload.image.error"));
+			redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("user.upload.image.error"));
 			return "redirect:/profile/main";
 		}
 
@@ -65,14 +69,15 @@ public class UserDashboardController {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String currentPrincipalName = authentication.getName();
 			AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
-			
+
 			byte[] bytes = file.getBytes();
-			String fileName = anxUser.getFirstName()+anxUser.getMiddleName()+anxUser.getLastName()+"Id"+anxUser.getUserId();
+			String fileName = anxUser.getFirstName() + anxUser.getMiddleName() + anxUser.getLastName() + "Id"
+					+ anxUser.getUserId();
 			Path path = Paths.get(UPLOAD_PATH + fileName);
 			Files.write(path, bytes);
-			
+
 			anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_2_PENDING));
-			userService.saveUser(anxUser,false);
+			userService.saveUser(anxUser, false);
 			UserImage image = new UserImage(anxUser, path.toString());
 			userService.saveUserImage(image);
 			redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.SUCCESS.getValue());
@@ -84,23 +89,27 @@ public class UserDashboardController {
 
 		return "redirect:/profile/main";
 	}
-	
+
 	@RequestMapping(value = "/myaccount")
-	public String myAccount(Map<String, Object> model) {
+	public String myAccount(Map<String, Object> model, HttpSession httpSession) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
 		model.put("anxUserForm", anxUser);
+		populate(model, httpSession);
 		return "main/myaccount";
 	}
+
 	@RequestMapping(value = "/myaccount/changePassword")
-	public String changePassword(Map<String, Object> model,@ModelAttribute("anxUserForm") AnxUser anxUser,RedirectAttributes redirectAttributes) {
+	public String changePassword(Map<String, Object> model, @ModelAttribute("anxUserForm") AnxUser anxUser,
+			RedirectAttributes redirectAttributes, HttpSession httpSession) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
+		populate(model, httpSession);
 		if (!anxUser.getPassword().equals(anxUser.getConfirmPassword())) {
 			redirectAttributes.addFlashAttribute("passwordClassDisplay", "in");
 			redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.DANGER.getValue());
-			redirectAttributes.addFlashAttribute("msgDetails",amHelper.get("user.password.notMatch"));
+			redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("user.password.notMatch"));
 			return "redirect:/profile/myaccount/";
 		}
 		String password = anxUser.getPassword();
@@ -111,5 +120,10 @@ public class UserDashboardController {
 		return "main/myaccount";
 	}
 
-}
+	private void populate(Map<String, Object> model, HttpSession session) {
+		List<PhoneCode> countryCodeList = userService.getAllPhoneCode();
+		model.put("countryCodeList", countryCodeList);
+		session.setAttribute("countryCodeList", countryCodeList);
+	}
 
+}

@@ -27,7 +27,35 @@ function sendEmailVerification() {
 	});
 
 }
-
+function updatePhoneNumber() {
+	var secretCode = {
+		"phoneNumber" : jQuery("#phoneNumber").val(),
+		"phoneCodeId" : jQuery('#phoneCodeNameId').val(),
+		"currentEmail" : jQuery("#currentEmail").val(),
+		"currentPhone" : jQuery("#currentPhone").val()
+	};
+	$.ajax({
+		url : '/api/changePhoneNumber',
+		data : JSON.stringify(secretCode),
+		method : "POST",
+		contentType : 'application/json',
+		dataType : "json",
+		success : function(data) {
+			$('#codeVerification').modal('show');
+		},
+		complete : function(data) {
+			if (data.responseText === "ok") {
+				$('#codeVerification').modal('hide');
+				window.location.href = "/logout";
+			} else {
+				console.log(data.responseText);
+				$('#errorMessagePhone').html(
+						"<div class='alert alert-danger'>Error: "
+								+ data.responseText + "</div>");
+			}
+		}
+	});
+}
 function enterVerificationCode() {
 	var secretCode = {
 		"verificationCode" : jQuery("#verificationCode").val(),
@@ -54,6 +82,8 @@ function enterVerificationCode() {
 	});
 }
 
-function clearErrorMessage(){
+function clearErrorMessage() {
 	$('#errorMessage').html("");
+	$('#errorMessagePhone').html("");
+	
 }

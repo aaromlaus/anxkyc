@@ -47,5 +47,7 @@ public interface UserService {
 	public void prepareAndSendUserRegistrationEmail(AnxUser anxUser, String verificationCode, HttpServletRequest request);
 	
 	public AnxUser findByEmailAddress(String emailAddress);
+	
+	public AnxUser findByPhoneNumber(String phoneNumber);
 
 }
