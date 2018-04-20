@@ -51,7 +51,7 @@
 }
 
 .dataTables_paginate a {
-    color: black;
+    color: whitesmoke;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
@@ -65,7 +65,10 @@
     border: 1px solid #4CAF50;
 }
 
-.dataTables_paginate a:hover:not(.active) {background-color: #ddd;}
+.dataTables_paginate a:hover:not(.active) {
+	background-color: #ddd; 
+	color: #36454F;
+}
 
 .btnApprove {
 	background-color: cadetblue;
@@ -80,7 +83,11 @@
 .dataTables_length{
 	float: left;
 	color: #36454F;
-	margin-left: 5px;
+	color: #fff;
+	margin-left: 10px;
+}
+.dataTables_length select{
+	color: black;
 }
 
 .dataTables_filter{

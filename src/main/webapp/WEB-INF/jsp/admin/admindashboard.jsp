@@ -106,8 +106,11 @@
             "language": {
                 searchPlaceholder: "Search",
                 search: "",
-                info:           "Showing _START_ to _END_ of _TOTAL_ entries",
+                info:           "Showing _START_ to _END_ of _TOTAL_ -",
                 infoEmpty:      "Showing 0 to 0 of 0 entries",
+                paginate: {
+                    previous: "Prev"
+                 }
 
             },
             "dom": '<"top"f>rt<"bottom"ilp><"clear">'
