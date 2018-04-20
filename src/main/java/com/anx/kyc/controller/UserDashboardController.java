@@ -79,8 +79,9 @@ public class UserDashboardController {
 	public String changePassword(Map<String, Object> model,@ModelAttribute("anxUserForm") AnxUser anxUser,RedirectAttributes redirectAttributes, 
 			HttpSession session) {
 		populate(model, session);
+		redirectAttributes.addFlashAttribute("passwordClassDisplay", "in");
 		if (!anxUser.getPassword().equals(anxUser.getConfirmPassword())) {
-			redirectAttributes.addFlashAttribute("passwordClassDisplay", "in");
+			
 			redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.DANGER.getValue());
 			redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("user.password.notMatch"));
 			return "redirect:/profile/myaccount/";
@@ -91,7 +92,9 @@ public class UserDashboardController {
 		anxUser.setPassword(password);
 		userService.saveUser(anxUser);
 		model.put("anxUserForm", anxUser);
-		return "main/myaccount";
+		redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.SUCCESS.getValue());
+		redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("userchange.password.success"));
+		return "redirect:/profile/myaccount/";
 	}
 
 	private void populate(Map<String, Object> model, HttpSession session) {
