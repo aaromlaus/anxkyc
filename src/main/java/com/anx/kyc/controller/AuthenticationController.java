@@ -43,7 +43,6 @@ public class AuthenticationController {
 
 	@RequestMapping(value = "/home")
 	public String home(HttpServletRequest request) {
-		System.out.println("test");
 		return "redirect:" + anxSession.getHomeUrl();
 	}
 
@@ -60,7 +59,6 @@ public class AuthenticationController {
 	public String doLogin(@ModelAttribute("loginForm") AuthenticationForm login) {
 		return "welcome";
 	}
-
 
 	@RequestMapping("/forgotPassword")
 	public String forgotPassword(Map<String, Object> model, HttpSession session) {
@@ -115,7 +113,6 @@ public class AuthenticationController {
 		}
 		
 	}
-	
 	
 	@RequestMapping("/resetPassword")
 	public String resetPasword(Map<String, Object> model, HttpSession session) {

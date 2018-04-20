@@ -287,4 +287,15 @@ public class UserServiceImpl implements UserService {
 		return "Add phone number";
 	}
 	
+	@Override
+	public void updateAnxUserLevel(int userId, String status) {
+		AnxUser user = getUserById(userId);
+		if(status.equalsIgnoreCase("approve")) {
+			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_2));
+		} else if (status.equalsIgnoreCase("reject")) {
+			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_1));
+		}
+		saveUser(user, false);
+	}
+	
 }

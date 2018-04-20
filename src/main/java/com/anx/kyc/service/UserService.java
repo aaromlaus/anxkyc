@@ -59,4 +59,6 @@ public interface UserService {
 	public String changeEmailCode(String requestBody, HttpSession session);
 
 	public String changePhoneNumber(String requestBody, HttpSession session);
+
+	public void updateAnxUserLevel(int userId, String status);
 }

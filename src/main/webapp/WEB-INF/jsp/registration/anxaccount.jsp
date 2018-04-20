@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/form.css">
 </head>
-<br />
 <jsp:include page="../common/header.jsp"></jsp:include>
 <div class="inner contact">
 

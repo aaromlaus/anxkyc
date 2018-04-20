@@ -49,10 +49,10 @@ public class AnxUtil {
 			byte imageData[] = new byte[(int) file.length()];
 			imageInFile.read(imageData);
 			base64Image = Base64.getEncoder().encodeToString(imageData);
-		} catch (FileNotFoundException e) {
-			System.out.println("Image not found" + e);
-		} catch (IOException ioe) {
-			System.out.println("Exception while reading the Image " + ioe);
+		} catch (FileNotFoundException e) { 
+			
+		} catch (IOException ioe) { 
+			
 		}
 		return base64Image;
 	}

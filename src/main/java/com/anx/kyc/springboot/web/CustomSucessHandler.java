@@ -32,7 +32,6 @@ public class CustomSucessHandler extends SimpleUrlAuthenticationSuccessHandler {
 		String targetUrl = determineTargetUrl(authentication, request);
 		
 		if (response.isCommitted()) {
-			System.out.println("Can't redirect");
 			return;
 		}
 		
