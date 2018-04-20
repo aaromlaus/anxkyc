@@ -22,9 +22,12 @@ public class AnxUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "anx_user_id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private int anxUserId;
+	
+	@Column(name = "user_id")
+	private String userId;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -89,11 +92,19 @@ public class AnxUser implements Serializable {
 	@Column(name = "active")
 	private boolean active;
 
-	public int getUserId() {
+	public int getAnxUserId() {
+		return anxUserId;
+	}
+
+	public void setAnxUserId(int anxUserId) {
+		this.anxUserId = anxUserId;
+	}
+
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -201,6 +212,14 @@ public class AnxUser implements Serializable {
 		this.sourceOfFund = sourceOfFund;
 	}
 
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -249,12 +268,5 @@ public class AnxUser implements Serializable {
 		this.active = active;
 	}
 
-	public String getVerificationCode() {
-		return verificationCode;
-	}
-
-	public void setVerificationCode(String verificationCode) {
-		this.verificationCode = verificationCode;
-	}
 
 }

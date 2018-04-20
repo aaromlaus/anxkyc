@@ -130,7 +130,7 @@ public class AuthenticationController {
 			String username = String.valueOf(session.getServletContext().getAttribute("username"));
 			AnxUser user = userService.findByEmailAddressOrPhoneNumber(username);
 			user.setPassword(form.getConfirmPassword());
-			userService.saveUser(user);
+			userService.saveUser(user, true);
 			return "redirect:/resetSuccess";
 		}else {
 			redirectAttributes.addAttribute("errorMsg", "Password did not match!");

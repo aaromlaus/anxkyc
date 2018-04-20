@@ -18,9 +18,12 @@ public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "role_id")
+	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int roleId;
+	private int id;
+	
+	@Column(name = "role_id")
+	private String roleId;
 	
 	@Column(name = "role_name")
 	@NaturalId
@@ -29,11 +32,19 @@ public class Role implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	public int getRoleId() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(int roleId) {
+	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
 
@@ -52,5 +63,6 @@ public class Role implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 
 }

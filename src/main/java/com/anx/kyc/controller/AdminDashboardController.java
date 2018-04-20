@@ -24,7 +24,7 @@ public class AdminDashboardController {
 	}
 	
 	@RequestMapping(value="/updateUserLevel")
-	public String updateUserLevel(@RequestParam("userId") int userId, @RequestParam("status") String status, Map<String, Object> model) {
+	public String updateUserLevel(@RequestParam("userId") String userId, @RequestParam("status") String status, Map<String, Object> model) {
 		userService.updateAnxUserLevel(userId, status);
 		return "redirect:/administrator/";
 	}

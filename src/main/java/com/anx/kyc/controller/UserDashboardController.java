@@ -90,7 +90,7 @@ public class UserDashboardController {
 		String password = anxUser.getPassword();
 		anxUser = userService.getLoggedInUser();
 		anxUser.setPassword(password);
-		userService.saveUser(anxUser);
+		userService.saveUser(anxUser, true);
 		model.put("anxUserForm", anxUser);
 		redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("userchange.password.success"));

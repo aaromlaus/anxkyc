@@ -52,7 +52,7 @@ public class ApiController {
 			JsonElement element = gson.fromJson(requestBody, JsonElement.class);
 			JsonObject requestJson = element.getAsJsonObject();
 			if (!requestJson.get("id").isJsonNull()) {
-				AnxUser user = userService.getUserById(requestJson.get("id").getAsInt());
+				AnxUser user = userService.getUserById(requestJson.get("id").getAsString());
 				String fileName = user.getFirstName() + user.getMiddleName() + user.getLastName() + "Id"
 						+ user.getUserId();
 				String imagePath = UPLOAD_PATH + fileName;

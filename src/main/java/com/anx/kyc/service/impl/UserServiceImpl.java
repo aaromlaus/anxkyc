@@ -68,13 +68,7 @@ public class UserServiceImpl implements UserService {
 	private Gson gson = new Gson();
 	
 	@Override
-	public int saveUser(AnxUser user) {
-
-		return saveUser(user, true);
-	}
-
-	@Override
-	public int saveUser(AnxUser user, boolean isEncodePassword) {
+	public String saveUser(AnxUser user, boolean isEncodePassword) {
 		if (isEncodePassword) {
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		}
@@ -82,10 +76,15 @@ public class UserServiceImpl implements UserService {
 		auRepository.flush();
 		return anx.getUserId();
 	}
+	
+	@Override
+	public String saveUser(AnxUser user) {
+		return saveUser(user, false);
+	}
 
 	@Override
-	public AnxUser getUserById(int userId) {
-		return auRepository.getOne(userId);
+	public AnxUser getUserById(String userId) {
+		return auRepository.findByUserId(userId);
 	}
 
 	@Override
@@ -170,7 +169,7 @@ public class UserServiceImpl implements UserService {
 		
 		verificationCode = UUID.randomUUID().toString();
 		anxUser.setVerificationCode(verificationCode);
-		saveUser(anxUser);
+		saveUser(anxUser, true);
 		return verificationCode;
 	}
 	
@@ -288,7 +287,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void updateAnxUserLevel(int userId, String status) {
+	public void updateAnxUserLevel(String userId, String status) {
 		AnxUser user = getUserById(userId);
 		if(status.equalsIgnoreCase("approve")) {
 			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_2));
