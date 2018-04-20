@@ -99,7 +99,19 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		$('#anxtable').DataTable();
+		$('#anxtable').DataTable({
+            "iDisplayLength": 20,
+            "aLengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+            "pagingType": "simple_numbers",
+            "language": {
+                searchPlaceholder: "Search",
+                search: "",
+                info:           "Showing _START_ to _END_ of _TOTAL_ entries",
+                infoEmpty:      "Showing 0 to 0 of 0 entries",
+
+            },
+            "dom": '<"top"f>rt<"bottom"ilp><"clear">'
+        });
 	});
 
 	function updateUserLevel(userId, status) {

@@ -41,7 +41,8 @@
 }
 
 #anxtable_info {
-	display: none;
+	color: whitesmoke;
+	float: left;
 }
 
 .dataTables_paginate {
@@ -74,5 +75,19 @@
 .btnReject {
 	background-color: crimson;
 	width: 90px;
+}
+
+.dataTables_length{
+	float: left;
+	color: #36454F;
+	margin-left: 5px;
+}
+
+.dataTables_filter{
+	margin-bottom: 5px;
+}
+
+#anxtable.table{
+	margin-bottom: 12px;
 }
 
