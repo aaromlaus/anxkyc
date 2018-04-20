@@ -6,7 +6,6 @@
 }
 
 #anxtable td, #anxtable th {
-	border: 1px solid #ddd;
 	padding: 8px;
 }
 
@@ -23,12 +22,13 @@
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
-	background-color: #34495E;
-	color: #dd5;
+	background-color: #3399cc;
+	color: whitesmoke;
 }
 
 #anxtable td {
-	color: white;
+	color: #36454F;
+	background-color: #d9edf7;
 }
 
 <!-- DATA TABLE -->
