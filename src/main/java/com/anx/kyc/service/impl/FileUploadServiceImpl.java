@@ -1,5 +1,6 @@
 package com.anx.kyc.service.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,6 +36,10 @@ public class FileUploadServiceImpl implements FileUploadService {
 		
 		byte[] bytes;
 		try {
+			File directory = new File(UPLOAD_PATH);
+			if(!directory.exists()) {
+				directory.mkdirs();
+			}
 			bytes = file.getBytes();
 			String fileName = anxUser.getFirstName()+anxUser.getMiddleName()+anxUser.getLastName()+"Id"+anxUser.getUserId();
 			Path path = Paths.get(UPLOAD_PATH + fileName);
