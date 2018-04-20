@@ -36,7 +36,7 @@
 				</div>
 				<div class="col-sm-4 text-right mar-t-b-10 h4">
 					<a href="#" data-toggle="modal" data-target="#sendEmailCode"
-						onClick="clearErrorMessage();">${anxUserForm.phoneNumber.length() >0 ? 'Change Email':'Add Email' }</a>
+						onClick="clearErrorMessage();">${anxUserForm.emailAddress.length() >0 ? 'Change Email':'Add Email' }</a>
 				</div>
 			</div>
 			<div class="col-sm-12 bg-info mar-bot-0">
