@@ -34,6 +34,9 @@ public class UserVerification implements Serializable {
 	
 	@Column(name="status")
 	private String status;
+	
+	@Column(name="level")
+	private String level;
 
 	public int getId() {
 		return id;
@@ -81,6 +84,14 @@ public class UserVerification implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 }

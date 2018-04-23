@@ -25,10 +25,19 @@ public class UserVerificationServiceImpl implements UserVerificationService {
 		for(VerificationType verType : verList) {
 			UserVerification ver = new UserVerification();
 			ver.setUserId(userId);
-			ver.setVerification(verType.getValue());
+			ver.setVerification(verType.toString());
 			ver.setStatus(VerificationStatusType.NOT_STARTED);
+			ver.setLevel(verType.getValue());
 			uvReposity.saveAndFlush(ver);
 		}
+	}
+	
+	public boolean checkLevel2Completion(String userId) {
+		
+		for(UserVerification uv : uvReposity.findByUserId(userId)) {
+		}
+		
+		return false;
 	}
 
 }

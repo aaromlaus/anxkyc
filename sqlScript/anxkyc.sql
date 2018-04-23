@@ -82,7 +82,8 @@ CREATE TABLE user_verification (
 	user_id VARCHAR(255),
 	verification VARCHAR(255),
 	description VARCHAR(255),
-	status VARCHAR(255)
+	status VARCHAR(255),
+	level VARCHAR(45)
 );
 
 CREATE TRIGGER user_ver_id_trigger
