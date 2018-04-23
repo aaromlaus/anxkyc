@@ -30,19 +30,19 @@
 <div class="stepwizard">
     <div class="stepwizard-row setup-panel">
       <div class="stepwizard-step arrow-left-div">
-        <a href="#step-1" type="button" class="btn btn-primary btn-circle">
+        <a href="#step-1" type="button" class="btn1 btn-primary1 btn-circle">
         	<i id="step1btn" class="fa fa-question-circle" style="font-size:55px;color:#337ab7"></i>
         </a>
         <p>General</p>
       </div>
       <div class="stepwizard-step arrow-left-div">
-        <a href="#step-2" type="button" class="btn btn-default btn-circle">
+        <a href="#step-2" type="button" class="btn1 btn-default1 btn-circle disabledLink">
 			<i id="step2btn"  class="fa fa-money" style="font-size:50px;color:#337ab7"></i>
         </a>
         <p class="side-border">Source of funds</p>
       </div>
       <div class="stepwizard-step ">
-        <a href="#step-3" type="button" class="btn btn-default btn-circle">
+        <a href="#step-3" type="button" class="btn1 btn-default1 btn-circle disabledLink">
 			<i id="step3btn"  class="fa fa-id-card-o" style="font-size:45px;color:#337ab7"></i>
         </a>
         <p>ID Upload</p>
@@ -63,7 +63,8 @@
           </div>
           <div class="form-group">
             <label class="control-label">Nationality</label>
-            <select name="nationality">
+            <select name="nationality" required="required">
+			    <option value="">Please select an option</option>
 			    <option value="Philippines">Philippines</option>
 			    <option value="Australia">Australia</option>
 			    <option value="New Zealand">New Zealand</option>
@@ -74,6 +75,7 @@
             <label class="control-label">Birth date</label>
             <input  type="date" required="required" class="form-control">
           </div>
+          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
       </div>
     </div>
     </div>
@@ -92,7 +94,7 @@
           </div>
           <div class="form-group">
             <label class="control-label">Industry</label>
-               <select name="industry">
+               <select name="industry" required="required">
 			    <option value="">Please select an option</option>
 			    <option value="accounting_and_finance">Accounting and Finance</option>
 			    <option value="administrative">Administrative</option>
@@ -129,7 +131,7 @@
           </div>
           <div class="form-group">
             <label class="control-label">Fund Source?</label>
-            <select name="fundsource">
+            <select name="fundsource" required="required">
 			    <option value="">Please select an option</option>
 			    <option value="allowance">Allowance</option>
 			    <option value="government_subsidy">Government Subsidy</option>
@@ -152,7 +154,7 @@
           <br>
           <div class="form-group">
             <label class="control-label">ID Type</label><br>
-	            <select name="idType">
+	            <select name="idType" required="required">
 	              	<option value="" disabled="disabled">Government Issued ID</option>
 	                <option value="afp">Armed Forces of the Philippines (AFP) ID</option>
 	                <option value="drivers_license">Driver's License</option>

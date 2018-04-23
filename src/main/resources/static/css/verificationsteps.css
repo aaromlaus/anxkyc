@@ -26,12 +26,39 @@
     text-align: center;
     position: relative;
 }
+
+.btn1 {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+
 .btn-circle {
 	width: 90px;
     height: 45px; /* as the half of the width */
     border-top-left-radius: 58px;  /* 100px of height + 10px of border */
     border-top-right-radius: 58px; /* 100px of height + 10px of border */
     border-bottom: 0;
+    background-color: #e4e4e4;
+}
+
+.disabledLink{
+    pointer-events: none;
 }
 
 .stepwizard {
@@ -50,15 +77,6 @@
     width: 33.33333%;
 }
 
-a.btn-primary,a.btn-primary:link,a.btn-primary:hover,a.btn-primary:active,a.btn-primary:visited,a.btn-primary:focus
-,a.btn-default,a.btn-default:link,a.btn-default:hover,a.btn-default:active,a.btn-default:visited,a.btn-default:focus
-,a.btn,a.btn:link,a.btn:hover,a.btn:active,a.btn:visited,a.btn:focus
-,a.btn-circle,a.btn-circle:link,a.btn-circle:hover,a.btn-circle:active,a.btn-circle:visited,a.btn-circle:focus{
-    background-color: #e4e4e4;
-    border-color: #e4e4e4;
-    text-decoration: line-through; !important;
-    pointer-    
-}
 
 
 .arrow-left-div:before{    
@@ -117,6 +135,7 @@ a.btn-primary,a.btn-primary:link,a.btn-primary:hover,a.btn-primary:active,a.btn-
 .verification-form{
 	background: #e4e4e4;
 }
+
 
 
 

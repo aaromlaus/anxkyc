@@ -12,8 +12,8 @@ $(document).ready(function () {
               $item = $(this);
 
       if (!$item.hasClass('disabled')) {
-          navListItems.removeClass('btn-primary').addClass('btn-default');
-          $item.addClass('btn-primary');
+          navListItems.removeClass('btn-primary1').addClass('btn-default1');
+          $item.addClass('btn-primary1');
           allWells.hide();
           $target.show();
           $target.find('input:eq(0)').focus();
@@ -25,7 +25,7 @@ $(document).ready(function () {
           curStepBtn = curStep.attr("id"),
           prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
 
-          prevStepWizard.removeAttr('disabled').trigger('click');
+          prevStepWizard.removeClass('disabledLink').trigger('click');
   });
 
   allNextBtn.click(function(){
@@ -44,10 +44,10 @@ $(document).ready(function () {
       }
 
       if (isValid){
-          nextStepWizard.removeAttr('disabled').trigger('click');
+          nextStepWizard.removeClass('disabledLink').trigger('click');
           $('#step'+id+'btn').css('color', '#397D02');
       }
   });
 
-  $('div.setup-panel div a.btn-primary').trigger('click');
+  $('div.setup-panel div a.btn-primary1').trigger('click');
 });
