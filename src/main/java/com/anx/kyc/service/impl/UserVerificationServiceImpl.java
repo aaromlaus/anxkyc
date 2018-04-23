@@ -35,6 +35,7 @@ public class UserVerificationServiceImpl implements UserVerificationService {
 	public boolean checkLevel2Completion(String userId) {
 		
 		for(UserVerification uv : uvReposity.findByUserId(userId)) {
+			
 		}
 		
 		return false;

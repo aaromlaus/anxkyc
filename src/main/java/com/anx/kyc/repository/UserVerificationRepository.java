@@ -9,6 +9,6 @@ import com.anx.kyc.model.UserVerification;
 
 public interface UserVerificationRepository extends JpaRepository<UserVerification, Integer> {
 	
-	List<UserVerification> findByUserId(@Param("userId") String userId);
+	List<UserVerification> findByLevelAndUserId(@Param("level") String level, @Param("userId") String userId);
 
 }

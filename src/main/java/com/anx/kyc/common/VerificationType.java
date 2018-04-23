@@ -2,11 +2,11 @@ package com.anx.kyc.common;
 
 public enum VerificationType {
 	
-	EMAIL_VERIFICATION("Level2"), 
-	PHONE_VERIFICATION("Level2"), 
-	SELFIE_VERIFICATION("Level2"), 
-	IDENTIFICATION_VERIFICATION("Level2"),
-	ADDRESS_VERIFICATION("Level3");
+	EMAIL_VERIFICATION(UserLevelType.LEVEL_2), 
+	PHONE_VERIFICATION(UserLevelType.LEVEL_2), 
+	SELFIE_VERIFICATION(UserLevelType.LEVEL_2), 
+	IDENTIFICATION_VERIFICATION(UserLevelType.LEVEL_2),
+	ADDRESS_VERIFICATION(UserLevelType.LEVEL_3);
 
 	private final String value;
 
