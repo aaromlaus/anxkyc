@@ -52,8 +52,8 @@
   
   <form role="form" class="verification-form" method="post">
     <div class="row setup-content" id="step-1">
-      <div class="col-xs-6 col-md-offset-3">
-        <div class="col-md-12">
+      <div class="col-xs-12">
+        <div class="col-md-6 col-div">
           <h3> General</h3>
           <br>
           <div class="form-group">
@@ -75,15 +75,16 @@
             <label class="control-label">Birth date</label>
             <input  type="date" required="required" class="form-control">
           </div>
-          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
       </div>
     </div>
+      <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
     </div>
     <div class="row setup-content" id="step-2">
-      <div class="col-xs-6 col-md-offset-3">
+      <div class="col-xs-12">
         <div class="col-md-12">
           <h3> Source of funds</h3>
           <br>
+          <div class="col-xs-6 col-div">
           <div class="form-group">
             <label class="control-label">Employment Status</label><br>
               <input type="radio" required="required"  name="gender" value="employed" checked> Employed
@@ -121,6 +122,9 @@
 			    <option value="writing_and_content">Writing and Content</option>
 			  </select>
           </div>
+          </div>
+          
+          <div class="col-xs-6">
           <div class="form-group">
             <label class="control-label">Title or Position</label>
             <input type="text" placeholder="Title | Position" required="required" class="form-control">
@@ -142,16 +146,19 @@
 			    <option value="separation_pay">Separation Pay</option>
 			  </select>
           </div>
+          
+          </div>
           <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
           <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
         </div>
       </div>
     </div>
     <div class="row setup-content" id="step-3">
-      <div class="col-xs-6 col-md-offset-3">
+      <div class="col-xs-12">
         <div class="col-md-12">
           <h3> Upload ID</h3>
           <br>
+          <div class="col-xs-6 col-div">
           <div class="form-group">
             <label class="control-label">ID Type</label><br>
 	            <select name="idType" required="required">
@@ -187,20 +194,22 @@
             <label class="control-label">ID number</label>
             <input type="text" placeholder="ID number" required="required" class="form-control">
           </div>
+         </div> 
+        <div class="col-xs-6">
           <div class="form-group">
             <input type="button" value="Upload ID" required="required" class="btn btn-default btn-md">
           </div>
           
+        </div>
+        </div>
           <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
           <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
-        </div>
       </div>
     </div>
   </form>
   
+			</div>
 </div>
-			</div>
-			</div>
 			</div>
 </body>
 
