@@ -18,12 +18,16 @@ import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.UserImage;
 import com.anx.kyc.service.FileUploadService;
 import com.anx.kyc.service.UserService;
+import com.anx.kyc.service.UserVerificationService;
 
 @Service
 public class FileUploadServiceImpl implements FileUploadService {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserVerificationService uvService;
 	
 	@Value("${file.path.upload:test}")
 	private String UPLOAD_PATH;
@@ -45,7 +49,10 @@ public class FileUploadServiceImpl implements FileUploadService {
 			Path path = Paths.get(UPLOAD_PATH + fileName);
 			Files.write(path, bytes);
 			
-			anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_2_PENDING));
+			if(uvService.checkLevelCompletion(UserLevelType.LEVEL_2, anxUser.getUserId())) {
+				anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_2_PENDING));
+			}
+			
 			userService.saveUser(anxUser,false);
 			UserImage image = new UserImage(anxUser, path.toString());
 			userService.saveUserImage(image);

@@ -32,6 +32,7 @@ import com.anx.kyc.repository.UserImageRepository;
 import com.anx.kyc.repository.UserLevelRepository;
 import com.anx.kyc.service.EmailService;
 import com.anx.kyc.service.UserService;
+import com.anx.kyc.service.UserVerificationService;
 import com.anx.kyc.util.AnxUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -64,6 +65,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private EmailHelper emailHelper;
+	
+	@Autowired
+	private UserVerificationService uvService;
 	
 	private Gson gson = new Gson();
 	
@@ -254,6 +258,8 @@ public class UserServiceImpl implements UserService {
 			if (null != user) {
 				
 				user.setEmailAddress(String.valueOf(session.getServletContext().getAttribute("myAccountEmail")));
+				checkAndUpdateLevel2Completion(user);
+				
 				saveUser(user, false);
 				session.getServletContext().removeAttribute("myAccountCode");
 				session.getServletContext().removeAttribute("myAccountEmail");
@@ -286,6 +292,7 @@ public class UserServiceImpl implements UserService {
 			if (null != user) {
 				user.setPhoneNumber(requestJson.get("phoneNumber").getAsString());
 				user.setPhoneCode(findPhoneCodeById(Long.valueOf(requestJson.get("phoneCodeId").getAsString())));
+				checkAndUpdateLevel2Completion(user);
 				saveUser(user, false);
 				return "ok";
 			}
@@ -308,6 +315,12 @@ public class UserServiceImpl implements UserService {
 	
 	public AnxUser getAnxUserById(int id) {
 		return auRepository.findById(id);
+	}
+	
+	private void checkAndUpdateLevel2Completion(AnxUser user) {
+		if(uvService.checkLevelCompletion(UserLevelType.LEVEL_2, user.getUserId())) {
+			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_2_PENDING));
+		}
 	}
 	
 }
