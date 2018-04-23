@@ -2,11 +2,11 @@ package com.anx.kyc.common;
 
 public enum VerificationType {
 	
-	EMAIL_VERIFICATION("alert alert-success"), 
-	PHONE_VERIFICATION("alert alert-info"), 
-	SELFIE_VERIFICATION("alert alert-warning"), 
-	IDENTIFICATION_VERIFICATION("alert alert-danger"),
-	ADDRESS_VERIFICATION("alert alert-danger");
+	EMAIL_VERIFICATION("emailverification"), 
+	PHONE_VERIFICATION("phoneverification"), 
+	SELFIE_VERIFICATION("selfieverification"), 
+	IDENTIFICATION_VERIFICATION("identificationverification"),
+	ADDRESS_VERIFICATION("addressverification");
 
 	private final String value;
 
