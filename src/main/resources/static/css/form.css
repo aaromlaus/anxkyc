@@ -184,4 +184,12 @@ input[type="submit"]:hover {
 	margin-top: 3%;
 }
 
+.font-size-60{
+	font-size:60px;
+}
+
+.bg-grey-pad-6 {
+	background: #f0f0f0;
+	padding: 4% 4%;
+}
 
