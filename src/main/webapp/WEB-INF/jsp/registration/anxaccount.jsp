@@ -20,6 +20,7 @@
 		</c:if>
 		<form:form id="contact-us" method="POST" modelAttribute="anxUserForm"
 			action="createaccount">			
+			<form:hidden path="userId" required="required" class="form" />
 			<form:input path="firstName" required="required" class="form" placeholder="First Name" />
 			<form:input path="middleName" required="required" class="form" placeholder="Middle Name" />
 			<form:input path="lastName" required="required" class="form" placeholder="Last Name" />

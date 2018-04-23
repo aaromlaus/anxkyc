@@ -1,9 +1,14 @@
 CREATE TABLE role (
 role_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 role_name VARCHAR(255) NOT NULL,
-description TEXT,
+description VARCHAR(255),
 UNIQUE(role_name)
 );
+
+CREATE TRIGGER role_id_trigger
+  BEFORE INSERT ON role
+  FOR EACH ROW
+  SET new.role_id = CONCAT('RLE', DATE_FORMAT(CURRENT_TIMESTAMP, '%m%d%Y%H%i'), new.id)
 
 
 CREATE TABLE user_level(
@@ -19,13 +24,14 @@ CREATE TABLE user_level(
 );
 
 CREATE TABLE anx_user(
-anx_user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-first_name TEXT,
-middle_name TEXT,
-last_name TEXT,
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+user_id VARCHAR(255),
+first_name VARCHAR(255),
+middle_name VARCHAR(255),
+last_name VARCHAR(255),
 email_address VARCHAR(255),
 phone_number VARCHAR(255),
-password TEXT,
+password VARCHAR(255),
 role_name VARCHAR(255),
 user_level_name VARCHAR(255),
 house_number VARCHAR(255),
@@ -63,13 +69,26 @@ CREATE TABLE phone_code(
 	country VARCHAR(50)
 );
 
-
 CREATE TABLE user_image(
 	user_image_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	anx_user_id INT,
 	link VARCHAR(255),
 	user_level_details_id INT
 );
+
+CREATE TABLE user_verification (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	user_ver_id VARCHAR(255),
+	user_id VARCHAR(255),
+	verification VARCHAR(255),
+	description VARCHAR(255),
+	status VARCHAR(255)
+);
+
+CREATE TRIGGER user_ver_id_trigger
+  BEFORE INSERT ON user_verification
+  FOR EACH ROW
+  SET new.user_ver_id = CONCAT('UV', DATE_FORMAT(CURRENT_TIMESTAMP, '%m%d%Y%H%i'), new.id)
 
 INSERT INTO phone_code(phone_code_name,country)
 VALUES

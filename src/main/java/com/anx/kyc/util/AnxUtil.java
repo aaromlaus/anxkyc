@@ -17,6 +17,14 @@ import com.anx.kyc.model.AnxUser;
 public class AnxUtil {
 
 	public static int generateVerificationCode() {
+		return generateCode();
+	}
+	
+	public synchronized static String generateId(String prefix, int id) {
+		return prefix + generateCode() + id;
+	}
+	
+	private static int generateCode() {
 		int code = 0;
 		try {
 		     SecureRandom number = SecureRandom.getInstanceStrong();
@@ -60,4 +68,5 @@ public class AnxUtil {
  	public static String getAnxUserFullName(AnxUser anxUser) {
  		return anxUser.getFirstName().concat(" ").concat(anxUser.getMiddleName().concat(" ").concat(anxUser.getLastName()));
  	}
+ 	
 }

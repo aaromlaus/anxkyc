@@ -13,9 +13,9 @@ import com.anx.kyc.model.UserLevel;
 
 public interface UserService {
 
-	public String saveUser(AnxUser user);
+	public int saveUser(AnxUser user);
 	
-	public String saveUser(AnxUser user, boolean isEncodePassword);
+	public int saveUser(AnxUser user, boolean isEncodePassword);
 
 	public Role getRole(String roleName);
 
@@ -61,5 +61,9 @@ public interface UserService {
 	public String changePhoneNumber(String requestBody, HttpSession session);
 
 	public void updateAnxUserLevel(String userId, String status);
+
+	public String generateandSetVerificationCode(AnxUser anxUser);
+
+	public AnxUser getAnxUserById(int id);
 
 }

@@ -36,6 +36,7 @@
 				<option value="Personal Savings" />
 			</datalist>
 			
+			<form:hidden path="userId" required="required" class="form" />
 			<form:hidden path="firstName" required="required" class="form" />
 			<form:hidden path="middleName" required="required" class="form" />
 			<form:hidden path="lastName" required="required" class="form" />

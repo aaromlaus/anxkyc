@@ -22,6 +22,7 @@ import com.anx.kyc.helper.AnxMessageHelper;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.service.UserService;
+import com.anx.kyc.service.UserVerificationService;
 import com.anx.kyc.validator.RegistrationFormValidator;
 
 @Controller
@@ -31,6 +32,9 @@ public class RegistrationController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserVerificationService userVerService;
 
 	@Autowired
 	private RegistrationFormValidator rfValidator;
@@ -81,12 +85,15 @@ public class RegistrationController {
 	@RequestMapping(value = "/save")
 	public String saveUserDetails(@ModelAttribute("anxUserForm") AnxUser anxUser, Map<String, Object> model, HttpSession session, 
 			HttpServletRequest request) {
+		
 		populate(model, anxUser, session);
 		String successMessage = amHelper.get("registration.mobile.success");
+		String verificationCode = userService.generateandSetVerificationCode(anxUser);
+		userService.saveUserDetails(anxUser);
 		
-		String verificationCode = userService.saveUserDetails(anxUser);
 		if(anxUser.getEmailAddress() != null && !anxUser.getEmailAddress().isEmpty()) {
 			userService.prepareAndSendUserRegistrationEmail(anxUser, verificationCode, request);
+			userVerService.addUserVerification(anxUser.getUserId());
 			successMessage = amHelper.get("registration.email.success");
 		}
 		
@@ -107,5 +114,6 @@ public class RegistrationController {
 		model.put("emailConfirmMsg", emailConfirmMsg);
 		return "registration/emailconfirmationsuccess";
 	}
-
+	
+	
 }

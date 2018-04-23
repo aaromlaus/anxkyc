@@ -68,17 +68,17 @@ public class UserServiceImpl implements UserService {
 	private Gson gson = new Gson();
 	
 	@Override
-	public String saveUser(AnxUser user, boolean isEncodePassword) {
+	public int saveUser(AnxUser user, boolean isEncodePassword) {
 		if (isEncodePassword) {
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		}
 		AnxUser anx = auRepository.save(user);
 		auRepository.flush();
-		return anx.getUserId();
+		return anx.getId();
 	}
 	
 	@Override
-	public String saveUser(AnxUser user) {
+	public int saveUser(AnxUser user) {
 		return saveUser(user, false);
 	}
 
@@ -158,19 +158,28 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public String saveUserDetails(AnxUser anxUser) {
-		String verificationCode = "";
+	public String generateandSetVerificationCode(AnxUser anxUser) {
+		String verificationCode = UUID.randomUUID().toString();
+		anxUser.setVerificationCode(verificationCode);
 		
+		return verificationCode;
+	}
+	
+	@Override
+	public String saveUserDetails(AnxUser anxUser) {
 		anxUser.setRole(getRole(RoleType.USER));
 		anxUser.setUserLevel(getUserLevel(UserLevelType.LEVEL_1));
 		if (null != anxUser && null != anxUser.getPhoneCode() && null != anxUser.getPhoneCode().getPhoneCodeId()) {
 			anxUser.setPhoneCode(findPhoneCodeById(anxUser.getPhoneCode().getPhoneCodeId()));
 		}
 		
-		verificationCode = UUID.randomUUID().toString();
-		anxUser.setVerificationCode(verificationCode);
-		saveUser(anxUser, true);
-		return verificationCode;
+		int id = saveUser(anxUser, true);
+		String userId = AnxUtil.generateId("ANX", id);
+		
+		anxUser.setUserId(userId);
+		saveUser(anxUser);
+		
+		return userId;
 	}
 	
 	@Override
@@ -295,6 +304,10 @@ public class UserServiceImpl implements UserService {
 			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_1));
 		}
 		saveUser(user, false);
+	}
+	
+	public AnxUser getAnxUserById(int id) {
+		return auRepository.findById(id);
 	}
 	
 }

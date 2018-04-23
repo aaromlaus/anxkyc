@@ -24,7 +24,7 @@ public class AnxUser implements Serializable {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int anxUserId;
+	private int id;
 	
 	@Column(name = "user_id")
 	private String userId;
@@ -91,14 +91,6 @@ public class AnxUser implements Serializable {
 	
 	@Column(name = "active")
 	private boolean active;
-
-	public int getAnxUserId() {
-		return anxUserId;
-	}
-
-	public void setAnxUserId(int anxUserId) {
-		this.anxUserId = anxUserId;
-	}
 
 	public String getUserId() {
 		return userId;
@@ -266,6 +258,14 @@ public class AnxUser implements Serializable {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 
