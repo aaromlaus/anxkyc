@@ -48,6 +48,7 @@ public class UserDashboardController {
 		List<UserLevel> userLevels = userService.getAllUserLevel();
 		model.put("userLevels", userLevels);
 		model.put("anxUser", anxUser);
+		populate(model, session);
 		return "main/userdashboard";
 	}
 
@@ -70,13 +71,13 @@ public class UserDashboardController {
 
 	@RequestMapping(value = "/myaccount")
 	public String myAccount(Map<String, Object> model, HttpSession session) {
-		model.put("anxUserForm", userService.getLoggedInUser());
+		model.put("anxUser", userService.getLoggedInUser());
 		populate(model, session);
 		return "main/myaccount";
 	}
 	
 	@RequestMapping(value = "/myaccount/changePassword")
-	public String changePassword(Map<String, Object> model,@ModelAttribute("anxUserForm") AnxUser anxUser,RedirectAttributes redirectAttributes, 
+	public String changePassword(Map<String, Object> model,@ModelAttribute("anxUser") AnxUser anxUser,RedirectAttributes redirectAttributes, 
 			HttpSession session) {
 		populate(model, session);
 		redirectAttributes.addFlashAttribute("passwordClassDisplay", "in");
@@ -91,7 +92,7 @@ public class UserDashboardController {
 		anxUser = userService.getLoggedInUser();
 		anxUser.setPassword(password);
 		userService.saveUser(anxUser, true);
-		model.put("anxUserForm", anxUser);
+		model.put("anxUser", anxUser);
 		redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("userchange.password.success"));
 		return "redirect:/profile/myaccount/";

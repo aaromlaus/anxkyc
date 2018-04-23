@@ -31,12 +31,12 @@
 					<strong>Email</strong>
 				</div>
 				<div class="col-sm-5 text-left mar-t-b-10 h4">
-					<c:out value="${anxUserForm.emailAddress}"></c:out>
-					<form:hidden path="anxUserForm.emailAddress" id="currentEmail" />
+					<c:out value="${anxUser.emailAddress}"></c:out>
+					<form:hidden path="anxUser.emailAddress" id="currentEmail" />
 				</div>
 				<div class="col-sm-4 text-right mar-t-b-10 h4">
 					<a href="#" data-toggle="modal" data-target="#sendEmailCode"
-						onClick="clearErrorMessage();">${anxUserForm.emailAddress.length() >0 ? 'Change Email':'Add Email' }</a>
+						onClick="clearErrorMessage();">${anxUser.emailAddress.length() >0 ? 'Change Email':'Add Email' }</a>
 				</div>
 			</div>
 			<div class="col-sm-12 bg-info mar-bot-0">
@@ -44,12 +44,12 @@
 					<strong>Phone</strong>
 				</div>
 				<div class="col-sm-5 text-left mar-t-b-10 h4">
-					<form:hidden path="anxUserForm.phoneNumber" id="currentPhone" />
-					<c:out value="${anxUserForm.phoneNumber}"></c:out>
+					<form:hidden path="anxUser.phoneNumber" id="currentPhone" />
+					<c:out value="${anxUser.phoneNumber}"></c:out>
 				</div>
 				<div class="col-sm-4 text-right mar-t-b-10 h4">
 					<a href="#" data-toggle="modal" data-target="#phoneVerification"
-						onClick="clearErrorMessage();">${anxUserForm.phoneNumber.length() >0 ? 'Change Phone':'Add Phone' }</a>
+						onClick="clearErrorMessage();">${anxUser.phoneNumber.length() >0 ? 'Change Phone':'Add Phone' }</a>
 				</div>
 			</div>
 			<div class="col-sm-12 bg-info mar-bot-0">
@@ -68,7 +68,7 @@
 				id="collapseExample">
 				<div class="panel panel-default ">
 					<form:form id="contact-us" method="POST"
-						modelAttribute="anxUserForm" action="changePassword">
+						modelAttribute="anxUser" action="changePassword">
 						<div class="${msgCss }">${msgDetails }</div>
 						<div class="panel-heading">
 							<form:password path="password" required="required"
@@ -90,101 +90,10 @@
 		</div>
 	</div>
 	<div class="col-sm-3 clearfix row ">&nbsp</div>
-
-	<div class="modal fade" role="dialog" id="sendEmailCode">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-					<h4 class="modal-title">
-						<span class="glyphicon glyphicon-envelope mar-r-10"></span>Email
-						Verification
-					</h4>
-				</div>
-
-				<div class="modal-body">
-					<div id="errorMessage"></div>
-					<p>
-						<input type="text" placeholder="Email Address"
-							class="my-account-input" id="emailVerificationAddress">
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary"
-						onclick="sendEmailVerification();">
-						<span class="glyphicon glyphicon-send mar-r-10"></span>Send
-					</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	<div class="modal fade" role="dialog" id="phoneVerification">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">
-						<span class="glyphicon glyphicon-phone mar-r-10"></span> Phone
-						Verification
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div id="errorMessagePhone"></div>
-					<p>
-						<form:select
-							class="selectpicker phone-code-width my-account-input"
-							data-live-search="true" path="anxUserForm.phoneCode.phoneCodeId"
-							id="phoneCodeNameId">
-							<form:options items="${countryCodeList}" itemValue="phoneCodeId"
-								itemLabel="phoneCodeCountry" />
-						</form:select>
-						<input type="text" placeholder="Mobile number"
-							class="my-account-input phone-number-width" id="phoneNumber">
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary"
-						onclick="updatePhoneNumber();">Send</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	<div class="modal fade" role="dialog" id="codeVerification">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">
-						<span class="glyphicon glyphicon-envelope mar-r-10"></span>Enter
-						verification code
-					</h4>
-				</div>
-				<div class="modal-body">
-					<p>
-						<input type="text" placeholder="Verification Code"
-							class="my-account-input" id="verificationCode">
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary"
-						onclick="enterVerificationCode();">Change Email</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
+	<jsp:include page="../modal/sendEmailCodeModal.jsp"></jsp:include>
+	<jsp:include page="../modal/sendPhoneCodeModal.jsp"></jsp:include>
+	<jsp:include page="../modal/codeVerificationModal.jsp"></jsp:include>
+	
 
 </body>
 </html>

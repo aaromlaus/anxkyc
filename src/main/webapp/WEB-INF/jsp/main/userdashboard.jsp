@@ -12,6 +12,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/form.css">
+<script src="/js/myaccount.js"></script>
 </head>
 <jsp:include page="../common/header.jsp"></jsp:include>
 <jsp:include page="../common/headermenu.jsp"></jsp:include>
@@ -107,16 +108,17 @@
 										<td colspan="5 " class="container bg-grey-pad-6">
 											<div class="col-sm-3">
 												<div class="text-center">
-													<c:if test="${anxUser.emailAddress.length() > 0 && anxUser.phoneNumber.length() > 0}">
-														<span
-															class="glyphicon  glyphicon-envelope font-size-60">
+													<c:if
+														test="${anxUser.emailAddress.length() > 0 && anxUser.phoneNumber.length() > 0}">
+														<span class="glyphicon  glyphicon-envelope font-size-60">
 
 														</span>
 														<br />
-														<p>Email Verification</p>														
-															<a class="btn btn-success mar-top-10">Completed</a>														
+														<p>Email Verification</p>
+														<a class="btn btn-success mar-top-10">Completed</a>
 													</c:if>
-													<c:if test="${anxUser.emailAddress.length() == 0 || anxUser.phoneNumber.length() == 0}">
+													<c:if
+														test="${anxUser.emailAddress.length() == 0 || anxUser.phoneNumber.length() == 0}">
 														<span
 															class="glyphicon  ${anxUser.emailAddress.length() >0 ? 'glyphicon-phone':'glyphicon-envelope'} font-size-60">
 
@@ -129,7 +131,9 @@
 														</c:if>
 														<c:if
 															test="${!(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
-															<a class="btn btn-primary mar-top-10">Verify</a>
+															<a class="btn btn-primary mar-top-10" data-toggle="modal"
+																data-target="${anxUser.emailAddress.length() > 0 ? '#phoneVerification':'#sendEmailCode'}"
+																onClick="clearErrorMessage();">Verify</a>
 														</c:if>
 													</c:if>
 												</div>
@@ -199,7 +203,9 @@
 	</div>
 
 </div>
-
+<jsp:include page="../modal/sendEmailCodeModal.jsp"></jsp:include>
+<jsp:include page="../modal/sendPhoneCodeModal.jsp"></jsp:include>
+<jsp:include page="../modal/codeVerificationModal.jsp"></jsp:include>
 <script>
 	$(document).on('click', '#close-preview', function() {
 		$('.image-preview').popover('hide');
