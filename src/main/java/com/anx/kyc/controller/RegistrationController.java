@@ -93,10 +93,10 @@ public class RegistrationController {
 		
 		if(anxUser.getEmailAddress() != null && !anxUser.getEmailAddress().isEmpty()) {
 			userService.prepareAndSendUserRegistrationEmail(anxUser, verificationCode, request);
-			userVerService.addUserVerification(anxUser.getUserId());
+			
 			successMessage = amHelper.get("registration.email.success");
 		}
-		
+		userVerService.addUserVerification(anxUser.getUserId());
 		model.put("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		model.put("msgDetails", successMessage);
 		

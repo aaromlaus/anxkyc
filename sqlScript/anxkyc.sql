@@ -8,7 +8,7 @@ UNIQUE(role_name)
 CREATE TRIGGER role_id_trigger
   BEFORE INSERT ON role
   FOR EACH ROW
-  SET new.role_id = CONCAT('RLE', DATE_FORMAT(CURRENT_TIMESTAMP, '%m%d%Y%H%i'), new.id)
+  SET new.role_id = CONCAT('RLE', DATE_FORMAT(CURRENT_TIMESTAMP, '%m%d%Y%H%i'), new.role_id);
 
 
 CREATE TABLE user_level(
@@ -89,7 +89,7 @@ CREATE TABLE user_verification (
 CREATE TRIGGER user_ver_id_trigger
   BEFORE INSERT ON user_verification
   FOR EACH ROW
-  SET new.user_ver_id = CONCAT('UV', DATE_FORMAT(CURRENT_TIMESTAMP, '%m%d%Y%H%i'), new.id)
+  SET new.user_ver_id = CONCAT('UV', DATE_FORMAT(CURRENT_TIMESTAMP, '%m%d%Y%H%i'), new.user_ver_id);
 
 INSERT INTO phone_code(phone_code_name,country)
 VALUES
