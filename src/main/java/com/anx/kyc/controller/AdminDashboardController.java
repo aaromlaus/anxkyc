@@ -11,7 +11,7 @@ import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.service.UserService;
 
 @Controller
-@RequestMapping("/administrator")
+@RequestMapping(value="${url.administrator}")
 public class AdminDashboardController {
 	
 	@Autowired

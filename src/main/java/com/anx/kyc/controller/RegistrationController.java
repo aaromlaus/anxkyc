@@ -26,7 +26,7 @@ import com.anx.kyc.service.UserVerificationService;
 import com.anx.kyc.validator.RegistrationFormValidator;
 
 @Controller
-@RequestMapping("/signup")
+@RequestMapping(value="${url.signup}")
 @SessionAttributes
 public class RegistrationController {
 

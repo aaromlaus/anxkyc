@@ -26,7 +26,7 @@ import com.anx.kyc.service.UserService;
 import com.anx.kyc.util.AnxUtil;
 
 @Controller
-@RequestMapping("/profile")
+@RequestMapping(value="${url.profile}")
 public class UserDashboardController {
 
 	@Autowired

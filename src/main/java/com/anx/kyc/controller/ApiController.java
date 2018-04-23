@@ -19,7 +19,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value="${url.api}")
 public class ApiController {
 	@Autowired
 	UserService userService;
