@@ -57,6 +57,7 @@ public class AnxUtil {
 			byte imageData[] = new byte[(int) file.length()];
 			imageInFile.read(imageData);
 			base64Image = Base64.getEncoder().encodeToString(imageData);
+
 		} catch (FileNotFoundException e) { 
 			
 		} catch (IOException ioe) { 
@@ -69,4 +70,5 @@ public class AnxUtil {
  		return anxUser.getFirstName().concat(" ").concat(anxUser.getMiddleName().concat(" ").concat(anxUser.getLastName()));
  	}
  	
+
 }

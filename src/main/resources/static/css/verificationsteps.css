@@ -1,0 +1,123 @@
+
+.stepwizard-step p {
+    margin-top: 10px;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 50%;
+    position: relative;
+}
+
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 60px;
+    background-color: #e4e4e4;
+    z-order: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+	width: 90px;
+    height: 45px; /* as the half of the width */
+    border-top-left-radius: 58px;  /* 100px of height + 10px of border */
+    border-top-right-radius: 58px; /* 100px of height + 10px of border */
+    border-bottom: 0;
+}
+
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.stepwizard-step p {
+	color: #337ab7;
+	font-weight: 600;
+}
+
+.stepwizard-step{
+    width: 33.33333%;
+}
+
+a.btn-primary,a.btn-primary:link,a.btn-primary:hover,a.btn-primary:active,a.btn-primary:visited,a.btn-primary:focus
+,a.btn-default,a.btn-default:link,a.btn-default:hover,a.btn-default:active,a.btn-default:visited,a.btn-default:focus
+,a.btn,a.btn:link,a.btn:hover,a.btn:active,a.btn:visited,a.btn:focus
+,a.btn-circle,a.btn-circle:link,a.btn-circle:hover,a.btn-circle:active,a.btn-circle:visited,a.btn-circle:focus{
+    background-color: #e4e4e4;
+    border-color: #e4e4e4;
+    text-decoration: line-through; !important;
+    pointer-    
+}
+
+
+.arrow-left-div:before{    
+    display: table-cell; 
+ 	top: 14px;  
+    text-align: center;
+   	bottom: 0;
+  	position: absolute;
+    content: " ";
+    width: 100%;
+    height: 58px;
+    padding: 0px;
+    margin: 0px;
+    z-order: 0;
+    border: 1px solid #f1f1f1;
+}
+
+.arrow-left-div:after, .arrow-left-div:before {
+    content:"";
+    display:inline-block;        
+    border-width: 36px;
+    border-style: solid;
+    width: 0px;
+    height: 0px;
+    left: 100%;
+    top: -1px;        
+    position: absolute;        
+    z-index: 1;
+}
+
+.arrow-left-div:after, .arrow-left-div:before {
+    border-color: transparent transparent transparent #f1f1f1;
+}
+
+.arrow-left-div:after {
+	margin-top:9px;
+}
+
+.arrow-left-div:before {
+    border-width: 30px;
+    display: block;
+    border-color: transparent transparent transparent #e4e4e4;
+    z-index: 2;
+    top:1px;
+	margin-top: 13px;
+}
+
+.container{
+	
+	margin: auto;
+	background-color: #f1f1f1;
+	padding: 10px 20px 20px 20px;
+	border-radius: 5px;
+}
+
+.verification-form{
+	background: #e4e4e4;
+}
+
+
+
+

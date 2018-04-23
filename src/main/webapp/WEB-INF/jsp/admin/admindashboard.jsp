@@ -143,5 +143,6 @@
 	}
 	
 	$(".icon_info").tooltip();
+
 </script>
 

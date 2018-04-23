@@ -207,6 +207,10 @@ footer {
 	margin-top: 7%;
 }
 
+.modal-dialog {
+	margin-top: 7%;
+}
+
 a#approveBtn:link, a#approveBtn:visited, a#approveBtn:active  {
     color: #4CBB17;
 }
