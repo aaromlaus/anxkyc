@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 
 <!doctype html>
@@ -20,7 +21,7 @@
 	
 <div class="inner contact">
 	<div class="forgotContainer2">
-		<h1>Enter Verification Code</h1>
+		<h1><spring:message code="kyc.verification.code.title"/></h1>
 		<div class="message">
 			<c:if test="${not empty param.errorMsg}">
 				<div class="alert alert-danger">${param.errorMsg}</div>
@@ -30,7 +31,7 @@
 		<form:form method="POST" modelAttribute="command" action="/doVerify" >
 			<form:input path="code" class="field" placeholder="Verification Code" />
 			<input class="btn" type="submit" value="VERIFY"/>
-			<label>Don't have an Account? <a href="/signup/">Sign Up</a></label>
+			<label><spring:message code="kyc.dont.have.account.msg"/> <a href="/signup/"><spring:message code="kyc.label.signup"/></a></label>
 		</form:form>
 	</div>	
 	</div>

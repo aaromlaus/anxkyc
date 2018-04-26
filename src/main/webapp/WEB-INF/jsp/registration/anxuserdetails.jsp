@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <head>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
@@ -54,7 +55,7 @@
 </div>
 
 <center>
-	Already have an account? <a href="../login" target="blank">Sign in </a>
+	Already have an account? <a href="../login" target="blank"><spring:message code="kyc.btn.signin"/> </a>
 </center>
 
 <script>

@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 
 <!doctype html>
@@ -22,19 +23,19 @@
 <div class="inner contact">
 	<div class="forgotContainer2">
 		<!-- <h3>ANX Login</h3> -->
-		<h1>Forgot your password?</h1>
+		<h1><spring:message code="kyc.forgot.password"/></h1>
 		<div class="message">
 			<c:if test="${not empty param.errorMsg}">
 				<div class="alert alert-danger">${param.errorMsg}</div>
 			</c:if>
 		</div>
 		<div class="forgotContainer">
-			<span class="reset-password__note">Please enter your email or mobile number, and we'll send you a reset code</span>
+			<span class="reset-password__note"><spring:message code="kyc.reset.password.msg"/></span>
 		</div>
 		<form:form method="POST" modelAttribute="command" action="/sendCode" >
 			<form:input path="username" class="field" placeholder="Email or Mobile Number" />
 			<input class="btn" type="submit" value="SEND CODE"/>
-			<label>Don't have an Account? <a href="/signup/">Sign Up</a></label>
+			<label><spring:message code="kyc.reset.password.msg"/> <a href="/signup/"><spring:message code="kyc.label.signup"/></a></label>
 		</form:form>
 	</div>	
 	</div>

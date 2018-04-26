@@ -146,6 +146,12 @@ h3{
 	border-right: 1px solid #ccc;
 }
 
+select{
+    margin-bottom: 2%;
+    padding: 1.5%;
+    border-radius: 4px;
+}
+
 
 
 

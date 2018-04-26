@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <div class="modal fade" role="dialog" id="sendEmailCode">
 		<div class="modal-dialog">
 
@@ -7,8 +8,7 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 
 					<h4 class="modal-title">
-						<span class="glyphicon glyphicon-envelope mar-r-10"></span>Email
-						Verification
+						<span class="glyphicon glyphicon-envelope mar-r-10"></span><spring:message code="modal.email.verification"/>
 					</h4>
 				</div>
 
@@ -20,10 +20,10 @@
 					</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="kyc.btn.cancel"/></button>
 					<button type="button" class="btn btn-primary"
 						onclick="sendEmailVerification();">
-						<span class="glyphicon glyphicon-send mar-r-10"></span>Send
+						<span class="glyphicon glyphicon-send mar-r-10"></span><spring:message code="kyc.btn.send"/>
 					</button>
 				</div>
 			</div>

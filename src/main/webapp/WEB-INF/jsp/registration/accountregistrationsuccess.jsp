@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -32,11 +33,11 @@
 		<div class="forgotContainer pad-bot-30">
 			<span class="glyphicon glyphicon-ok-circle success" ></span>
 			<br>
-			<span class="reset-password__note">Your account has been created.</span> 
+			<span class="reset-password__note"><spring:message code="kyc.account.registration.msg1"/></span> 
 			<br>
-			<span class="reset-password__note">A verification link has been sent to your email address.</span>
+			<span class="reset-password__note"><spring:message code="kyc.account.registration.msg2"/></span>
 		
-			<button class="btn-sign-in"  onclick="login()">SIGN IN</button>
+			<button class="btn-sign-in"  onclick="login()"><spring:message code="kyc.label.signin"/></button>
 		</div>
 	</div>	
 	</div>

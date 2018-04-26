@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 
 <div class="row">
 	<div class="col-sm-12">
@@ -18,7 +20,7 @@
 				</c:if>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="/logout" id="logoutId"><span
-							class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+							class="glyphicon glyphicon-log-out"></span> <spring:message code="kyc.label.logout"/></a></li>
 				</ul>
 			</div>
 		</nav>

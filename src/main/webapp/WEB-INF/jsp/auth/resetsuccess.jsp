@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 
 <!doctype html>
@@ -24,7 +25,7 @@
 	
 <div class="inner contact">
 	<div class="forgotContainer2">
-		<h1>Password Reset Complete</h1>
+		<h1><spring:message code="kyc.reset.password.complete"/></h1>
 		<div class="message">
 			<c:if test="${not empty param.errorMsg}">
 				<div class="alert alert-danger">${param.errorMsg}</div>
@@ -33,11 +34,11 @@
 		<div class="forgotContainer pad-bot-30">
 			<span class="glyphicon glyphicon-ok-circle success" ></span>
 			<br>
-			<span class="reset-password__note">Your password has been successfully reset.</span> 
+			<span class="reset-password__note"><spring:message code="kyc.reset.password.success"/></span> 
 			<br>
-			<span class="reset-password__note">Please login using your latest credentials.</span>
+			<span class="reset-password__note"><spring:message code="kyc.reset.password.login"/></span>
 		
-			<button class="btn-sign-in"  onclick="login()">SIGN IN</button>
+			<button class="btn-sign-in"  onclick="login()"><spring:message code="kyc.label.signin"/></button>
 		</div>
 	</div>	
 	</div>

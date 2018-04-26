@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,16 +16,15 @@
 <body align="center">
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<div class="jumbotron text-xs-center">
-		<h1 class="display-3">Thank you!</h1>
+		<h1 class="display-3"><spring:message code="kyc.label.thankyou"/>!</h1>
 		<p class="lead">${emailConfirmMsg }</p>
 		<hr>
 		<p>
-			Having trouble? <a href="#">Contact us</a>
+			<spring:message code="kyc.label.trouble"/> <a href="#"><spring:message code="kyc.label.contactus"/></a>
 		</p>
 		<p class="lead">
 			<a class="btn btn-primary btn-sm"
-				href="../login" role="button">Continue to
-				login</a>
+				href="../login" role="button"><spring:message code="kyc.email.continue.login"/></a>
 		</p>
 	</div>
 </body>

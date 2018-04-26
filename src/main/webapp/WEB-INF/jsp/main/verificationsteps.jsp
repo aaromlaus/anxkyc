@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,6 +12,8 @@
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/form.css">
 <script src="/js/verificationsteps.js"></script>
+	
+<title><spring:message code="kyc.verification.steps.title"/></title>
 </head>
 
   <body>
@@ -33,19 +36,19 @@
         <a href="#step-1" type="button" class="btn1 btn-primary1 btn-circle">
         	<i id="step1btn" class="fa fa-question-circle" style="font-size:55px;color:#337ab7"></i>
         </a>
-        <p>General</p>
+        <p><spring:message code ="kyc.label.general"/></p>
       </div>
       <div class="stepwizard-step arrow-left-div">
         <a href="#step-2" type="button" class="btn1 btn-default1 btn-circle disabledLink">
 			<i id="step2btn"  class="fa fa-money" style="font-size:50px;color:#337ab7"></i>
         </a>
-        <p class="side-border">Source of funds</p>
+        <p class="side-border"><spring:message code ="kyc.label.source"/></p>
       </div>
       <div class="stepwizard-step ">
         <a href="#step-3" type="button" class="btn1 btn-default1 btn-circle disabledLink">
 			<i id="step3btn"  class="fa fa-id-card-o" style="font-size:45px;color:#337ab7"></i>
         </a>
-        <p>ID Upload</p>
+        <p><spring:message code ="kyc.label.id.upload"/></p>
       </div>
     </div>
   </div>
@@ -54,15 +57,15 @@
     <div class="row setup-content" id="step-1">
       <div class="col-xs-12">
         <div class="col-md-6 col-div">
-          <h3> General</h3>
+          <h3> <spring:message code ="kyc.label.general"/></h3>
           <br>
           <div class="form-group">
-            <label class="control-label">Gender</label><br>
-              <input type="radio" required="required"  name="gender" value="male" checked> Male
-  			  <input type="radio" required="required"  name="gender" value="female"> Female
+            <label class="control-label"><spring:message code ="kyc.label.gender"/></label><br>
+              <input type="radio" required="required"  name="gender" value="male" checked> <spring:message code ="kyc.label.gender.male"/>
+  			  <input type="radio" required="required"  name="gender" value="female"> <spring:message code ="kyc.label.gender.female"/>
           </div>
           <div class="form-group">
-            <label class="control-label">Nationality</label>
+            <label class="control-label"><spring:message code="kyc.label.nationality"/></label>
             <select name="nationality" required="required">
 			    <option value="">Please select an option</option>
 			    <option value="Philippines">Philippines</option>
@@ -72,21 +75,21 @@
 			  </select>
           </div>
           <div class="form-group">
-            <label class="control-label">Birth date</label>
+            <label class="control-label"><spring:message code ="kyc.label.birthdate"/></label>
             <input  type="date" required="required" class="form-control">
           </div>
       </div>
     </div>
-      <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+      <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"><spring:message code ="kyc.btn.next"/></button>
     </div>
     <div class="row setup-content" id="step-2">
       <div class="col-xs-12">
         <div class="col-md-12">
-          <h3> Source of funds</h3>
+          <h3> <spring:message code="kyc.label.source"/></h3>
           <br>
           <div class="col-xs-6 col-div">
           <div class="form-group">
-            <label class="control-label">Employment Status</label><br>
+            <label class="control-label"><spring:message code="kyc.label.employment.status"/></label><br>
               <input type="radio" required="required"  name="gender" value="employed" checked> Employed
   			  <input type="radio" required="required"  name="gender" value="selfemployed"> Self-employed
               <input type="radio" required="required"  name="gender" value="retired" checked> Retired
@@ -94,7 +97,7 @@
               <input type="radio" required="required"  name="gender" value="student" checked> Student
           </div>
           <div class="form-group">
-            <label class="control-label">Industry</label>
+            <label class="control-label"><spring:message code="kyc.label.industry"/></label>
                <select name="industry" required="required">
 			    <option value="">Please select an option</option>
 			    <option value="accounting_and_finance">Accounting and Finance</option>
@@ -126,15 +129,15 @@
           
           <div class="col-xs-6">
           <div class="form-group">
-            <label class="control-label">Title or Position</label>
+            <label class="control-label"><spring:message code="kyc.label.title.position"/></label>
             <input type="text" placeholder="Title | Position" required="required" class="form-control">
           </div>
           <div class="form-group">
-            <label class="control-label">Name of Employer</label>
+            <label class="control-label"><spring:message code="kyc.label.employer.name"/></label>
             <input type="text" placeholder="Name of Employer" required="required" class="form-control">
           </div>
           <div class="form-group">
-            <label class="control-label">Fund Source?</label>
+            <label class="control-label"><spring:message code="kyc.label.fund.source"/></label>
             <select name="fundsource" required="required">
 			    <option value="">Please select an option</option>
 			    <option value="allowance">Allowance</option>
@@ -148,19 +151,19 @@
           </div>
           
           </div>
-          <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
-          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+          <button class="btn btn-primary prevBtn btn-lg pull-left" type="button"><spring:message code="kyc.btn.prev"/></button>
+          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"><spring:message code="kyc.btn.next"/></button>
         </div>
       </div>
     </div>
     <div class="row setup-content" id="step-3">
       <div class="col-xs-12">
         <div class="col-md-12">
-          <h3> Upload ID</h3>
+          <h3> <spring:message code="kyc.label.upload.id"/></h3>
           <br>
           <div class="col-xs-6 col-div">
           <div class="form-group">
-            <label class="control-label">ID Type</label><br>
+            <label class="control-label"><spring:message code="kyc.label.id.type"/></label><br>
 	            <select name="idType" required="required">
 	              	<option value="" disabled="disabled">Government Issued ID</option>
 	                <option value="afp">Armed Forces of the Philippines (AFP) ID</option>
@@ -187,11 +190,11 @@
           </div>
           
           <div class="form-group">
-            <label class="control-label">Expiration date</label>
+            <label class="control-label"><spring:message code="kyc.label.id.expiration"/></label>
             <input type="text" placeholder="Expiration date" required="required" class="form-control">
           </div>
           <div class="form-group">
-            <label class="control-label">ID number</label>
+            <label class="control-label"><spring:message code="kyc.label.id.number"/></label>
             <input type="text" placeholder="ID number" required="required" class="form-control">
           </div>
          </div> 
@@ -202,8 +205,8 @@
           
         </div>
         </div>
-          <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
-          <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
+          <button class="btn btn-primary prevBtn btn-lg pull-left" type="button"><spring:message code="kyc.btn.prev"/></button>
+          <button class="btn btn-success btn-lg pull-right" type="submit"><spring:message code="kyc.btn.submit"/></button>
       </div>
     </div>
   </form>

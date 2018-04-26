@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 
 <!doctype html>
@@ -31,7 +32,7 @@
 			<form:password path="password" class="field" placeholder="Password" />
 			<form:password path="confirmPassword" class="field" placeholder="Confirm Password" />
 			<input class="btn" type="submit" value="RESET"/>
-			<label>Don't have an Account? <a href="/signup/">Sign Up</a></label>
+			<label><spring:message code="kyc.reset.password.msg"/> <a href="/signup/"><spring:message code="kyc.label.signup"/></a></label>
 		</form:form>
 	</div>	
 	</div>

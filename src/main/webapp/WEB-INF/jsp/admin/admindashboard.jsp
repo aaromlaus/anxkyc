@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <head>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -21,18 +22,18 @@
 	<table id="anxtable" class="table">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>Email Address</th>
-				<th>Mobile Number</th>
-				<th>User Level</th>
+				<th><spring:message code="kyc.label.id"/></th>
+				<th><spring:message code="kyc.label.name"/></th>
+				<th><spring:message code="kyc.label.email"/></th>
+				<th><spring:message code="kyc.label.mobilenumber"/></th>
+				<th><spring:message code="kyc.label.userlevel"/></th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:choose>
 				<c:when test="${empty userList }">
-					<tr><td colspan="6" align="center">Nothing to approve</td></tr>
+					<tr><td colspan="6" align="center"><spring:message code="list.no.results"/></td></tr>
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${userList }" var="user">
@@ -64,16 +65,15 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">
-						<span class="glyphicon glyphicon-envelope mar-r-10"></span>Email
-						Verification
+						<span class="glyphicon glyphicon-envelope mar-r-10"></span><spring:message code="modal.email.verification"/>
 					</h4>
 				</div>
 				<div class="modal-body">
 					<p><input type="text" placeholder="Email Address" class="my-account-input" id="emailVerificationAddress"></p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary" onclick="sendEmailVerification();">Send</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="kyc.btn.cancel"/></button>
+					<button type="button" class="btn btn-primary" onclick="sendEmailVerification();"><spring:message code="kyc.btn.send"/></button>
 				</div>
 			</div>
 
@@ -83,14 +83,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Image preview</h4>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><spring:message code="kyc.btn.close"/></span></button>
+        <h4 class="modal-title" id="myModalLabel"><spring:message code="modal.title.img.preview"/></h4>
       </div>
       <div class="modal-body">
         <img src="" id="imagepreview" style="width: 100%;" >
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="kyc.btn.close"/></button>
       </div>
     </div>
   </div>

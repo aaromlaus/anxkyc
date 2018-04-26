@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -32,11 +33,11 @@
 			<h4>Login Form</h4>
 			<form:input path="username" class="field" placeholder="Email address or Mobile Number" />
 			<form:password path="password" class="field" placeholder="Password" />
-			<button>Sign In</button>
+			<button><spring:message code="kyc.btn.signin"/></button>
 			<p class="message">
-				Not registered? <a href="/signup/">Create an account</a>
+				<spring:message code="kyc.login.not.registered"/> <a href="/signup/"><spring:message code="kyc.login.create.account"/></a>
 			</p>
-			<a id="forgotPasswordBtnId" class="btn" href="/forgotPassword">Forgot your password?</a>
+			<a id="forgotPasswordBtnId" class="btn" href="/forgotPassword"><spring:message code="kyc.forgot.password"/></a>
 		</form:form>
 	</div>
 	<script>

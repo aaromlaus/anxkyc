@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <head>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -30,7 +31,7 @@
 				<form:input path="emailAddress" required="required" class="form"
 					placeholder="Email Address" />
 				<div class="usernameChooserLink">
-					<a id="usePhonelinkId" href="#" onclick="myFunction();return false;">Sign up using Mobile Number </a>
+					<a id="usePhonelinkId" href="#" onclick="myFunction();return false;"><spring:message code="kyc.account.signup.phone"/> </a>
 				</div>
 			</div>
 			
@@ -41,7 +42,7 @@
 				 </form:select>
 				<form:input path="phoneNumber" class="form phone-number-width" placeholder="Mobile Number" />	
 				<div class="usernameChooserLink">
-					<a href="#" onclick="myFunction();return false;">Sign up using Email Address </a>
+					<a href="#" onclick="myFunction();return false;"><spring:message code="kyc.account.signup.email"/> </a>
 				</div>
 				
 			</div>	
