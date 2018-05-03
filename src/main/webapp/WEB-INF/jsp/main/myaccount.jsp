@@ -73,11 +73,11 @@
 						<div class="${msgCss }">${msgDetails }</div>
 						<div class="panel-heading">
 							<form:password path="password" required="required"
-								class="my-account-input" placeholder="Password" />
+								class="select-input" placeholder="Password" />
 						</div>
 						<div class="panel-heading">
 							<form:password path="confirmPassword" required="required"
-								class="my-account-input" placeholder="Confirm Password" />
+								class="select-input" placeholder="Confirm Password" />
 						</div>
 						<div class="panel-heading text-right">
 							<a data-toggle="collapse" href="#collapseExample" role="button"

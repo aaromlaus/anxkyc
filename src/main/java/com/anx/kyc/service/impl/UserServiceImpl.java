@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.anx.kyc.common.RoleType;
 import com.anx.kyc.common.UserLevelType;
+import com.anx.kyc.helper.AnxMessageHelper;
 import com.anx.kyc.helper.EmailHelper;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.PhoneCode;
@@ -68,6 +69,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserVerificationService uvService;
+	
+	@Autowired
+	private AnxMessageHelper amHelper;
 
 	private Gson gson = new Gson();
 
@@ -227,7 +231,7 @@ public class UserServiceImpl implements UserService {
 				&& AnxUtil.isValidEmail(requestJson.get("emailAddress").getAsString())) {
 			AnxUser duplicateUser = findByEmailAddress(requestJson.get("emailAddress").getAsString());
 			if (null != duplicateUser) {
-				return "Email Already Exists";
+				return amHelper.get("email.exists.error") ;
 			}
 			int code = emailService.sendChangeEmailVerificationCode(requestJson.get("emailAddress").getAsString());
 			session.getServletContext().setAttribute("myAccountCode", code);
@@ -270,10 +274,10 @@ public class UserServiceImpl implements UserService {
 				}
 				return "ok";
 			}
-			return "No user found";
+			return amHelper.get("no.user.found.error");
 
 		}
-		return "Incorrect code";
+		return amHelper.get("incorrect.code.error");
 	}
 
 	@Override
@@ -308,7 +312,7 @@ public class UserServiceImpl implements UserService {
 			ResponseEntity.ok("No user found");
 
 		}
-		return "Add phone number";
+		return amHelper.get("add.number.error");
 	}
 
 	@Override
