@@ -1,5 +1,7 @@
 package com.anx.kyc.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserIdentificationController {
 
 	@RequestMapping("/")
-	public String showIdentityVerificationPage() {
-		
+	public String showIdentityVerificationPage(Map<String, Object> model) {
 		return "main/identification";
+	}
+	
+	@RequestMapping("/steps")
+	public String showVerificationSteps() {
+		return "main/verificationsteps";
 	}
 	
 }

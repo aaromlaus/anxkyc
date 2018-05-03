@@ -11,6 +11,14 @@
     position: relative;
 }
 
+.stepwizard-row-single {
+	width: 100%;
+}
+
+.stepwizard-fixed-height {
+	height: 30%;
+}
+
 .stepwizard-row:before {
     top: 14px;
     bottom: 0;
