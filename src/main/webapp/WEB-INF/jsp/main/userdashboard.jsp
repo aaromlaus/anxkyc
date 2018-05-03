@@ -28,7 +28,9 @@
 				<h1>
 					Your Current Limits: <strong>${anxUser.userLevel.description}</strong>
 				</h1>
-
+				<form:hidden path="anxUser.emailAddress" id="currentEmail" />
+				<input type="hidden" value="userdashBoard" id="currentPage">				
+				<form:hidden path="anxUser.phoneNumber" id="currentPhone" />
 				<div class="clear"></div>
 				<div class="col-sm-12 bg-info">
 					<table class="table table-hover" id="levelTable">
@@ -92,7 +94,7 @@
 											<div class="col-sm-12 bg-grey-pad-6">
 												<div class="text-center">
 													<span
-														class="glyphicon ${anxUser.phoneNumber.length() >0 ? 'glyphicon-phone':'glyphicon-envelope'}  font-size-60">
+														class="glyphicon ${anxUser.phoneNumber.length() >0 ? 'glyphicon-phone':'glyphicon-envelope'}  font-size-60 ">
 
 													</span> <br />
 													<p class="mar-top-10">${anxUser.phoneNumber.length() >0 ? 'Phone Verification':'Email Verification'}</p>
@@ -107,7 +109,7 @@
 									<tr class="collapse out ${userLevels.userLevelId}"
 										id="${userLevels.userLevelId}">
 										<td colspan="5 " class="container bg-grey-pad-6">
-											<div class="col-sm-3">
+											<div class="col-sm-3 pad-l-r-0">
 												<div class="text-center">
 													<c:if
 														test="${anxUser.emailAddress.length() > 0 && anxUser.phoneNumber.length() > 0}">
@@ -115,7 +117,7 @@
 
 														</span>
 														<br />
-														<p>Email Verification</p>
+														<p class="mar-top-10">Email Verification</p>
 														<a class="btn btn-success mar-top-10">Completed</a>
 													</c:if>
 													<c:if
@@ -139,7 +141,7 @@
 													</c:if>
 												</div>
 											</div>
-											<div class="col-sm-3">
+											<div class="col-sm-4 pad-l-r-0">
 												<div class="text-center">
 													<span class="glyphicon glyphicon-user font-size-60">
 
@@ -156,7 +158,7 @@
 													</c:if>
 												</div>
 											</div>
-											<div class="col-sm-6">
+											<div class="col-sm-5 pad-l-r-0">
 												<form:form method="POST" action="/profile/upload/"
 													enctype="multipart/form-data">
 													<div class="level-2-grp">

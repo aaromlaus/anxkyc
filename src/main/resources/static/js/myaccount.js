@@ -4,6 +4,7 @@ function sendEmailVerification() {
 		"emailAddress" : jQuery("#emailVerificationAddress").val(),
 		"currentEmail" : jQuery("#currentEmail").val(),
 		"currentPhone" : jQuery("#currentPhone").val()
+
 	};
 	$.ajax({
 		url : '/api/sendEmailChangeCode',
@@ -32,7 +33,8 @@ function updatePhoneNumber() {
 		"phoneNumber" : jQuery("#phoneNumber").val(),
 		"phoneCodeId" : jQuery('#phoneCodeNameId').val(),
 		"currentEmail" : jQuery("#currentEmail").val(),
-		"currentPhone" : jQuery("#currentPhone").val()
+		"currentPhone" : jQuery("#currentPhone").val(),
+		"currentPage" : jQuery("#currentPage").val()
 	};
 	$.ajax({
 		url : '/api/changePhoneNumber',
@@ -47,11 +49,11 @@ function updatePhoneNumber() {
 			if (data.responseText === "ok") {
 				$('#codeVerification').modal('hide');
 				window.location.href = "/logout";
+			} else if (data.responseText === "userdashBoard") {
+				window.location.reload();
 			} else {
 				console.log(data.responseText);
-				$('#errorMessagePhone').html(
-						"<div class='alert alert-danger'>Error: "
-								+ data.responseText + "</div>");
+				
 			}
 		}
 	});
@@ -60,7 +62,8 @@ function enterVerificationCode() {
 	var secretCode = {
 		"verificationCode" : jQuery("#verificationCode").val(),
 		"currentEmail" : jQuery("#currentEmail").val(),
-		"currentPhone" : jQuery("#currentPhone").val()
+		"currentPhone" : jQuery("#currentPhone").val(),
+		"currentPage" : jQuery("#currentPage").val()
 	};
 	$.ajax({
 		url : '/api/changeEmailCode',
@@ -75,8 +78,13 @@ function enterVerificationCode() {
 			if (data.responseText === "ok") {
 				$('#codeVerification').modal('hide');
 				window.location.href = "/logout";
+			} else if (data.responseText === "userdashBoard") {
+				window.location.reload();
 			} else {
-				alert(data.responseText);
+				
+				$('#errorCodeVerification').html(
+						"<div class='alert alert-danger'>Error: "
+								+ data.responseText + "</div>");
 			}
 		}
 	});
@@ -85,5 +93,5 @@ function enterVerificationCode() {
 function clearErrorMessage() {
 	$('#errorMessage').html("");
 	$('#errorMessagePhone').html("");
-	
+
 }

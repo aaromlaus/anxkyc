@@ -7,10 +7,11 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">
-						<span class="glyphicon glyphicon-envelope mar-r-10"></span><spring:message code="kyc.verification.code.title"/>
+						<span class="glyphicon glyphicon-lock mar-r-10"></span><spring:message code="kyc.verification.code.title"/>
 					</h4>
 				</div>
 				<div class="modal-body">
+					<div id="errorCodeVerification"></div>
 					<p>
 						<input type="text" placeholder="Verification Code"
 							class="my-account-input" id="verificationCode">

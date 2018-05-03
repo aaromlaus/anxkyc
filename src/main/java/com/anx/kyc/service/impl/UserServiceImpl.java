@@ -50,27 +50,27 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserLevelRepository ulRepository;
-	
+
 	@Autowired
 	private PhoneCodeRepository phoneCodeRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
 	private UserImageRepository uIrepository;
-	
+
 	@Autowired
 	private EmailService emailService;
 
 	@Autowired
 	private EmailHelper emailHelper;
-	
+
 	@Autowired
 	private UserVerificationService uvService;
-	
+
 	private Gson gson = new Gson();
-	
+
 	@Override
 	public int saveUser(AnxUser user, boolean isEncodePassword) {
 		if (isEncodePassword) {
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 		auRepository.flush();
 		return anx.getId();
 	}
-	
+
 	@Override
 	public int saveUser(AnxUser user) {
 		return saveUser(user, false);
@@ -140,35 +140,35 @@ public class UserServiceImpl implements UserService {
 	public void saveUserImage(UserImage image) {
 		uIrepository.save(image);
 	}
-	
+
 	@Override
 	public AnxUser findByVerificationCode(String verificationCode) {
 		return auRepository.findByVerificationCode(verificationCode);
 	}
-	
+
 	@Override
 	public AnxUser verifyAndActivateUser(String verificationCode) {
-		if(verificationCode != null && !verificationCode.isEmpty()) {
+		if (verificationCode != null && !verificationCode.isEmpty()) {
 			AnxUser user = findByVerificationCode(verificationCode);
-			if(user != null) {
+			if (user != null) {
 				user.setActive(true);
 				user.setVerificationCode("");
 				saveUser(user, false);
 				return user;
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	@Override
 	public String generateandSetVerificationCode(AnxUser anxUser) {
 		String verificationCode = UUID.randomUUID().toString();
 		anxUser.setVerificationCode(verificationCode);
-		
+
 		return verificationCode;
 	}
-	
+
 	@Override
 	public String saveUserDetails(AnxUser anxUser) {
 		anxUser.setRole(getRole(RoleType.USER));
@@ -176,30 +176,31 @@ public class UserServiceImpl implements UserService {
 		if (null != anxUser && null != anxUser.getPhoneCode() && null != anxUser.getPhoneCode().getPhoneCodeId()) {
 			anxUser.setPhoneCode(findPhoneCodeById(anxUser.getPhoneCode().getPhoneCodeId()));
 		}
-		
+
 		int id = saveUser(anxUser, true);
 		String userId = AnxUtil.generateId("ANX", id);
-		
+
 		anxUser.setUserId(userId);
 		saveUser(anxUser);
-		
+
 		return userId;
 	}
-	
+
 	@Override
-	public void prepareAndSendUserRegistrationEmail(AnxUser anxUser, String verificationCode, HttpServletRequest request) {
+	public void prepareAndSendUserRegistrationEmail(AnxUser anxUser, String verificationCode,
+			HttpServletRequest request) {
 		// Prepare email verification link
 		String emailLink = AnxUtil.getRequestPath(request) + "/signup/verify?details=" + verificationCode;
 		Map<String, String> emailRegistrationParam = new HashMap<String, String>();
 		emailRegistrationParam.put("verificationCode", emailLink);
-		
+
 		// Send email
 		String emailContent = emailHelper.buildUserSignupVerificationEmailContent(emailRegistrationParam);
 		List<String> emailToList = new ArrayList<String>();
 		emailToList.add(anxUser.getEmailAddress());
 		emailService.sendEmail(emailToList, "Complete your Signup", emailContent);
 	}
-	
+
 	@Override
 	public AnxUser findByEmailAddress(String emailAddress) {
 		return auRepository.findByEmailAddress(emailAddress);
@@ -209,14 +210,14 @@ public class UserServiceImpl implements UserService {
 	public AnxUser findByPhoneNumber(String phoneNumber) {
 		return auRepository.findByPhoneNumber(phoneNumber);
 	}
-	
+
 	@Override
 	public AnxUser getLoggedInUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		return findByEmailAddressOrPhoneNumber(currentPrincipalName);
 	}
-	
+
 	@Override
 	public String sendEmailChangeCode(String requestBody, HttpSession session) {
 		JsonElement element = gson.fromJson(requestBody, JsonElement.class);
@@ -256,19 +257,23 @@ public class UserServiceImpl implements UserService {
 			}
 			AnxUser user = findByEmailAddressOrPhoneNumber(userNamePhone);
 			if (null != user) {
-				
+
 				user.setEmailAddress(String.valueOf(session.getServletContext().getAttribute("myAccountEmail")));
 				checkAndUpdateLevel2Completion(user);
-				
+
 				saveUser(user, false);
 				session.getServletContext().removeAttribute("myAccountCode");
 				session.getServletContext().removeAttribute("myAccountEmail");
+				if (null != requestJson.get("currentPage") && !requestJson.get("currentPage").isJsonNull()
+						&& !requestJson.get("currentPage").getAsString().equals("")) {
+					return requestJson.get("currentPage").getAsString();
+				}
 				return "ok";
 			}
 			return "No user found";
 
 		}
-		return "ok";
+		return "Incorrect code";
 	}
 
 	@Override
@@ -280,11 +285,11 @@ public class UserServiceImpl implements UserService {
 				return "Phone Number Already Exists";
 			}
 			String userNamePhone = null;
-			if (!requestJson.get("currentPhone").isJsonNull()
+			if (null != requestJson.get("currentPhone") && !requestJson.get("currentPhone").isJsonNull()
 					&& !requestJson.get("currentPhone").getAsString().equals("")) {
 				userNamePhone = requestJson.get("currentPhone").getAsString();
 			}
-			if (!requestJson.get("currentEmail").isJsonNull()
+			if (null != requestJson.get("currentEmail") && !requestJson.get("currentEmail").isJsonNull()
 					&& !requestJson.get("currentEmail").getAsString().equals("")) {
 				userNamePhone = requestJson.get("currentEmail").getAsString();
 			}
@@ -294,6 +299,10 @@ public class UserServiceImpl implements UserService {
 				user.setPhoneCode(findPhoneCodeById(Long.valueOf(requestJson.get("phoneCodeId").getAsString())));
 				checkAndUpdateLevel2Completion(user);
 				saveUser(user, false);
+				if (null != requestJson.get("currentPage") && !requestJson.get("currentPage").isJsonNull()
+						&& !requestJson.get("currentPage").getAsString().equals("")) {
+					return requestJson.get("currentPage").getAsString();
+				}
 				return "ok";
 			}
 			ResponseEntity.ok("No user found");
@@ -301,26 +310,26 @@ public class UserServiceImpl implements UserService {
 		}
 		return "Add phone number";
 	}
-	
+
 	@Override
 	public void updateAnxUserLevel(String userId, String status) {
 		AnxUser user = getUserById(userId);
-		if(status.equalsIgnoreCase("approve")) {
+		if (status.equalsIgnoreCase("approve")) {
 			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_2));
 		} else if (status.equalsIgnoreCase("reject")) {
 			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_1));
 		}
 		saveUser(user, false);
 	}
-	
+
 	public AnxUser getAnxUserById(int id) {
 		return auRepository.findById(id);
 	}
-	
+
 	private void checkAndUpdateLevel2Completion(AnxUser user) {
-		if(uvService.checkLevelCompletion(UserLevelType.LEVEL_2, user.getUserId())) {
+		if (uvService.checkLevelCompletion(UserLevelType.LEVEL_2, user.getUserId())) {
 			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_2_PENDING));
 		}
 	}
-	
+
 }

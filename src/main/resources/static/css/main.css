@@ -251,3 +251,12 @@ a#previewBtn:hover {
 .mar-top-10{
 	margin-top: 10px;
 }
+
+.pad-l-r-0 {
+	padding-right: 0px;
+	padding-left: 0px;	
+}
+
+.mar-top-5 {
+	margin-top: 5px;
+}
