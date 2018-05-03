@@ -90,13 +90,13 @@
           <div class="col-xs-6 col-div">
           <div class="form-group">
             <label class="control-label"><spring:message code="kyc.label.employment.status"/></label><br>
-              <input type="radio" required="required"  name="gender" value="employed" checked> Employed
-  			  <input type="radio" required="required"  name="gender" value="selfemployed"> Self-employed
-              <input type="radio" required="required"  name="gender" value="retired" checked> Retired
-  			  <input type="radio" required="required"  name="gender" value="unemployed"> Unemployed
-              <input type="radio" required="required"  name="gender" value="student" checked> Student
+              <input type="radio" required="required" onchange="employmentChanged();" name="employmentStatus" value="employed" checked> Employed
+  			  <input type="radio" required="required" onchange="employmentChanged();"  name="employmentStatus" value="selfemployed"> Self-employed
+              <input type="radio" required="required" onchange="employmentChanged();"  name="employmentStatus" value="retired"> Retired
+  			  <input type="radio" required="required" onchange="employmentChanged();"  name="employmentStatus" value="unemployed"> Unemployed
+              <input type="radio" required="required" onchange="employmentChanged();"  name="employmentStatus" value="student"> Student
           </div>
-          <div class="form-group">
+          <div class="form-group" id="industryDivId">
             <label class="control-label"><spring:message code="kyc.label.industry"/></label>
                <select name="industry" required="required">
 			    <option value="">Please select an option</option>
@@ -125,20 +125,10 @@
 			    <option value="writing_and_content">Writing and Content</option>
 			  </select>
           </div>
-          </div>
           
-          <div class="col-xs-6">
-          <div class="form-group">
-            <label class="control-label"><spring:message code="kyc.label.title.position"/></label>
-            <input type="text" placeholder="Title | Position" required="required" class="form-control">
-          </div>
-          <div class="form-group">
-            <label class="control-label"><spring:message code="kyc.label.employer.name"/></label>
-            <input type="text" placeholder="Name of Employer" required="required" class="form-control">
-          </div>
-          <div class="form-group">
+          <div class="form-group" id="sourceDivId" style="display:none">
             <label class="control-label"><spring:message code="kyc.label.fund.source"/></label>
-            <select name="fundsource" required="required">
+            <select id="fundsourceId" name="fundsource" required="required" onchange="fundSourceChanged();">
 			    <option value="">Please select an option</option>
 			    <option value="allowance">Allowance</option>
 			    <option value="government_subsidy">Government Subsidy</option>
@@ -149,10 +139,28 @@
 			    <option value="separation_pay">Separation Pay</option>
 			  </select>
           </div>
-          
           </div>
-          <button class="btn btn-primary prevBtn btn-lg pull-left" type="button"><spring:message code="kyc.btn.prev"/></button>
-          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"><spring:message code="kyc.btn.next"/></button>
+          
+          <div class="col-xs-6">
+          <div id="employedSubId">
+	          <div class="form-group" >
+	            <label class="control-label"><spring:message code="kyc.label.title.position"/></label>
+	            <input type="text" placeholder="Title | Position" required="required" class="form-control">
+	          </div>
+	          <div class="form-group">
+	            <label class="control-label"><spring:message code="kyc.label.employer.name"/></label>
+	            <input type="text" placeholder="Name of Employer" required="required" class="form-control">
+	          </div>
+	          </div>
+          	 <div class="form-group" id="sourceOfFundExpId" style="display: none">
+	            <label class="control-label"><spring:message code="kyc.label.source.explain"/></label>
+	            <input type="text" placeholder="My funds will come from" required="required" class="form-control">
+	          </div>
+          </div>
+          <div class="col-xs-12">
+          	<button class="btn btn-primary prevBtn btn-lg pull-left" type="button"><spring:message code="kyc.btn.prev"/></button>
+          	<button class="btn btn-primary nextBtn btn-lg pull-right" type="button"><spring:message code="kyc.btn.next"/></button>
+          </div>
         </div>
       </div>
     </div>
@@ -164,7 +172,7 @@
           <div class="col-xs-6 col-div">
           <div class="form-group">
             <label class="control-label"><spring:message code="kyc.label.id.type"/></label><br>
-	            <select name="idType" required="required">
+	            <select name="idType" id="idTypeId" required="required" onchange="idTypeChanged();">
 	              	<option value="" disabled="disabled">Government Issued ID</option>
 	                <option value="afp">Armed Forces of the Philippines (AFP) ID</option>
 	                <option value="drivers_license">Driver's License</option>
@@ -193,14 +201,18 @@
             <label class="control-label"><spring:message code="kyc.label.id.expiration"/></label>
             <input type="text" placeholder="Expiration date" required="required" class="form-control">
           </div>
-          <div class="form-group">
+          <div class="form-group" id="expireId">
             <label class="control-label"><spring:message code="kyc.label.id.number"/></label>
             <input type="text" placeholder="ID number" required="required" class="form-control">
           </div>
          </div> 
         <div class="col-xs-6">
+          <br><br>
           <div class="form-group">
-            <input type="button" value="Upload ID" required="required" class="btn btn-default btn-md">
+            <input type="button" value="Upload ID (front)" required="required" class="btn btn-default btn-md">
+          </div>
+          <div class="form-group" id="backId">
+            <input type="button" value="Upload ID (back)" required="required" class="btn btn-default btn-md">
           </div>
           
         </div>
@@ -215,6 +227,124 @@
 </div>
 			</div>
 </body>
+
+<script type="text/javascript">
+
+function employmentChanged(){
+	var status = $('input[name=employmentStatus]:checked').val();
+
+	if(status == 'employed'){
+		$('#sourceDivId').hide();
+		$('#industryDivId').show();
+		$('#employedSubId').show();
+	}else if(status == 'selfemployed'){
+		$('#sourceDivId').hide();
+		$('#industryDivId').show();
+		$('#employedSubId').hide();
+	}else if(status == 'retired'|| status == 'unemployed'|| status == 'student'){
+		$('#sourceDivId').show();
+		$('#industryDivId').hide();
+		$('#employedSubId').hide();
+	}
+}
+
+function fundSourceChanged(){
+	var source = $('#fundsourceId').val();
+	
+	if(source == 'other'){
+		$('#sourceOfFundExpId').show();
+	}else{
+		$('#sourceOfFundExpId').hide();
+	}
+}
+
+function idTypeChanged(){
+	var type = $('#idTypeId').val()
+	console.log(type);
+	if(type == "afp"){
+		$('#expireId').show();
+		$('#backId').show();
+	}
+	else if(type == "drivers_license"){
+		$('#expireId').show();
+		$('#backId').hide();
+	}
+	else if(type == "gsis_ecard"){
+		$('#expireId').show();
+		$('#backId').hide();
+	}
+	else if(type == "nbi"){
+		$('#expireId').show();
+		$('#backId').hide();
+	}
+	else if(type == "ncwdp"){
+		$('#expireId').show();
+		$('#backId').show();
+	}
+	else if(type == "ofw"){
+		$('#expireId').show();
+		$('#backId').show();
+	}
+	else if(type == "owwa"){
+		$('#expireId').show();
+		$('#backId').show();
+	}
+	else if(type == "passport"){
+		$('#expireId').show();
+		$('#backId').hide();
+	}
+	else if(type == "police"){
+		$('#expireId').hide();
+		$('#backId').show();
+	}
+	else if(type == "postal"){
+		$('#expireId').show();
+		$('#backId').show();
+	}
+	else if(type == "prc"){
+		$('#expireId').show();
+		$('#backId').hide();
+	}
+	else if(type == "seaman"){
+		$('#expireId').show();
+		$('#backId').hide();
+	}
+	else if(type == "ssn"){
+		$('#expireId').hide();
+		$('#backId').show();
+	}
+	else if(type == "umid"){
+		$('#expireId').hide();
+		$('#backId').show();
+	}
+	else if(type == "voter"){
+		$('#expireId').hide();
+		$('#backId').show();
+	}
+	else if(type == "alien"){
+		$('#expireId').hide();
+		$('#backId').show();
+	}
+	else if(type == "bureau_of_fire_protection"){
+		$('#expireId').hide();
+		$('#backId').show();
+	}
+	else if(type == "pnp"){
+		$('#expireId').hide();
+		$('#backId').show();
+	}
+	else if(type == "integrated_bar"){
+		$('#expireId').hide();
+		$('#backId').show();
+	}
+	else if(type == "philhealth"){
+		$('#expireId').hide();
+		$('#backId').hide();
+	}
+
+	
+}
+</script>
 
 
 
