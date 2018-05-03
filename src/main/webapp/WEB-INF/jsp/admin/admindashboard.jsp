@@ -39,7 +39,7 @@
 					<c:forEach items="${userList }" var="user">
 						<tr>
 							<td>${user.userId }</td>
-							<td>${user.firstName } ${user.middleName } ${user.lastName } </td>
+							<td  contenteditable="true" >${user.firstName } ${user.middleName } ${user.lastName } </td>
 							<td>${user.emailAddress }</td>
 							<td>${user.phoneNumber }</td>
 							<td>${user.userLevel.description }</td>
