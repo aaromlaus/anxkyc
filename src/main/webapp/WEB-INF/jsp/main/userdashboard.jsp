@@ -153,7 +153,7 @@
 													</c:if>
 													<c:if
 														test="${!(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
-														<a class="btn btn-primary mar-top-10">Verify</a>
+														<a class="btn btn-primary mar-top-10" href="../../identification/">Verify</a>
 													</c:if>
 												</div>
 											</div>

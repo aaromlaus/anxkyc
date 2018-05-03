@@ -26,11 +26,11 @@
 			</c:if>
 		</div>
 
-		<div class="container">
+		<div class="container" id="containerId" style="height:430px;">
 			<div class="stepwizard">
 				<div class="stepwizard-row stepwizard-row-single setup-panel">
 					
-					<div class="stepwizard-step" style="width:100%;">
+					<div class="stepwizard-step" style="width:100%; height:95%;">
 						<a href="#identification" type="button"
 							class="btn btn-default btn-circle"> <i id="step2btn"
 							class="glyphicon glyphicon-user" style="font-size: 50px; color: #337ab7"></i>
@@ -40,9 +40,8 @@
 				</div>
 			</div>
 			
-			<form role="form" class="verification-form" >
-				<!-- <div class="stepwizard stepwizard-fixed-height"> -->
-					<!-- <div class="verification-row"> -->
+			<form role="form" class="verification-form" style="height:75%;" >
+					<div class="verification-row">
 						<h4>Before continuing, please choose which of the following applies to you?</h4>
 						<select class="selectpicker select-input"
 								data-live-search="true" id="accountOptionId">
@@ -50,9 +49,9 @@
 								<option value="singleAccount">This is my only account </option>
 								<option value="multipleAccount">I have multiple accounts</option>
 							</select>
-				<!-- 	</div>	 -->
+					</div>	
 					
-					<div class="verification-row" id="multipleAccountDivId" style="display: none;">
+					<div class="verification-row" id="multipleAccountDivId" style="display: none; margin-top:2%">
 						<h4>Thank you. Which of the following applies to you on why you have multiple accounts?</h4>
 						<select class="selectpicker select-input"
 								data-live-search="true" id="accountOptionId">
@@ -62,7 +61,6 @@
 								<option value="cannotAccessAccount">I have different reasons for creating another accounts</option>
 							</select>
 					</div>
-				<!-- </div> -->
 			</form>
 		</div>
 		
@@ -71,6 +69,7 @@
 <script>
 	$('#accountOptionId').change(function() {
 		if($(this).index() != 0) {
+			
 			if($(this).val() == "singleAccount") {
 				location.href = "./steps";
 			} else if($(this).val() == "multipleAccount") {
