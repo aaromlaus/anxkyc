@@ -26,7 +26,7 @@
 
 			<div id="form-block">
 				<h1>
-					Your Current Limits: <strong>${anxUser.userLevel.description}</strong>
+					<spring:message code="kyc.label.current.limits"/> <strong>${anxUser.userLevel.description}</strong>
 				</h1>
 				<form:hidden path="anxUser.emailAddress" id="currentEmail" />
 				<input type="hidden" value="userdashBoard" id="currentPage">				
@@ -36,8 +36,8 @@
 					<table class="table table-hover" id="levelTable">
 						<thead>
 							<tr>
-								<th colspan="2" style="text-align: center;">Cash Out</th>
-								<th colspan="2" style="text-align: center;">Cash In</th>
+								<th colspan="2" style="text-align: center;"><spring:message code="kyc.label.cash.out"/></th>
+								<th colspan="2" style="text-align: center;"><spring:message code="kyc.label.cash.in"/></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -56,18 +56,17 @@
 	<div class="col-sm-12 clearfix row">
 		<div id="main-user">
 			<div id="form-block">
-				<h1>To increase your limits, click a level and complete the
-					steps below.</h1>
+				<h1><spring:message code="kyc.label.increase.limit"/></h1>
 				<div class="clear"></div>
 				<div class="col-sm-12 bg-info">
 					<table class="table table-hover" id="levelTable">
 						<thead>
 							<tr>
-								<th class="col-sm-2">Levels</th>
-								<th>Requirements</th>
+								<th class="col-sm-2"><spring:message code="kyc.label.levels"/></th>
+								<th><spring:message code="kyc.label.requirements"/></th>
 								<th>Cash In (PHP)</th>
 								<th>Cash Out (PHP)</th>
-								<th>Limits</th>
+								<th><spring:message code="kyc.label.limits"/></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -162,8 +161,7 @@
 												<form:form method="POST" action="/profile/upload/"
 													enctype="multipart/form-data">
 													<div class="level-2-grp">
-														<h3 class="row-header-headings">Image Upload
-															Verification</h3>
+														<h3 class="row-header-headings"><spring:message code="kyc.label.image.upload.verification"/></h3>
 														<div class="input-group image-preview">
 															<input type="text"
 																class="form-control image-preview-filename"
@@ -174,20 +172,19 @@
 																<button type="button"
 																	class="btn btn-default image-preview-clear"
 																	style="display: none;">
-																	<span class="glyphicon glyphicon-remove"></span> Clear
+																	<span class="glyphicon glyphicon-remove"></span><spring:message code="kyc.label.clear"/>
 																</button>
 																<!-- image-preview-input -->
 																<div class="btn btn-default image-preview-input">
 																	<span class="glyphicon glyphicon-folder-open"></span> <span
-																		class="image-preview-input-title">Browse</span> <input
+																		class="image-preview-input-title"><spring:message code="kyc.label.browse"/></span> <input
 																		type="file" accept="image/png, image/jpeg, image/gif"
 																		name="file" />
 																	<!-- rename it -->
 																</div>
 																<button type="submit" class="btn btn-primary start"
 																	data-ng-click="submit()">
-																	<i class="glyphicon glyphicon-upload"></i> <span>Start
-																		upload</span>
+																	<i class="glyphicon glyphicon-upload"></i> <span><spring:message code="kyc.label.start.upload"/></span>
 																</button>
 															</div>
 														</div>

@@ -26,11 +26,11 @@
 	<div class="col-sm-6 clearfix row ">
 		<div id="container">
 			<h1>
-				<strong>Account Settings</strong>
+				<strong><spring:message code="kyc.label.account.setting"/></strong>
 			</h1>
 			<div class="col-sm-12 bg-info mar-bot-0">
 				<div class="col-sm-3 text-left mar-t-b-10 h4">
-					<strong>Email</strong>
+					<strong><spring:message code="kyc.label.email"/></strong>
 				</div>
 				<div class="col-sm-5 text-left mar-t-b-10 h4">
 					<c:out value="${anxUser.emailAddress}"></c:out>
@@ -43,7 +43,7 @@
 			</div>
 			<div class="col-sm-12 bg-info mar-bot-0">
 				<div class="col-sm-3 text-left mar-t-b-10 h4">
-					<strong>Phone</strong>
+					<strong><spring:message code="kyc.label.phone"/></strong>
 				</div>
 				<div class="col-sm-5 text-left mar-t-b-10 h4">
 					<form:hidden path="anxUser.phoneNumber" id="currentPhone" />
@@ -56,13 +56,12 @@
 			</div>
 			<div class="col-sm-12 bg-info mar-bot-0">
 				<div class="col-sm-3 text-left mar-t-b-10 h4">
-					<strong>Password</strong>
+					<strong><spring:message code="kyc.label.password"/></strong>
 				</div>
 				<div class="col-sm-5 text-left mar-t-b-10 h5">.....</div>
 				<div class="col-sm-4 text-right mar-t-b-10 h4">
 					<a data-toggle="collapse" href="#collapseExample" role="button"
-						aria-expanded="false" aria-controls="collapseExample">Change
-						password</a>
+						aria-expanded="false" aria-controls="collapseExample"><spring:message code="kyc.label.change.password"/></a>
 				</div>
 			</div>
 			<div
