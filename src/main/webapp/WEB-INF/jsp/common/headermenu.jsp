@@ -7,12 +7,11 @@
 		<nav class="headermenu">
 			<div class="container-fluid">
 				<div class="navbar-header"></div>
-				
-				<ul class="nav navbar-nav navbar-left">
-					<li><a href="/home"><span class="glyphicon glyphicon-home"></span>
-							Home</a></li>
-				</ul>
-				<c:if test="${not empty sessionScope.fullname}">
+					<ul class="nav navbar-nav navbar-left">
+						<li><a href="/home"><span class="glyphicon glyphicon-home"></span>
+								Home</a></li>
+					</ul>
+				<c:if test="${not empty sessionScope.fullname && !isAccount}">
 					<ul class="nav navbar-nav navbar-left">
 						<li><a href="/profile/myaccount/"><span class="glyphicon glyphicon-user"></span>
 								${sessionScope.fullname }</a></li>

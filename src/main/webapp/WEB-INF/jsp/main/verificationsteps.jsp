@@ -137,7 +137,7 @@
 			    <option value="remittances">Remittances</option>
 			    <option value="scholarship_stipend">Scholarship/Stipend</option>
 			    <option value="separation_pay">Separation Pay</option>
-			  </select>
+			 </select>
           </div>
           </div>
           

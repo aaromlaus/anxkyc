@@ -26,13 +26,13 @@
 			</c:if>
 		</div>
 
-		<div class="container" id="containerId" style="height:430px;">
+		<div class="container" id="containerId">
 			<div class="stepwizard">
 				<div class="stepwizard-row stepwizard-row-single setup-panel">
 					
 					<div class="stepwizard-step" style="width:100%; height:95%;">
 						<a href="#identification" type="button"
-							class="btn btn-default btn-circle"> <i id="step2btn"
+							class="btnx btn-circle"> <i id="step2btn"
 							class="glyphicon glyphicon-user" style="font-size: 50px; color: #337ab7"></i>
 						</a>
 						<p class="side-border">Identification</p>
@@ -73,9 +73,9 @@
 			if($(this).val() == "singleAccount") {
 				location.href = "./steps";
 			} else if($(this).val() == "multipleAccount") {
-				$('#multipleAccountDivId').fadeTo(600, 1);
+				$('#multipleAccountDivId').fadeIn();
 			} else {
-				$('#multipleAccountDivId').fadeTo(600, 0);
+				$('#multipleAccountDivId').fadeOut();
 			}
 		}
 		

@@ -59,10 +59,11 @@
 .btn-circle {
 	width: 90px;
     height: 45px; /* as the half of the width */
-    border-top-left-radius: 58px;  /* 100px of height + 10px of border */
-    border-top-right-radius: 58px; /* 100px of height + 10px of border */
+    border-top-left-radius: 58px !important;  /* 100px of height + 10px of border */
+    border-top-right-radius: 58px !important; /* 100px of height + 10px of border */
     border-bottom: 0;
     background-color: #e4e4e4;
+    text-decoration: none;
 }
 
 .disabledLink{
@@ -161,9 +162,31 @@ select{
 }
 
 .container {
-    margin-top: 0px !
+    min-height: 100px;
+    white-space: nowrap;
+       display: table;
+   height: auto;
 }
-
+.btnx {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border-radius: 4px;
+}
 
 
 

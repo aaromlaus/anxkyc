@@ -72,6 +72,7 @@ public class UserDashboardController {
 	@RequestMapping(value = "/myaccount")
 	public String myAccount(Map<String, Object> model, HttpSession session) {
 		model.put("anxUser", userService.getLoggedInUser());
+		model.put("isAccount", true);
 		populate(model, session);
 		return "main/myaccount";
 	}
