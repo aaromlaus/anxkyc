@@ -14,6 +14,14 @@
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/form.css">
 <script src="/js/verificationsteps.js"></script>
+<style type="text/css">
+.container {
+    min-height: 100px;
+    white-space: nowrap;
+       display: table;
+   height: auto;
+}
+</style>
 </head>
 
 <body>

@@ -161,12 +161,6 @@ select{
     border-radius: 4px;
 }
 
-.container {
-    min-height: 100px;
-    white-space: nowrap;
-       display: table;
-   height: auto;
-}
 .btnx {
     display: inline-block;
     padding: 6px 12px;
