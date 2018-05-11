@@ -17,7 +17,7 @@ public class UserLevel implements Serializable {
 
 	@Id
 	@Column(name = "user_level_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userLevelId;
 	
 	@Column(name = "user_level_group")

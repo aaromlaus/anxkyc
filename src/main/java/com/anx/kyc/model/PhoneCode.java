@@ -18,7 +18,7 @@ public class PhoneCode implements Serializable {
 
 	@Id
 	@Column(name = "phone_code_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long phoneCodeId;
 	
 	@Column(name = "phone_code_name")

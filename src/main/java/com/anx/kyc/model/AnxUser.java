@@ -2,6 +2,7 @@ package com.anx.kyc.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,7 +25,7 @@ public class AnxUser implements Serializable {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name = "user_id")
@@ -91,6 +93,34 @@ public class AnxUser implements Serializable {
 	
 	@Column(name = "active")
 	private boolean active;
+	
+	@Column(name = "gender")
+	private String gender;
+	
+	@Column(name = "nationality")
+	private String nationality;
+	
+	@Column(name = "employment_status")
+	private String employmentStatus;
+	
+	@Column(name = "industry")
+	private String industry;
+	
+	@Column(name = "position")
+	private String position;
+	
+	@Column(name = "employer_name")
+	private String employerName;
+	
+	@Column(name = "fund_source")
+	private String fundSource;
+	
+	@Column(name = "fund_source_reason")
+	private String fundSourceReason;
+	
+	@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<IdentificationCard> card;
+	
 
 	public String getUserId() {
 		return userId;
@@ -266,6 +296,78 @@ public class AnxUser implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public String getEmploymentStatus() {
+		return employmentStatus;
+	}
+
+	public void setEmploymentStatus(String employmentStatus) {
+		this.employmentStatus = employmentStatus;
+	}
+
+	public String getIndustry() {
+		return industry;
+	}
+
+	public void setIndustry(String industry) {
+		this.industry = industry;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getEmployerName() {
+		return employerName;
+	}
+
+	public void setEmployerName(String employerName) {
+		this.employerName = employerName;
+	}
+
+	public String getFundSource() {
+		return fundSource;
+	}
+
+	public void setFundSource(String fundSource) {
+		this.fundSource = fundSource;
+	}
+
+	public String getFundSourceReason() {
+		return fundSourceReason;
+	}
+
+	public void setFundSourceReason(String fundSourceReason) {
+		this.fundSourceReason = fundSourceReason;
+	}
+
+	public List<IdentificationCard> getCard() {
+		return card;
+	}
+
+	public void setCard(List<IdentificationCard> card) {
+		this.card = card;
 	}
 
 

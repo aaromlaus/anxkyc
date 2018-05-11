@@ -15,7 +15,7 @@ public class UserImage {
 	
 	@Id
 	@Column(name="user_image_id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long userImageId;
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "anx_user_id")

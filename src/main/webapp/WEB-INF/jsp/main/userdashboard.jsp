@@ -14,6 +14,11 @@
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/form.css">
 <script src="/js/myaccount.js"></script>
+<style type="text/css">
+.btn[disabled], fieldset[disabled] .btn {
+    opacity: 1; 
+}
+</style>
 </head>
 <jsp:include page="../common/header.jsp"></jsp:include>
 <jsp:include page="../common/headermenu.jsp"></jsp:include>
@@ -97,7 +102,7 @@
 
 													</span> <br />
 													<p class="mar-top-10">${anxUser.phoneNumber.length() >0 ? 'Phone Verification':'Email Verification'}</p>
-													<a class="btn btn-success mar-top-10">Completed</a>
+													<a class="btn btn-success mar-top-10" disabled>Completed</a>
 												</div>
 											</div>
 										</td>
@@ -129,7 +134,7 @@
 														<p>${anxUser.emailAddress.length() > 0 ? 'Phone Verification':'Email Verification'}</p>
 														<c:if
 															test="${(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
-															<a class="btn btn-success mar-top-10">Completed</a>
+															<a class="btn btn-success mar-top-10" disabled>Completed</a>
 														</c:if>
 														<c:if
 															test="${!(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
@@ -145,11 +150,11 @@
 													<span class="glyphicon glyphicon-user font-size-60">
 
 													</span> <br />
-													<p class="mar-top-10">Identification Verification</p>
+													<p>Identification Verification</p>
 													<c:if
 														test="${(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
 
-														<a class="btn btn-success mar-top-10">Completed</a>
+														<a class="btn btn-success mar-top-10" disabled>Completed</a>
 													</c:if>
 													<c:if
 														test="${!(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
@@ -177,14 +182,14 @@
 																<!-- image-preview-input -->
 																<div class="btn btn-default image-preview-input">
 																	<span class="glyphicon glyphicon-folder-open"></span> <span
-																		class="image-preview-input-title"><spring:message code="kyc.label.browse"/></span> <input
+																		class="image-preview-input-title" style="padding:3px;"></span> <input
 																		type="file" accept="image/png, image/jpeg, image/gif"
 																		name="file" />
 																	<!-- rename it -->
 																</div>
 																<button type="submit" class="btn btn-primary start"
 																	data-ng-click="submit()">
-																	<i class="glyphicon glyphicon-upload"></i> <span><spring:message code="kyc.label.start.upload"/></span>
+																	<i class="glyphicon glyphicon-upload"></i> <span><spring:message code="kyc.label.upload"/></span>
 																</button>
 															</div>
 														</div>
