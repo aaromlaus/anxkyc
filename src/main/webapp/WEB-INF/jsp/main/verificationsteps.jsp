@@ -66,7 +66,7 @@
           </div>
           <div class="form-group">
             <label class="control-label"><spring:message code="kyc.label.nationality"/></label>
-            <select name="nationality" required="required">
+            <select name="nationality" required="required" class="form-control">
 			    <option value="">Please select an option</option>
 			    <option value="Philippines">Philippines</option>
 			    <option value="Australia">Australia</option>
@@ -98,7 +98,7 @@
           </div>
           <div class="form-group" id="industryDivId">
             <label class="control-label"><spring:message code="kyc.label.industry"/></label>
-               <select name="industry" required="required">
+               <select name="industry" id="industryId" required="required" class="form-control">
 			    <option value="">Please select an option</option>
 			    <option value="accounting_and_finance">Accounting and Finance</option>
 			    <option value="administrative">Administrative</option>
@@ -128,7 +128,7 @@
           
           <div class="form-group" id="sourceDivId" style="display:none">
             <label class="control-label"><spring:message code="kyc.label.fund.source"/></label>
-            <select id="fundsourceId" name="fundsource" required="required" onchange="fundSourceChanged();">
+            <select id="fundsourceId" name="fundsource" onchange="fundSourceChanged();"  class="form-control">
 			    <option value="">Please select an option</option>
 			    <option value="allowance">Allowance</option>
 			    <option value="government_subsidy">Government Subsidy</option>
@@ -145,16 +145,16 @@
           <div id="employedSubId">
 	          <div class="form-group" >
 	            <label class="control-label"><spring:message code="kyc.label.title.position"/></label>
-	            <input type="text" placeholder="Title | Position" required="required" class="form-control">
+	            <input type="text" id="titleId" placeholder="Title | Position" required="required" class="form-control">
 	          </div>
 	          <div class="form-group">
 	            <label class="control-label"><spring:message code="kyc.label.employer.name"/></label>
-	            <input type="text" placeholder="Name of Employer" required="required" class="form-control">
+	            <input type="text" id="employerId" placeholder="Name of Employer" required="required" class="form-control">
 	          </div>
-	          </div>
+	      </div>
           	 <div class="form-group" id="sourceOfFundExpId" style="display: none">
 	            <label class="control-label"><spring:message code="kyc.label.source.explain"/></label>
-	            <input type="text" placeholder="My funds will come from" required="required" class="form-control">
+	            <input type="text" id="subSourceOfFundExpId" placeholder="My funds will come from" class="form-control">
 	          </div>
           </div>
           <div class="col-xs-12">
@@ -172,7 +172,7 @@
           <div class="col-xs-6 col-div">
           <div class="form-group">
             <label class="control-label"><spring:message code="kyc.label.id.type"/></label><br>
-	            <select name="idType" id="idTypeId" required="required" onchange="idTypeChanged();">
+	            <select name="idType" id="idTypeId" required="required" onchange="idTypeChanged();" class="form-control">
 	              	<option value="" disabled="disabled">Government Issued ID</option>
 	                <option value="afp">Armed Forces of the Philippines (AFP) ID</option>
 	                <option value="drivers_license">Driver's License</option>

@@ -32,11 +32,11 @@ $(document).ready(function () {
       var curStep = $(this).closest(".setup-content"),
           curStepBtn = curStep.attr("id"),
           nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-          curInputs = curStep.find("input[type='text'],input[type='url']"),
+          curInputs = curStep.find("input[type='text'],input[type='url'],select,input[type='radio'],input[type='date']"),
           isValid = true;
       	var id = curStep.attr("id").substring(5,6);
-      $(".form-group").removeClass("has-error");
-      for(var i=0; i<curInputs.length; i++){
+	      $(".form-group").removeClass("has-error");
+	      for(var i=0; i<curInputs.length; i++){
           if (!curInputs[i].validity.valid){
               isValid = false;
               $(curInputs[i]).closest(".form-group").addClass("has-error");
@@ -57,16 +57,43 @@ function employmentChanged(){
 
 	if(status == 'employed'){
 		$('#sourceDivId').hide();
+		$('#fundsourceId').removeAttr("required");
+		$('#fundsourceId').val('');
+		
 		$('#industryDivId').show();
+		$('#industryId').attr("required","required");
+		
 		$('#employedSubId').show();
+		$('#titleId').attr("required","required");
+		$('#employerId').attr("required","required");
+		
 	}else if(status == 'selfemployed'){
 		$('#sourceDivId').hide();
+		$('#fundsourceId').removeAttr("required");
+		$('#fundsourceId').val('');
+		
 		$('#industryDivId').show();
+		$('#industryId').attr("required","required");
+		
 		$('#employedSubId').hide();
+		$('#titleId').removeAttr("required");
+		$('#employerId').removeAttr("required");
+		$('#titleId').val('');
+		$('#employerId').val('');
+		
 	}else if(status == 'retired'|| status == 'unemployed'|| status == 'student'){
 		$('#sourceDivId').show();
+		$('#fundsourceId').attr("required","required");
+		
 		$('#industryDivId').hide();
+		$('#industryId').removeAttr("required");
+		$('#industryId').val('');
+		
 		$('#employedSubId').hide();
+		$('#titleId').removeAttr("required");
+		$('#employerId').removeAttr("required");
+		$('#titleId').val('');
+		$('#employerId').val('');
 	}
 }
 
@@ -75,8 +102,11 @@ function fundSourceChanged(){
 	
 	if(source == 'other'){
 		$('#sourceOfFundExpId').show();
+		$('#subSourceOfFundExpId').attr("required","required");
 	}else{
 		$('#sourceOfFundExpId').hide();
+		$('#subSourceOfFundExpId').removeAttr("required");
+		$('#subSourceOfFundExpId').val('');
 	}
 }
 
@@ -85,83 +115,154 @@ function idTypeChanged(){
 	console.log(type);
 	if(type == "afp"){
 		$('#expireId').show();
+		$('#expireId').attr("required","required");
+
 		$('#backId').show();
 	}
 	else if(type == "drivers_license"){
 		$('#expireId').show();
+		$('#expireId').attr("required","required");
+		
 		$('#backId').hide();
+		$('#backId').removeAttr("required");
+		
 	}
 	else if(type == "gsis_ecard"){
 		$('#expireId').show();
+		$('#expireId').attr("required","required");
+		
 		$('#backId').hide();
+		$('#backId').removeAttr("required");
+		
 	}
 	else if(type == "nbi"){
 		$('#expireId').show();
+		$('#expireId').attr("required","required");
+		
 		$('#backId').hide();
 	}
 	else if(type == "ncwdp"){
 		$('#expireId').show();
+		$('#expireId').attr("required","required");
+		
 		$('#backId').show();
 	}
 	else if(type == "ofw"){
 		$('#expireId').show();
+		$('#expireId').attr("required","required");
+		
 		$('#backId').show();
+		$('#backId').attr("required","required");
 	}
 	else if(type == "owwa"){
 		$('#expireId').show();
+		$('#expireId').attr("required","required");
+		
 		$('#backId').show();
+		$('#backId').attr("required","required");
 	}
 	else if(type == "passport"){
 		$('#expireId').show();
+		$('#expireId').attr("required","required");
+		
 		$('#backId').hide();
+		$('#backId').removeAttr("required");
+		
 	}
 	else if(type == "police"){
 		$('#expireId').hide();
+		$('#expireId').removeAttr("required");
+		$('#expireId').val('');
+		
 		$('#backId').show();
+		$('#backId').attr("required","required");
 	}
 	else if(type == "postal"){
 		$('#expireId').show();
+		$('#expireId').attr("required","required");
+		
 		$('#backId').show();
+		$('#backId').attr("required","required");
 	}
 	else if(type == "prc"){
 		$('#expireId').show();
+		$('#expireId').attr("required","required");
+		
 		$('#backId').hide();
+		$('#backId').removeAttr("required");
+		
 	}
 	else if(type == "seaman"){
 		$('#expireId').show();
+		$('#expireId').attr("required","required");
+		
 		$('#backId').hide();
+		$('#backId').removeAttr("required");
 	}
 	else if(type == "ssn"){
 		$('#expireId').hide();
+		$('#expireId').removeAttr("required");
+		$('#expireId').val('');
+		
 		$('#backId').show();
+		$('#backId').attr("required","required");
 	}
 	else if(type == "umid"){
 		$('#expireId').hide();
+		$('#expireId').removeAttr("required");
+		$('#expireId').val('');
+		
 		$('#backId').show();
+		$('#backId').attr("required","required");
 	}
 	else if(type == "voter"){
 		$('#expireId').hide();
+		$('#expireId').removeAttr("required");
+		$('#expireId').val('');
+		
 		$('#backId').show();
+		$('#backId').attr("required","required");
 	}
 	else if(type == "alien"){
 		$('#expireId').hide();
+		$('#expireId').removeAttr("required");
+		$('#expireId').val('');
+		
 		$('#backId').show();
+		$('#backId').attr("required","required");
 	}
 	else if(type == "bureau_of_fire_protection"){
 		$('#expireId').hide();
+		$('#expireId').removeAttr("required");
+		$('#expireId').val('');
+		
 		$('#backId').show();
+		$('#backId').attr("required","required");
 	}
 	else if(type == "pnp"){
 		$('#expireId').hide();
+		$('#expireId').removeAttr("required");
+		$('#expireId').val('');
+		
 		$('#backId').show();
+		$('#backId').attr("required","required");
 	}
 	else if(type == "integrated_bar"){
 		$('#expireId').hide();
+		$('#expireId').removeAttr("required");
+		$('#expireId').val('');
+		
 		$('#backId').show();
+		$('#backId').attr("required","required");
 	}
 	else if(type == "philhealth"){
 		$('#expireId').hide();
+		$('#expireId').removeAttr("required");
+		$('#expireId').val(''); 
+		
 		$('#backId').hide();
+		$('#backId').removeAttr("required");
+		
 	}
 
 	
