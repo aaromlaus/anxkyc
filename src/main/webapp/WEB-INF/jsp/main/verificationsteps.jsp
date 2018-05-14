@@ -29,7 +29,6 @@
 			</c:if>
 			
 <div class="container">
-  
 <div class="stepwizard">
     <div class="stepwizard-row setup-panel">
       <div class="stepwizard-step arrow-left-div">
@@ -53,7 +52,7 @@
     </div>
   </div>
   
-  <form role="form" class="verification-form" method="post">
+  <form:form class="verification-form" modelAttribute="user" method="post" action="saveUserDetails">
     <div class="row setup-content" id="step-1">
       <div class="col-xs-12">
         <div class="col-md-6 col-div">
@@ -68,15 +67,14 @@
             <label class="control-label"><spring:message code="kyc.label.nationality"/></label>
             <select name="nationality" required="required" class="form-control">
 			    <option value="">Please select an option</option>
-			    <option value="Philippines">Philippines</option>
-			    <option value="Australia">Australia</option>
-			    <option value="New Zealand">New Zealand</option>
-			    <option value="India">India</option>
+			    <c:forEach var="country" items="${countryList}">
+				   <option value="${country.key}" <c:if test="${user.nationality == country.key}">selected</c:if>>${country.value}</option>
+				</c:forEach>
 			  </select>
           </div>
           <div class="form-group">
             <label class="control-label"><spring:message code ="kyc.label.birthdate"/></label>
-            <input  type="date" required="required" class="form-control">
+            <input  type="date" name="birthDateStr" required="required" class="form-control" value="${user.formattedBirthDate}">
           </div>
       </div>
     </div>
@@ -100,43 +98,20 @@
             <label class="control-label"><spring:message code="kyc.label.industry"/></label>
                <select name="industry" id="industryId" required="required" class="form-control">
 			    <option value="">Please select an option</option>
-			    <option value="accounting_and_finance">Accounting and Finance</option>
-			    <option value="administrative">Administrative</option>
-			    <option value="architecture_and_engineering">Architecture and Engineering</option>
-			    <option value="arts_and_sports">Arts and Sports</option>
-			    <option value="construction">Construction</option>
-			    <option value="customer_service">Customer Service</option>
-			    <option value="education_and_training">Education and Training</option>
-			    <option value="general_service">General Service</option>
-			    <option value="health_and_medical">Health and Medical</option>
-			    <option value="hospitality_and_tourism">Hospitality and Tourism</option>
-			    <option value="household">Household (helper, driver)</option>
-			    <option value="human_resources">Human Resources</option>
-			    <option value="it_and_software">IT and Software</option>
-			    <option value="legal">Legal</option>
-			    <option value="management_and_consultancy">Management and Consultancy</option>
-			    <option value="manufacturing_and_production">Manufacturing and Production</option>
-			    <option value="media_and_creatives">Media and Creatives</option>
-			    <option value="public_service_and_ngos">Public Service and NGOs</option>
-			    <option value="safety_and_security">Safety and Security</option>
-			    <option value="sales_and_marketing">Sales and Marketing</option>
-			    <option value="sciences">Sciences</option>
-			    <option value="supply_chain">Supply Chain</option>
-			    <option value="writing_and_content">Writing and Content</option>
+				<c:forEach var="industry" items="${industryList}">
+				   <option value="${industry.key}" <c:if test="${user.industry == industry.key}">selected</c:if>>${industry.value}</option>
+				</c:forEach>
 			  </select>
           </div>
           
           <div class="form-group" id="sourceDivId" style="display:none">
             <label class="control-label"><spring:message code="kyc.label.fund.source"/></label>
-            <select id="fundsourceId" name="fundsource" onchange="fundSourceChanged();"  class="form-control">
+            <select id="fundsourceId" name="fundSource" onchange="fundSourceChanged();"  class="form-control">
 			    <option value="">Please select an option</option>
-			    <option value="allowance">Allowance</option>
-			    <option value="government_subsidy">Government Subsidy</option>
-			    <option value="other">Other</option>
-			    <option value="pension">Pension</option>
-			    <option value="remittances">Remittances</option>
-			    <option value="scholarship_stipend">Scholarship/Stipend</option>
-			    <option value="separation_pay">Separation Pay</option>
+				<c:forEach var="source" items="${sourceList}">
+				   <option value="${source.key}" <c:if test="${user.fundSource == source.key}">selected</c:if>>${source.value}</option>
+				</c:forEach>
+				
 			 </select>
           </div>
           </div>
@@ -145,16 +120,16 @@
           <div id="employedSubId">
 	          <div class="form-group" >
 	            <label class="control-label"><spring:message code="kyc.label.title.position"/></label>
-	            <input type="text" id="titleId" placeholder="Title | Position" required="required" class="form-control">
+	            <input type="text" name="position" id="titleId" placeholder="Title | Position" required="required" class="form-control"  value="${user.position}">
 	          </div>
 	          <div class="form-group">
 	            <label class="control-label"><spring:message code="kyc.label.employer.name"/></label>
-	            <input type="text" id="employerId" placeholder="Name of Employer" required="required" class="form-control">
+	            <input type="text" name="employerName" id="employerId" placeholder="Name of Employer" required="required" class="form-control" value="${user.employerName}">
 	          </div>
 	      </div>
           	 <div class="form-group" id="sourceOfFundExpId" style="display: none">
 	            <label class="control-label"><spring:message code="kyc.label.source.explain"/></label>
-	            <input type="text" id="subSourceOfFundExpId" placeholder="My funds will come from" class="form-control">
+	            <input type="text" name="fundSourceReason" id="subSourceOfFundExpId" placeholder="My funds will come from" class="form-control" value="${user.fundSourceReason}">
 	          </div>
           </div>
           <div class="col-xs-12">
@@ -172,47 +147,32 @@
           <div class="col-xs-6 col-div">
           <div class="form-group">
             <label class="control-label"><spring:message code="kyc.label.id.type"/></label><br>
-	            <select name="idType" id="idTypeId" required="required" onchange="idTypeChanged();" class="form-control">
+	            <select name="card[0].idType" id="idTypeId" required="required" onchange="idTypeChanged();" class="form-control">
 	              	<option value="" disabled="disabled">Government Issued ID</option>
-	                <option value="afp">Armed Forces of the Philippines (AFP) ID</option>
-	                <option value="drivers_license">Driver's License</option>
-	                <option value="gsis_ecard">Government Service Insurance System (GSIS) e-Card Plus2</option>
-	                <option value="nbi">National Bureau of Investigation (NBI) clearance</option>
-	                <option value="ncwdp">Certification from the National Council for the Welfare of Disabled Persons (NCWDP)</option>
-	                <option value="ofw">OFW E-Card</option>
-	                <option value="owwa">Overseas Workers Welfare Administration (OWWA) ID</option>
-	                <option value="passport">Passport</option>
-                    <option value="police">Police Clearance Certificate</option>
-	                <option value="postal">Postal ID</option>
-	                <option value="prc">Professional Regulation Commission (PRC) ID</option>
-	                <option value="seaman">Seaman's Book</option>
-	                <option value="ssn">Social Security System (SSS) Card</option>
-	                <option value="umid">Unified Multi-Purpose ID</option>
-	                <option value="voter">Voter's ID</option>
-	                <option value="alien">Alien Certificate of Registration</option>
-	                <option value="bureau_of_fire_protection">Bureau of Fire Protection ID</option>
-	                <option value="pnp">Philippine National Police ID</option>
-	                <option value="integrated_bar">Integrated Bar of the Philippines ID</option>
-	                <option value="philhealth">PhilHealth ID</option>
+					<c:forEach var="id" items="${idList}">
+					   <option value="${id.key}" <c:if test="${user.card[0].idType == id.key}">selected</c:if>>${id.value}</option>
+					</c:forEach>
 	          </select>
           </div>
           
           <div class="form-group">
             <label class="control-label"><spring:message code="kyc.label.id.expiration"/></label>
-            <input type="text" placeholder="Expiration date" required="required" class="form-control">
+            <input  type="date" name="card[0].expDateStr" required="required" class="form-control"  value="${user.card[0].formattedExpDateStr}">
           </div>
           <div class="form-group" id="expireId">
             <label class="control-label"><spring:message code="kyc.label.id.number"/></label>
-            <input type="text" placeholder="ID number" required="required" class="form-control">
+            <input type="text" name="card[0].idNumber" placeholder="ID number" required="required" class="form-control" value="${user.card[0].idNumber}">
           </div>
          </div> 
         <div class="col-xs-6">
           <br><br>
           <div class="form-group">
-            <input type="button" value="Upload ID (front)" required="required" class="btn btn-default btn-md">
+           <label class="control-label">Upload ID (front)</label>
+            <input type="file" id="fileUploadFrontId" required="required" class="btn btn-default btn-md" onchange="showPreviewFront();">
           </div>
           <div class="form-group" id="backId">
-            <input type="button" value="Upload ID (back)" required="required" class="btn btn-default btn-md">
+           <label class="control-label">Upload ID (back)</label>
+            <input type="file" id="fileUploadBackId" required="required" class="btn btn-default btn-md"  onchange="showPreviewBack();">
           </div>
           
         </div>
@@ -221,12 +181,41 @@
           <button class="btn btn-success btn-lg pull-right" type="submit"><spring:message code="kyc.btn.submit"/></button>
       </div>
     </div>
-  </form>
-  
-	</div>
+    <c:if test="${user.card[0] != null}">
+    <input  type="hidden" name="card[0].id" value="${user.card[0].id}">
+    </c:if>
+    <input id="fImgId" type="hidden" name="card[0].frontImg" value="${user.card[0].frontImgStr}">
+    <input id="bImgId"  type="hidden" name="card[0].backImg" value="${user.card[0].backImgStr}">
+  </form:form>
 </div>
-			</div>
+</div>
+</div>
 </body>
+<c:if test="${user.card[0].frontImg != null}">
+<script type="text/javascript">
+var frontImgVal = $('#fImgId').val();
+$('#fileUploadFrontId').popover({
+    content: "<img src='"+frontImgVal+"' style='width: 250px;height:200px;'>",
+    placement : 'bottom',
+    trigger: 'hover',
+    html:true
+  });
+presentBack = true;
+</script>
+
+</c:if>
+<c:if test="${user.card[0].backImg != null}">
+<script type="text/javascript">
+var frontImgVal = $('#bImgId').val();
+$('#fileUploadBackId').popover({
+    content: "<img src='"+frontImgVal+"' style='width: 250px;height:200px;'>",
+    placement : 'bottom',
+    trigger: 'hover',
+    html:true
+  });
+presentBack = true;
+</script>
+</c:if>
 
 
 

@@ -263,7 +263,66 @@ function idTypeChanged(){
 		$('#backId').hide();
 		$('#backId').removeAttr("required");
 		
-	}
+	}	
+}
 
+var presentBack = false;
+var presentFront = false;
+
+function  showPreviewFront(){
+	var input = document.getElementById("fileUploadFrontId");
+
+	var fReader = new FileReader();
+	fReader.readAsDataURL(input.files[0]);
+	fReader.onloadend = function(event) {
+		if(!presentFront){
+			$('#fileUploadFrontId').popover({
+		        content: "<img src='"+event.target.result+"' style='width: 250px;height:200px;'>",
+		        placement : 'bottom',
+		        trigger: 'hover',
+		        html:true
+		      });
+			presentFront = true;
+		}else{
+			var img = $('<img/>', {
+				id : 'dynamic',
+				width : 250,
+				height : 200
+			});
+			img.attr('src', event.target.result);
+			$('#fileUploadFrontId').attr("data-content",$(img)[0].outerHTML).popover("show");
+		}
+		$('#fImgId').val(event.target.result);
+	}
+}
+function  showPreviewBack(){
+	
+	var input = document.getElementById("fileUploadBackId");
+
+	var fReader = new FileReader();
+	var t=fReader.readAsDataURL(input.files[0]);
+	console.log(t);
+	fReader.onloadend = function(event) {
+		if(!presentBack){
+			$('#fileUploadBackId').popover({
+		        content: "<img src='"+event.target.result+"' style='width: 250px;height:200px;'>",
+		        placement : 'bottom',
+		        trigger: 'hover',
+		        html:true
+		      });
+			presentBack = true;
+		}else{
+			var img = $('<img/>', {
+				id : 'dynamic',
+				width : 250,
+				height : 200
+			});
+			img.attr('src', event.target.result);
+			$('#fileUploadBackId').attr("data-content",$(img)[0].outerHTML).popover("show");
+		}
+		$('#bImgId').val(event.target.result);
+	}
 	
 }
+
+

@@ -1,6 +1,7 @@
 package com.anx.kyc.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -120,6 +121,8 @@ public class AnxUser implements Serializable {
 	
 	@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<IdentificationCard> card;
+
+	private String birthDateStr;
 	
 
 	public String getUserId() {
@@ -368,6 +371,19 @@ public class AnxUser implements Serializable {
 
 	public void setCard(List<IdentificationCard> card) {
 		this.card = card;
+	}
+	
+	public String getFormattedBirthDate() {
+		if(birthDate == null) return "";
+		return new SimpleDateFormat("yyyy-MM-dd").format(birthDate);
+	}
+
+	public String getBirthDateStr() {
+		return birthDateStr;
+	}
+
+	public void setBirthDateStr(String birthDateStr) {
+		this.birthDateStr = birthDateStr;
 	}
 
 

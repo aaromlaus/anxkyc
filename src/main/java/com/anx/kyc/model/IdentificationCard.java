@@ -1,6 +1,7 @@
 package com.anx.kyc.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -30,6 +31,9 @@ public class IdentificationCard implements Serializable {
 	@Column(name = "id_type")
 	private String idType;
 	
+	@Column(name = "id_number")
+	private String idNumber;
+	
 	@Column(name = "expiration_date")
 	private Date expirationDate;
 
@@ -41,6 +45,7 @@ public class IdentificationCard implements Serializable {
 	@Column(name = "back_img")
 	private byte[] backImg;
 
+	private String expDateStr;
 	
 	public long getId() {
 		return id;
@@ -81,6 +86,34 @@ public class IdentificationCard implements Serializable {
 	public void setBackImg(byte[] backImg) {
 		this.backImg = backImg;
 	}
+
+	public String getIdNumber() {
+		return idNumber;
+	}
+
+	public void setIdNumber(String idNumber) {
+		this.idNumber = idNumber;
+	}
+
+	public String getExpDateStr() {
+		return expDateStr;
+	}
+
+	public void setExpDateStr(String expDateStr) {
+		this.expDateStr = expDateStr;
+	}
 	
+	public String getFormattedExpDateStr() {
+		if(expirationDate == null) return "";
+		return new SimpleDateFormat("yyyy-MM-dd").format(expirationDate);
+	}
+
+	public String getBackImgStr() {
+		return new String(this.backImg);
+	}
+
+	public String getFrontImgStr() {
+		return new String(this.frontImg);
+	}
 
 }
