@@ -45,7 +45,7 @@
       </div>
       <div class="stepwizard-step ">
         <a href="#step-3" type="button" class="btn1 btn-default1 btn-circle disabledLink">
-			<i id="step3btn"  class="fa fa-id-card-o" style="font-size:45px;color:#337ab7"></i>
+			<i id="step3btn"  class="fa fa-id-card-o" style="font-size:45px;color: #337ab7"></i>
         </a>
         <p><spring:message code ="kyc.label.id.upload"/></p>
       </div>
@@ -149,6 +149,7 @@
             <label class="control-label"><spring:message code="kyc.label.id.type"/></label><br>
 	            <select name="card[0].idType" id="idTypeId" required="required" onchange="idTypeChanged();" class="form-control">
 	              	<option value="" disabled="disabled">Government Issued ID</option>
+	              	<option value="">Please select an option</option>
 					<c:forEach var="id" items="${idList}">
 					   <option value="${id.key}" <c:if test="${user.card[0].idType == id.key}">selected</c:if>>${id.value}</option>
 					</c:forEach>
@@ -159,20 +160,19 @@
             <label class="control-label"><spring:message code="kyc.label.id.expiration"/></label>
             <input  type="date" name="card[0].expDateStr" required="required" class="form-control"  value="${user.card[0].formattedExpDateStr}">
           </div>
-          <div class="form-group" id="expireId">
+          <div class="form-group" id="numberIdDiv">
             <label class="control-label"><spring:message code="kyc.label.id.number"/></label>
-            <input type="text" name="card[0].idNumber" placeholder="ID number" required="required" class="form-control" value="${user.card[0].idNumber}">
+            <input type="text" id="numberId" name="card[0].idNumber" placeholder="ID number" required="required" class="form-control" value="${user.card[0].idNumber}">
           </div>
          </div> 
         <div class="col-xs-6">
-          <br><br>
           <div class="form-group">
            <label class="control-label">Upload ID (front)</label>
-            <input type="file" id="fileUploadFrontId" required="required" class="btn btn-default btn-md" onchange="showPreviewFront();">
+            <input type="file" accept="image/x-png,image/gif,image/jpeg" id="fileUploadFrontId" required="required" class="btn btn-default btn-md" onchange="showPreviewFront();">
           </div>
           <div class="form-group" id="backId">
            <label class="control-label">Upload ID (back)</label>
-            <input type="file" id="fileUploadBackId" required="required" class="btn btn-default btn-md"  onchange="showPreviewBack();">
+            <input type="file" accept="image/x-png,image/gif,image/jpeg" id="fileUploadBackId" required="required" class="btn btn-default btn-md"  onchange="showPreviewBack();">
           </div>
           
         </div>
@@ -217,6 +217,12 @@ presentBack = true;
 </script>
 </c:if>
 
+<c:if test="${user.card[0].idType != null}">
+<script type="text/javascript">
+	idTypeChanged();
+</script>
+
+</c:if>
 
 
 

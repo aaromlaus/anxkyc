@@ -114,151 +114,151 @@ function idTypeChanged(){
 	var type = $('#idTypeId').val()
 	console.log(type);
 	if(type == "afp"){
-		$('#expireId').show();
-		$('#expireId').attr("required","required");
+		$('#numberIdDiv').show();
+		$('#numberIdDiv').attr("required","required");
 
 		$('#backId').show();
 	}
 	else if(type == "drivers_license"){
-		$('#expireId').show();
-		$('#expireId').attr("required","required");
+		$('#numberIdDiv').show();
+		$('#numberIdDiv').attr("required","required");
 		
 		$('#backId').hide();
 		$('#backId').removeAttr("required");
 		
 	}
 	else if(type == "gsis_ecard"){
-		$('#expireId').show();
-		$('#expireId').attr("required","required");
+		$('#numberIdDiv').show();
+		$('#numberIdDiv').attr("required","required");
 		
 		$('#backId').hide();
 		$('#backId').removeAttr("required");
 		
 	}
 	else if(type == "nbi"){
-		$('#expireId').show();
-		$('#expireId').attr("required","required");
+		$('#numberIdDiv').show();
+		$('#numberIdDiv').attr("required","required");
 		
 		$('#backId').hide();
 	}
 	else if(type == "ncwdp"){
-		$('#expireId').show();
-		$('#expireId').attr("required","required");
+		$('#numberIdDiv').show();
+		$('#numberIdDiv').attr("required","required");
 		
 		$('#backId').show();
 	}
 	else if(type == "ofw"){
-		$('#expireId').show();
-		$('#expireId').attr("required","required");
+		$('#numberIdDiv').show();
+		$('#numberIdDiv').attr("required","required");
 		
 		$('#backId').show();
 		$('#backId').attr("required","required");
 	}
 	else if(type == "owwa"){
-		$('#expireId').show();
-		$('#expireId').attr("required","required");
+		$('#numberIdDiv').show();
+		$('#numberIdDiv').attr("required","required");
 		
 		$('#backId').show();
 		$('#backId').attr("required","required");
 	}
 	else if(type == "passport"){
-		$('#expireId').show();
-		$('#expireId').attr("required","required");
+		$('#numberIdDiv').show();
+		$('#numberIdDiv').attr("required","required");
 		
 		$('#backId').hide();
 		$('#backId').removeAttr("required");
 		
 	}
 	else if(type == "police"){
-		$('#expireId').hide();
-		$('#expireId').removeAttr("required");
-		$('#expireId').val('');
+		$('#numberIdDiv').hide();
+		$('#numberId').removeAttr("required");
+		$('#numberId').val(''); 
 		
 		$('#backId').show();
 		$('#backId').attr("required","required");
 	}
 	else if(type == "postal"){
-		$('#expireId').show();
-		$('#expireId').attr("required","required");
+		$('#numberIdDiv').show();
+		$('#numberIdDiv').attr("required","required");
 		
 		$('#backId').show();
 		$('#backId').attr("required","required");
 	}
 	else if(type == "prc"){
-		$('#expireId').show();
-		$('#expireId').attr("required","required");
+		$('#numberIdDiv').show();
+		$('#numberIdDiv').attr("required","required");
 		
 		$('#backId').hide();
 		$('#backId').removeAttr("required");
 		
 	}
 	else if(type == "seaman"){
-		$('#expireId').show();
-		$('#expireId').attr("required","required");
+		$('#numberIdDiv').show();
+		$('#numberIdDiv').attr("required","required");
 		
 		$('#backId').hide();
 		$('#backId').removeAttr("required");
 	}
 	else if(type == "ssn"){
-		$('#expireId').hide();
-		$('#expireId').removeAttr("required");
-		$('#expireId').val('');
+		$('#numberIdDiv').hide();
+		$('#numberId').removeAttr("required");
+		$('#numberId').val(''); 
 		
 		$('#backId').show();
 		$('#backId').attr("required","required");
 	}
 	else if(type == "umid"){
-		$('#expireId').hide();
-		$('#expireId').removeAttr("required");
-		$('#expireId').val('');
+		$('#numberIdDiv').hide();
+		$('#numberId').removeAttr("required");
+		$('#numberId').val(''); 
 		
 		$('#backId').show();
 		$('#backId').attr("required","required");
 	}
 	else if(type == "voter"){
-		$('#expireId').hide();
-		$('#expireId').removeAttr("required");
-		$('#expireId').val('');
+		$('#numberIdDiv').hide();
+		$('#numberId').removeAttr("required");
+		$('#numberId').val(''); 
 		
 		$('#backId').show();
 		$('#backId').attr("required","required");
 	}
 	else if(type == "alien"){
-		$('#expireId').hide();
-		$('#expireId').removeAttr("required");
-		$('#expireId').val('');
+		$('#numberIdDiv').hide();
+		$('#numberId').removeAttr("required");
+		$('#numberId').val(''); 
 		
 		$('#backId').show();
 		$('#backId').attr("required","required");
 	}
 	else if(type == "bureau_of_fire_protection"){
-		$('#expireId').hide();
-		$('#expireId').removeAttr("required");
-		$('#expireId').val('');
+		$('#numberIdDiv').hide();
+		$('#numberId').removeAttr("required");
+		$('#numberId').val(''); 
 		
 		$('#backId').show();
 		$('#backId').attr("required","required");
 	}
 	else if(type == "pnp"){
-		$('#expireId').hide();
-		$('#expireId').removeAttr("required");
-		$('#expireId').val('');
+		$('#numberIdDiv').hide();
+		$('#numberId').removeAttr("required");
+		$('#numberId').val(''); 
 		
 		$('#backId').show();
 		$('#backId').attr("required","required");
 	}
 	else if(type == "integrated_bar"){
-		$('#expireId').hide();
-		$('#expireId').removeAttr("required");
-		$('#expireId').val('');
+		$('#numberIdDiv').hide();
+		$('#numberId').removeAttr("required");
+		$('#numberId').val(''); 
 		
 		$('#backId').show();
 		$('#backId').attr("required","required");
 	}
 	else if(type == "philhealth"){
-		$('#expireId').hide();
-		$('#expireId').removeAttr("required");
-		$('#expireId').val(''); 
+		$('#numberIdDiv').hide();
+		$('#numberId').removeAttr("required");
+		$('#numberId').val(''); 
 		
 		$('#backId').hide();
 		$('#backId').removeAttr("required");
