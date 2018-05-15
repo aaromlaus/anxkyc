@@ -167,12 +167,26 @@
          </div> 
         <div class="col-xs-6">
           <div class="form-group">
-           <label class="control-label">Upload ID (front)</label>
-            <input type="file" accept="image/x-png,image/gif,image/jpeg" id="fileUploadFrontId" required="required" class="btn btn-default btn-md" onchange="showPreviewFront();">
-          </div>
+           	<label class="control-label" >Upload ID (front)</label>
+            <input type="file" accept="image/x-png,image/gif,image/jpeg" name="card[0].frontFileName" id="fileUploadFrontId" required="required" class="form-control btn btn-default btn-md" onchange="showPreviewFront();" <c:if test="${user.card[0].frontImg != null}">style="display:none;"</c:if>>
+          	<c:if test="${user.card[0].frontImg != null}">
+          		<br>
+          		<span class="mar-l-20" id="ffileNameLblId">${user.card[0].frontFileName}</span>
+          		<a href="#" class="mar-l-10" onclick="removeFileFront();" id="ffileNameLinkId" title="Remove">
+		          <span class="glyphicon glyphicon-remove"></span>
+		        </a>
+          	</c:if>          
+          	</div>
           <div class="form-group" id="backId">
-           <label class="control-label">Upload ID (back)</label>
-            <input type="file" accept="image/x-png,image/gif,image/jpeg" id="fileUploadBackId" required="required" class="btn btn-default btn-md"  onchange="showPreviewBack();">
+           	<label class="control-label" >Upload ID (back)</label>
+            <input type="file" accept="image/x-png,image/gif,image/jpeg" name="card[0].backFileName" id="fileUploadBackId" class="form-control btn btn-default btn-md"  onchange="showPreviewBack();" <c:if test="${user.card[0].backImg != null}">style="display:none;"</c:if>>
+          	<c:if test="${user.card[0].backImg != null}">
+          		<br>
+          		<span class="mar-l-20"  id="bfileNameLblId">${user.card[0].backFileName}</span>
+          		<a href="#" class="mar-l-10" onclick="removeFileBack();" id="bfileNameLinkId" title="Remove">
+		          <span class="glyphicon glyphicon-remove"></span>
+		        </a>
+          	</c:if>
           </div>
           
         </div>
@@ -182,7 +196,7 @@
       </div>
     </div>
     <c:if test="${user.card[0] != null}">
-    <input  type="hidden" name="card[0].id" value="${user.card[0].id}">
+    	<input  type="hidden" name="card[0].id" value="${user.card[0].id}">
     </c:if>
     <input id="fImgId" type="hidden" name="card[0].frontImg" value="${user.card[0].frontImgStr}">
     <input id="bImgId"  type="hidden" name="card[0].backImg" value="${user.card[0].backImgStr}">
@@ -194,26 +208,25 @@
 <c:if test="${user.card[0].frontImg != null}">
 <script type="text/javascript">
 var frontImgVal = $('#fImgId').val();
-$('#fileUploadFrontId').popover({
+$('#ffileNameLblId').popover({
     content: "<img src='"+frontImgVal+"' style='width: 250px;height:200px;'>",
     placement : 'bottom',
     trigger: 'hover',
     html:true
   });
-presentBack = true;
 </script>
 
 </c:if>
 <c:if test="${user.card[0].backImg != null}">
 <script type="text/javascript">
 var frontImgVal = $('#bImgId').val();
-$('#fileUploadBackId').popover({
+$('#bfileNameLblId').popover({
     content: "<img src='"+frontImgVal+"' style='width: 250px;height:200px;'>",
     placement : 'bottom',
     trigger: 'hover',
     html:true
   });
-presentBack = true;
+
 </script>
 </c:if>
 

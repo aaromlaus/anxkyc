@@ -56,46 +56,58 @@ function employmentChanged(){
 	var status = $('input[name=employmentStatus]:checked').val();
 
 	if(status == 'employed'){
-		$('#sourceDivId').hide();
-		$('#fundsourceId').removeAttr("required");
-		$('#fundsourceId').val('');
-		
-		$('#industryDivId').show();
-		$('#industryId').attr("required","required");
-		
-		$('#employedSubId').show();
-		$('#titleId').attr("required","required");
-		$('#employerId').attr("required","required");
+		hideSourceDetails();
+		showIndustryDetails();
+		showEmploymentDetails();
 		
 	}else if(status == 'selfemployed'){
-		$('#sourceDivId').hide();
-		$('#fundsourceId').removeAttr("required");
-		$('#fundsourceId').val('');
-		
-		$('#industryDivId').show();
-		$('#industryId').attr("required","required");
-		
-		$('#employedSubId').hide();
-		$('#titleId').removeAttr("required");
-		$('#employerId').removeAttr("required");
-		$('#titleId').val('');
-		$('#employerId').val('');
+		hideSourceDetails();
+		hideEmploymentDetails();
 		
 	}else if(status == 'retired'|| status == 'unemployed'|| status == 'student'){
-		$('#sourceDivId').show();
-		$('#fundsourceId').attr("required","required");
-		
-		$('#industryDivId').hide();
-		$('#industryId').removeAttr("required");
-		$('#industryId').val('');
-		
-		$('#employedSubId').hide();
-		$('#titleId').removeAttr("required");
-		$('#employerId').removeAttr("required");
-		$('#titleId').val('');
-		$('#employerId').val('');
+		showSourceDetails();
+		hideIndustryDetails();
+		hideEmploymentDetails();
 	}
 }
+
+function showIndustryDetails(){
+	$('#industryDivId').show();
+	$('#industryId').attr("required","required");
+}
+
+function hideIndustryDetails(){
+	$('#industryDivId').hide();
+	$('#industryId').removeAttr("required");
+	$('#industryId').val('');
+}
+
+function showSourceDetails(){
+	$('#sourceDivId').show();
+	$('#fundsourceId').attr("required","required");
+}
+
+function hideSourceDetails(){
+	$('#sourceDivId').hide();
+	$('#fundsourceId').removeAttr("required");
+	$('#fundsourceId').val('');
+}
+
+function showEmploymentDetails(){
+	$('#employedSubId').show();
+	$('#titleId').attr("required","required");
+	$('#employerId').attr("required","required");
+}
+
+function hideEmploymentDetails(){
+	$('#employedSubId').hide();
+	$('#titleId').removeAttr("required");
+	$('#employerId').removeAttr("required");
+	$('#titleId').val('');
+	$('#employerId').val('');
+}
+
+
 
 function fundSourceChanged(){
 	var source = $('#fundsourceId').val();
@@ -114,155 +126,85 @@ function idTypeChanged(){
 	var type = $('#idTypeId').val()
 	console.log(type);
 	if(type == "afp"){
-		$('#numberIdDiv').show();
-		$('#numberIdDiv').attr("required","required");
-
-		$('#backId').show();
+		showNumberId();
+		showBackIdImage();
 	}
 	else if(type == "drivers_license"){
-		$('#numberIdDiv').show();
-		$('#numberIdDiv').attr("required","required");
-		
-		$('#backId').hide();
-		$('#backId').removeAttr("required");
-		
+		showNumberId();
+		hideBackIdImage();
 	}
 	else if(type == "gsis_ecard"){
-		$('#numberIdDiv').show();
-		$('#numberIdDiv').attr("required","required");
-		
-		$('#backId').hide();
-		$('#backId').removeAttr("required");
-		
+		showNumberId();
+		hideBackIdImage();		
 	}
 	else if(type == "nbi"){
-		$('#numberIdDiv').show();
-		$('#numberIdDiv').attr("required","required");
-		
-		$('#backId').hide();
+		showNumberId();
+		hideBackIdImage();
 	}
 	else if(type == "ncwdp"){
-		$('#numberIdDiv').show();
-		$('#numberIdDiv').attr("required","required");
-		
-		$('#backId').show();
+		showNumberId();
+		showBackIdImage();
 	}
 	else if(type == "ofw"){
-		$('#numberIdDiv').show();
-		$('#numberIdDiv').attr("required","required");
-		
-		$('#backId').show();
-		$('#backId').attr("required","required");
+		showNumberId();
+		showBackIdImage();
 	}
 	else if(type == "owwa"){
-		$('#numberIdDiv').show();
-		$('#numberIdDiv').attr("required","required");
-		
-		$('#backId').show();
-		$('#backId').attr("required","required");
+		showNumberId();
+		showBackIdImage();
 	}
 	else if(type == "passport"){
-		$('#numberIdDiv').show();
-		$('#numberIdDiv').attr("required","required");
-		
-		$('#backId').hide();
-		$('#backId').removeAttr("required");
-		
+		showNumberId();
+		hideBackIdImage();
 	}
 	else if(type == "police"){
-		$('#numberIdDiv').hide();
-		$('#numberId').removeAttr("required");
-		$('#numberId').val(''); 
-		
-		$('#backId').show();
-		$('#backId').attr("required","required");
+		hideNumberDiv();
+		showBackIdImage();
 	}
 	else if(type == "postal"){
-		$('#numberIdDiv').show();
-		$('#numberIdDiv').attr("required","required");
-		
-		$('#backId').show();
-		$('#backId').attr("required","required");
+		showNumberId();
+		showBackIdImage();
 	}
 	else if(type == "prc"){
-		$('#numberIdDiv').show();
-		$('#numberIdDiv').attr("required","required");
-		
-		$('#backId').hide();
-		$('#backId').removeAttr("required");
-		
+		showNumberId();
+		hideBackIdImage();
 	}
 	else if(type == "seaman"){
-		$('#numberIdDiv').show();
-		$('#numberIdDiv').attr("required","required");
-		
-		$('#backId').hide();
-		$('#backId').removeAttr("required");
+		showNumberId();
+		hideBackIdImage();
 	}
 	else if(type == "ssn"){
-		$('#numberIdDiv').hide();
-		$('#numberId').removeAttr("required");
-		$('#numberId').val(''); 
-		
-		$('#backId').show();
-		$('#backId').attr("required","required");
+		hideNumberDiv();
+		showBackIdImage();
 	}
 	else if(type == "umid"){
-		$('#numberIdDiv').hide();
-		$('#numberId').removeAttr("required");
-		$('#numberId').val(''); 
-		
-		$('#backId').show();
-		$('#backId').attr("required","required");
+		hideNumberDiv(); 
+		showBackIdImage();
 	}
 	else if(type == "voter"){
-		$('#numberIdDiv').hide();
-		$('#numberId').removeAttr("required");
-		$('#numberId').val(''); 
+		hideNumberDiv();
 		
-		$('#backId').show();
-		$('#backId').attr("required","required");
+		showBackIdImage();
 	}
 	else if(type == "alien"){
-		$('#numberIdDiv').hide();
-		$('#numberId').removeAttr("required");
-		$('#numberId').val(''); 
-		
-		$('#backId').show();
-		$('#backId').attr("required","required");
+		hideNumberDiv();
+		showBackIdImage();
 	}
 	else if(type == "bureau_of_fire_protection"){
-		$('#numberIdDiv').hide();
-		$('#numberId').removeAttr("required");
-		$('#numberId').val(''); 
-		
-		$('#backId').show();
-		$('#backId').attr("required","required");
+		hideNumberDiv();
+		showBackIdImage();
 	}
 	else if(type == "pnp"){
-		$('#numberIdDiv').hide();
-		$('#numberId').removeAttr("required");
-		$('#numberId').val(''); 
-		
-		$('#backId').show();
-		$('#backId').attr("required","required");
+		hideNumberDiv();
+		showBackIdImage();
 	}
 	else if(type == "integrated_bar"){
-		$('#numberIdDiv').hide();
-		$('#numberId').removeAttr("required");
-		$('#numberId').val(''); 
-		
-		$('#backId').show();
-		$('#backId').attr("required","required");
+		hideNumberDiv();
+		showBackIdImage();
 	}
 	else if(type == "philhealth"){
-		$('#numberIdDiv').hide();
-		$('#numberId').removeAttr("required");
-		$('#numberId').val(''); 
-		
-		$('#backId').hide();
-		$('#backId').removeAttr("required");
-		
+		hideNumberDiv();
+		hideBackIdImage();
 	}	
 }
 
@@ -270,6 +212,7 @@ var presentBack = false;
 var presentFront = false;
 
 function  showPreviewFront(){
+
 	var input = document.getElementById("fileUploadFrontId");
 
 	var fReader = new FileReader();
@@ -297,6 +240,7 @@ function  showPreviewFront(){
 }
 function  showPreviewBack(){
 	
+	
 	var input = document.getElementById("fileUploadBackId");
 
 	var fReader = new FileReader();
@@ -323,6 +267,41 @@ function  showPreviewBack(){
 		$('#bImgId').val(event.target.result);
 	}
 	
+}
+
+function showNumberId(){
+	$('#numberIdDiv').show();
+	$('#numberId').attr("required","required");
+}
+
+function hideNumberDiv(){
+	$('#numberIdDiv').hide();
+	$('#numberId').removeAttr("required");
+	$('#numberId').val(''); 
+}
+
+function hideBackIdImage(){
+	$('#backId').hide();
+	$('#fileUploadBackId').removeAttr("required");
+}
+
+function showBackIdImage(){
+	$('#backId').show();
+	$('#fileUploadBackId').attr("required","required");
+}
+
+function removeFileFront(){
+	$('#ffileNameLblId').popover('destroy');
+	$('#ffileNameLblId').hide();
+	$('#ffileNameLinkId').hide();
+	$('#fileUploadFrontId').show();
+}
+
+function removeFileBack(){
+	$('#bfileNameLblId').popover('destroy');
+	$('#bfileNameLblId').hide();
+	$('#bfileNameLinkId').hide();
+	$('#fileUploadBackId').show();
 }
 
 

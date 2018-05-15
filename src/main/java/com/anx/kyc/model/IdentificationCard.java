@@ -46,6 +46,12 @@ public class IdentificationCard implements Serializable {
 	private byte[] backImg;
 
 	private String expDateStr;
+
+	@Column(name = "front_file_name")
+	private String frontFileName;
+
+	@Column(name = "back_file_name")
+	private String backFileName;
 	
 	public long getId() {
 		return id;
@@ -114,6 +120,22 @@ public class IdentificationCard implements Serializable {
 
 	public String getFrontImgStr() {
 		return new String(this.frontImg);
+	}
+
+	public String getFrontFileName() {
+		return frontFileName;
+	}
+
+	public void setFrontFileName(String frontFileName) {
+		this.frontFileName = frontFileName;
+	}
+
+	public String getBackFileName() {
+		return backFileName;
+	}
+
+	public void setBackFileName(String backFileName) {
+		this.backFileName = backFileName;
 	}
 
 }

@@ -89,6 +89,8 @@ public class UserIdentificationController {
 			to.getCard().get(0).setIdNumber(card.getIdNumber());
 			to.getCard().get(0).setFrontImg(card.getFrontImg());
 			to.getCard().get(0).setBackImg(card.getBackImg());
+			to.getCard().get(0).setFrontFileName(card.getFrontFileName());
+			to.getCard().get(0).setBackFileName(card.getBackFileName());
 		}
 		
 		return to;
