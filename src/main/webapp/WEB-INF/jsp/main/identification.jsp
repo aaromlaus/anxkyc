@@ -62,7 +62,7 @@
 					<div class="verification-row" id="multipleAccountDivId" style="display: none; margin-top:2%">
 						<h4>Thank you. Which of the following applies to you on why you have multiple accounts?</h4>
 						<select class="selectpicker select-input"
-								data-live-search="true" id="accountOptionId">
+								data-live-search="true" id="accountMultipleOptionId">
 								<option value="#">Select here</option>
 								<option value="forgotPassword">Because I forgot my password </option>
 								<option value="cannotAccessAccount">Because I cannot access my account</option>
@@ -88,6 +88,17 @@
 		}
 		
 	});
+	
+	$('#accountMultipleOptionId').change(function() {
+		if($(this).index() != 0) {
+			
+			if($(this).val() == "forgotPassword") {
+				location.href = "../forgotPassword";
+			}
+		}
+		
+	});
+	
 </script>
 
 
