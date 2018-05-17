@@ -166,12 +166,14 @@
           </div>
          </div> 
         <div class="col-xs-6">
-          <div class="form-group">
+          <div class="form-group"  id="frontId">
            	<label class="control-label" >Upload ID (front)</label>
-            <input type="file" accept="image/x-png,image/gif,image/jpeg" name="card[0].frontFileName" id="fileUploadFrontId" required="required" class="form-control btn btn-default btn-md" onchange="showPreviewFront();" <c:if test="${user.card[0].frontImg != null}">style="display:none;"</c:if>>
+           	<c:if test="${user.card[0].frontImg == null}">
+            	<input type="file" accept="image/x-png,image/gif,image/jpeg" name="card[0].frontFileName" id="fileUploadFrontId" required="required" class="form-control btn btn-default btn-md" onchange="showPreviewFront();" >
+          	</c:if>
           	<c:if test="${user.card[0].frontImg != null}">
           		<br>
-          		<span class="mar-l-20" id="ffileNameLblId">${user.card[0].frontFileName}</span>
+          		<input type="text" readonly class="fileName mar-l-20" name="card[0].frontFileName"  id="ffileNameLblId" value="${user.card[0].frontFileName}"/>
           		<a href="#" class="mar-l-10" onclick="removeFileFront();" id="ffileNameLinkId" title="Remove">
 		          <span class="glyphicon glyphicon-remove"></span>
 		        </a>
@@ -179,10 +181,12 @@
           	</div>
           <div class="form-group" id="backId">
            	<label class="control-label" >Upload ID (back)</label>
-            <input type="file" accept="image/x-png,image/gif,image/jpeg" name="card[0].backFileName" id="fileUploadBackId" class="form-control btn btn-default btn-md"  onchange="showPreviewBack();" <c:if test="${user.card[0].backImg != null}">style="display:none;"</c:if>>
+           	<c:if test="${user.card[0].backImg == null}">
+            	<input type="file" accept="image/x-png,image/gif,image/jpeg" name="card[0].backFileName" id="fileUploadBackId" class="form-control btn btn-default btn-md"  onchange="showPreviewBack();" <c:if test="${user.card[0].backImg != null}">style="display:none;"</c:if>>
+          	</c:if>
           	<c:if test="${user.card[0].backImg != null}">
           		<br>
-          		<span class="mar-l-20"  id="bfileNameLblId">${user.card[0].backFileName}</span>
+          		<input type="text" readonly class="fileName mar-l-20" name="card[0].backFileName"  id="bfileNameLblId" value="${user.card[0].backFileName}"/>
           		<a href="#" class="mar-l-10" onclick="removeFileBack();" id="bfileNameLinkId" title="Remove">
 		          <span class="glyphicon glyphicon-remove"></span>
 		        </a>

@@ -190,6 +190,16 @@ select{
 	margin-left: 10px;
 }
 
+.fileName{
+	width: auto !important; 
+    background: #e4e4e4 !important;
+    margin-bottom: 0 !important; 
+    border: 1px solid #e4e4e4 !important;
+    padding: 1% !important;
+    font-size: 100%  !important;
+    color: #555  !important;
+}
+
 
 
 

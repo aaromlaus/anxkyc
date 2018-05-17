@@ -292,16 +292,17 @@ function showBackIdImage(){
 
 function removeFileFront(){
 	$('#ffileNameLblId').popover('destroy');
-	$('#ffileNameLblId').hide();
-	$('#ffileNameLinkId').hide();
-	$('#fileUploadFrontId').show();
+	$('#ffileNameLblId').remove();
+	$('#ffileNameLinkId').remove();
+	$('#frontId').append('<input type="file" accept="image/x-png,image/gif,image/jpeg" name="card[0].frontFileName" id="fileUploadFrontId" required="required" class="form-control btn btn-default btn-md" onchange="showPreviewFront();" >');
 }
 
 function removeFileBack(){
 	$('#bfileNameLblId').popover('destroy');
-	$('#bfileNameLblId').hide();
-	$('#bfileNameLinkId').hide();
-	$('#fileUploadBackId').show();
+	$('#bfileNameLblId').remove();
+	$('#bfileNameLinkId').remove();
+	$('#backId').append('<input type="file" accept="image/x-png,image/gif,image/jpeg" name="card[0].backFileName" id="fileUploadBackId" required="required" class="form-control btn btn-default btn-md"  onchange="showPreviewBack();">');
+
 }
 
 
