@@ -40,12 +40,17 @@ public class FileUploadServiceImpl implements FileUploadService {
 				directory.mkdirs();
 			}
 			bytes = file.getBytes();
-			String fileName = anxUser.getFirstName()+anxUser.getMiddleName()+anxUser.getLastName()+"Id"+anxUser.getUserId();
+			Long systemMills = System.currentTimeMillis();
+			String fileName = anxUser.getFirstName()+anxUser.getMiddleName()+anxUser.getLastName()+"Id"+anxUser.getUserId()+"_"+systemMills;
 			Path path = Paths.get(UPLOAD_PATH + fileName);
 			Files.write(path, bytes);
 			
 			if(uvService.checkLevelCompletion(UserLevelType.LEVEL_2, anxUser.getUserId())) {
 				anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_2_PENDING));
+			}
+			
+			if(uvService.checkLevelCompletion(UserLevelType.LEVEL_3, anxUser.getUserId())) {
+				anxUser.setUserLevel(userService.getUserLevel(UserLevelType.LEVEL_3_PENDING));
 			}
 			
 			userService.saveUser(anxUser,false);

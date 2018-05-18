@@ -22,6 +22,8 @@ public class UserImage {
 	private AnxUser anxUser;
 	@Column(name = "link")
 	private String link;
+	@Column(name ="level")
+	private String level;
 
 
 	public UserImage(AnxUser anxUser,String link) {
