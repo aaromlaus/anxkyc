@@ -8,8 +8,6 @@ import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,10 +31,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 	private String UPLOAD_PATH;
 	
 	@Override
-	public void uploadAndSaveImage(MultipartFile file) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-		AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
+	public void uploadAndSaveImage(MultipartFile file,AnxUser anxUser) {
 		
 		byte[] bytes;
 		try {

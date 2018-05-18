@@ -61,8 +61,10 @@ public class UserDashboardController {
 			redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("user.upload.image.error"));
 			return "redirect:/profile/main";
 		}
-
-		fileUploadService.uploadAndSaveImage(file);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
+		fileUploadService.uploadAndSaveImage(file,anxUser);
 		redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("user.upload.image.success"));
 
@@ -103,6 +105,24 @@ public class UserDashboardController {
 		List<PhoneCode> countryCodeList = userService.getAllPhoneCode();
 		model.put("countryCodeList", countryCodeList);
 		session.setAttribute("countryCodeList", countryCodeList);
+	}
+	
+	@PostMapping("/multiplefileupload")
+	public String multipleFileUpload(Map<String, Object> model, @RequestParam("fileAddress") MultipartFile[] files,
+			RedirectAttributes redirectAttributes) {
+
+		if (files.length == 0 ) {
+			redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.DANGER.getValue());
+			redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("user.upload.image.error"));
+			return "redirect:/profile/main";
+		}
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		AnxUser anxUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
+		for(int i =0; i < files.length ; i++) {
+			fileUploadService.uploadAndSaveImage(files[i],anxUser);			
+		}
+		return "redirect:/profile/main";
 	}
 
 }

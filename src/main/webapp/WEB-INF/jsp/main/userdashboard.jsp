@@ -205,6 +205,33 @@
 										</td>
 									</tr>
 								</c:if>
+								<c:if
+									test="${userLevels.userLevelName.equalsIgnoreCase('level3')}">
+									<tr class="collapse out ${userLevels.userLevelId}"
+										id="${userLevels.userLevelId}">
+										<td colspan="5" class="container">
+											<div class="col-sm-12 bg-grey-pad-6">
+												<div class="text-center">
+													<form:form method="POST" action="/profile/multiplefileupload/"
+														enctype="multipart/form-data">
+														<div class="level-2-grp">
+															<h3 class="row-header-headings">
+																<spring:message
+																	code="kyc.label.image.upload.verification" />
+															</h3>
+															<input type="file" id="fileAddress" multiple="multiple"
+																accept="image/png, image/jpeg, image/gif" name="fileAddress">
+															<button type="submit" class="btn btn-primary start">
+																<i class="glyphicon glyphicon-upload"></i> <span><spring:message
+																		code="kyc.label.upload" /></span>
+															</button>
+														</div>
+													</form:form>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</c:if>
 							</c:forEach>
 						</tbody>
 					</table>
