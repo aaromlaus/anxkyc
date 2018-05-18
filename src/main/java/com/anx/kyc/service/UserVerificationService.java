@@ -6,4 +6,6 @@ public interface UserVerificationService {
 	
 	public boolean checkLevelCompletion(String level, String userId);
 
+	public void updateVerificationStatus(String userId, String verification, String status);
+
 }

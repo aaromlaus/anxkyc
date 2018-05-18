@@ -121,7 +121,7 @@
 
 														</span>
 														<br />
-														<p class="mar-top-10">Email Verification</p>
+														<p>Email Verification</p>
 														<a class="btn btn-success mar-top-10">Completed</a>
 													</c:if>
 													<c:if
@@ -156,9 +156,15 @@
 
 														<a class="btn btn-success mar-top-10" disabled>Completed</a>
 													</c:if>
-													<c:if
-														test="${!(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
-														<a class="btn btn-primary mar-top-10" href="../../identification/">Verify</a>
+													<c:if test="${!(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
+														<c:choose>
+															<c:when test="${(anxUser.identificationCompleted)}">
+																<a class="btn btn-success mar-top-10" href="../../identification/">Completed</a>
+															</c:when>
+															<c:otherwise>
+																<a class="btn btn-primary mar-top-10" href="../../identification/">Verify</a>
+															</c:otherwise>
+														</c:choose>
 													</c:if>
 												</div>
 											</div>

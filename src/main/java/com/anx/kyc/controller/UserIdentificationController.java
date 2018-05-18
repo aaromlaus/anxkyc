@@ -1,12 +1,6 @@
 package com.anx.kyc.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,15 +8,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.anx.kyc.common.VerificationStatusType;
+import com.anx.kyc.common.VerificationType;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.IdentificationCard;
 import com.anx.kyc.service.UserService;
+import com.anx.kyc.service.UserVerificationService;
 import com.anx.kyc.util.AnxUtil;
 
 @Controller
@@ -31,6 +25,9 @@ public class UserIdentificationController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private UserVerificationService userVerificationService;
 	
 	@RequestMapping("/")
 	public String showIdentityVerificationPage(Map<String, Object> model) {
@@ -63,7 +60,9 @@ public class UserIdentificationController {
 		String currentPrincipalName = authentication.getName();
 		AnxUser dbUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
 		copyFormFieldsValue(dbUser,anxUser);
+		dbUser.setIdentificationCompleted(true);
 		userService.saveUser(dbUser);
+		userVerificationService.updateVerificationStatus(dbUser.getUserId(), VerificationType.IDENTIFICATION_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 		return "redirect:/profile/main";
 	}
 	

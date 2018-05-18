@@ -40,5 +40,10 @@ public class UserVerificationServiceImpl implements UserVerificationService {
 		}
 		return true;
 	}
+	
+	@Override
+	public void updateVerificationStatus(String userId, String verification, String status) {
+		uvReposity.updateVerificationStatus(userId, verification, status);
+	}
 
 }

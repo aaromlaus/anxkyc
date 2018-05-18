@@ -260,3 +260,7 @@ a#previewBtn:hover {
 .mar-top-5 {
 	margin-top: 5px;
 }
+
+.navbar-nav>li>a:hover {
+    background-color: #902222;
+}

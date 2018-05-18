@@ -121,6 +121,9 @@ public class AnxUser implements Serializable {
 	
 	@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<IdentificationCard> card;
+	
+	@Column(name="identification_completed", columnDefinition="tinyint(1) default 0")
+	private boolean identificationCompleted;
 
 	private String birthDateStr;
 	
@@ -384,6 +387,14 @@ public class AnxUser implements Serializable {
 
 	public void setBirthDateStr(String birthDateStr) {
 		this.birthDateStr = birthDateStr;
+	}
+
+	public boolean isIdentificationCompleted() {
+		return identificationCompleted;
+	}
+
+	public void setIdentificationCompleted(boolean identificationCompleted) {
+		this.identificationCompleted = identificationCompleted;
 	}
 
 
