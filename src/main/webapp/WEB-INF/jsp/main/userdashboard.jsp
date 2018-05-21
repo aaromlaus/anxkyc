@@ -217,7 +217,7 @@
 														<div class="level-2-grp">
 															<h3 class="row-header-headings">
 																<spring:message
-																	code="kyc.label.image.upload.verification" />
+																	code="kyc.label.image.address.verification" />
 															</h3>
 															<input type="file" id="fileAddress" multiple="multiple"
 																accept="image/png, image/jpeg, image/gif" name="fileAddress">

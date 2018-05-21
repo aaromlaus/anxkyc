@@ -17,12 +17,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.anx.kyc.common.AlertStyleMessages;
+import com.anx.kyc.common.VerificationStatusType;
+import com.anx.kyc.common.VerificationType;
 import com.anx.kyc.helper.AnxMessageHelper;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.model.UserLevel;
 import com.anx.kyc.service.FileUploadService;
 import com.anx.kyc.service.UserService;
+import com.anx.kyc.service.UserVerificationService;
 import com.anx.kyc.util.AnxUtil;
 
 @Controller
@@ -37,6 +40,9 @@ public class UserDashboardController {
 	
 	@Autowired
 	private FileUploadService fileUploadService;
+	
+	@Autowired
+	private UserVerificationService userVerificationService;
 	
 	@RequestMapping(value = "/main")
 	public String mainPage(Map<String, Object> model, HttpSession session) {
@@ -67,7 +73,7 @@ public class UserDashboardController {
 		fileUploadService.uploadAndSaveImage(file,anxUser);
 		redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("user.upload.image.success"));
-
+		userVerificationService.updateVerificationStatus(anxUser.getUserId(), VerificationType.SELFIE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 		return "redirect:/profile/main";
 	}
 
@@ -122,6 +128,7 @@ public class UserDashboardController {
 		for(int i =0; i < files.length ; i++) {
 			fileUploadService.uploadAndSaveImage(files[i],anxUser);			
 		}
+		userVerificationService.updateVerificationStatus(anxUser.getUserId(), VerificationType.ADDRESS_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 		return "redirect:/profile/main";
 	}
 
