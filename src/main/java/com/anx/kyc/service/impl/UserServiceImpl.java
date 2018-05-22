@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 import com.anx.kyc.common.RoleType;
 import com.anx.kyc.common.UserLevelType;
+import com.anx.kyc.common.VerificationStatusType;
+import com.anx.kyc.common.VerificationType;
 import com.anx.kyc.helper.AnxMessageHelper;
 import com.anx.kyc.helper.EmailHelper;
 import com.anx.kyc.model.AnxUser;
@@ -158,13 +160,14 @@ public class UserServiceImpl implements UserService {
 				user.setActive(true);
 				user.setVerificationCode("");
 				saveUser(user, false);
+				uvService.updateVerificationStatus(user.getUserId(), VerificationType.EMAIL_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 				return user;
 			}
 		}
 
 		return null;
 	}
-
+	
 	@Override
 	public String generateandSetVerificationCode(AnxUser anxUser) {
 		String verificationCode = UUID.randomUUID().toString();
@@ -335,5 +338,5 @@ public class UserServiceImpl implements UserService {
 			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_2_PENDING));
 		}
 	}
-
+	
 }

@@ -178,6 +178,10 @@ public class AnxUtil {
 		}
 		return null;
 	}
+	
+	public static boolean isNotNullOrEmpty(String value) {
+		return value != null && !value.isEmpty();
+	}
  	
 
 }

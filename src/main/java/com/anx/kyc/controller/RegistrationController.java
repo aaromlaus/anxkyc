@@ -18,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.anx.kyc.common.AlertStyleMessages;
+import com.anx.kyc.common.VerificationStatusType;
+import com.anx.kyc.common.VerificationType;
 import com.anx.kyc.helper.AnxMessageHelper;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.service.UserService;
 import com.anx.kyc.service.UserVerificationService;
+import com.anx.kyc.util.AnxUtil;
 import com.anx.kyc.validator.RegistrationFormValidator;
 
 @Controller
@@ -90,13 +93,15 @@ public class RegistrationController {
 		String successMessage = amHelper.get("registration.mobile.success");
 		String verificationCode = userService.generateandSetVerificationCode(anxUser);
 		userService.saveUserDetails(anxUser);
-		
-		if(anxUser.getEmailAddress() != null && !anxUser.getEmailAddress().isEmpty()) {
-			userService.prepareAndSendUserRegistrationEmail(anxUser, verificationCode, request);
-			
-			successMessage = amHelper.get("registration.email.success");
-		}
 		userVerService.addUserVerification(anxUser.getUserId());
+		
+		if(AnxUtil.isNotNullOrEmpty(anxUser.getEmailAddress())) {
+			userService.prepareAndSendUserRegistrationEmail(anxUser, verificationCode, request);
+			successMessage = amHelper.get("registration.email.success");
+		} else if(AnxUtil.isNotNullOrEmpty(anxUser.getPhoneNumber())) {
+			userVerService.updateVerificationStatus(anxUser.getUserId(), VerificationType.PHONE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+		}
+		
 		model.put("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		model.put("msgDetails", successMessage);
 		
