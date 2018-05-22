@@ -99,7 +99,7 @@ public class RegistrationController {
 			userService.prepareAndSendUserRegistrationEmail(anxUser, verificationCode, request);
 			successMessage = amHelper.get("registration.email.success");
 		} else if(AnxUtil.isNotNullOrEmpty(anxUser.getPhoneNumber())) {
-			userVerService.updateVerificationStatus(anxUser.getUserId(), VerificationType.PHONE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+			userVerService.updateVerificationStatus(anxUser, VerificationType.PHONE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 		}
 		
 		model.put("msgCss", AlertStyleMessages.SUCCESS.getValue());

@@ -62,7 +62,7 @@ public class UserIdentificationController {
 		copyFormFieldsValue(dbUser,anxUser);
 		dbUser.setIdentificationCompleted(true);
 		userService.saveUser(dbUser);
-		userVerificationService.updateVerificationStatus(dbUser.getUserId(), VerificationType.IDENTIFICATION_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+		userVerificationService.updateVerificationStatus(dbUser, VerificationType.IDENTIFICATION_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 		return "redirect:/profile/main";
 	}
 	

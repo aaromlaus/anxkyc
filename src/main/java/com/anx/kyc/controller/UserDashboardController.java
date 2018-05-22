@@ -73,7 +73,7 @@ public class UserDashboardController {
 		fileUploadService.uploadAndSaveImage(file,anxUser);
 		redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("user.upload.image.success"));
-		userVerificationService.updateVerificationStatus(anxUser.getUserId(), VerificationType.SELFIE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+		userVerificationService.updateVerificationStatus(anxUser, VerificationType.SELFIE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 		return "redirect:/profile/main";
 	}
 
@@ -128,7 +128,7 @@ public class UserDashboardController {
 		for(int i =0; i < files.length ; i++) {
 			fileUploadService.uploadAndSaveImage(files[i],anxUser);			
 		}
-		userVerificationService.updateVerificationStatus(anxUser.getUserId(), VerificationType.ADDRESS_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+		userVerificationService.updateVerificationStatus(anxUser, VerificationType.ADDRESS_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 		return "redirect:/profile/main";
 	}
 

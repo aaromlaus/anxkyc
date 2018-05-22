@@ -160,7 +160,7 @@ public class UserServiceImpl implements UserService {
 				user.setActive(true);
 				user.setVerificationCode("");
 				saveUser(user, false);
-				uvService.updateVerificationStatus(user.getUserId(), VerificationType.EMAIL_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+				uvService.updateVerificationStatus(user, VerificationType.EMAIL_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 				return user;
 			}
 		}
@@ -266,10 +266,9 @@ public class UserServiceImpl implements UserService {
 			if (null != user) {
 
 				user.setEmailAddress(String.valueOf(session.getServletContext().getAttribute("myAccountEmail")));
-				checkAndUpdateLevel2Completion(user);
-
+				
 				saveUser(user, false);
-				uvService.updateVerificationStatus(user.getUserId(), VerificationType.EMAIL_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+				uvService.updateVerificationStatus(user, VerificationType.EMAIL_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 				
 				session.getServletContext().removeAttribute("myAccountCode");
 				session.getServletContext().removeAttribute("myAccountEmail");
@@ -306,10 +305,9 @@ public class UserServiceImpl implements UserService {
 			if (null != user) {
 				user.setPhoneNumber(requestJson.get("phoneNumber").getAsString());
 				user.setPhoneCode(findPhoneCodeById(Long.valueOf(requestJson.get("phoneCodeId").getAsString())));
-				checkAndUpdateLevel2Completion(user);
 				
 				saveUser(user, false);
-				uvService.updateVerificationStatus(user.getUserId(), VerificationType.PHONE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+				uvService.updateVerificationStatus(user, VerificationType.PHONE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 				
 				if (null != requestJson.get("currentPage") && !requestJson.get("currentPage").isJsonNull()
 						&& !requestJson.get("currentPage").getAsString().equals("")) {
@@ -338,10 +336,4 @@ public class UserServiceImpl implements UserService {
 		return auRepository.findById(id);
 	}
 
-	private void checkAndUpdateLevel2Completion(AnxUser user) {
-		if (uvService.checkLevelCompletion(UserLevelType.LEVEL_2, user.getUserId())) {
-			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_2_PENDING));
-		}
-	}
-	
 }
