@@ -269,6 +269,8 @@ public class UserServiceImpl implements UserService {
 				checkAndUpdateLevel2Completion(user);
 
 				saveUser(user, false);
+				uvService.updateVerificationStatus(user.getUserId(), VerificationType.EMAIL_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+				
 				session.getServletContext().removeAttribute("myAccountCode");
 				session.getServletContext().removeAttribute("myAccountEmail");
 				if (null != requestJson.get("currentPage") && !requestJson.get("currentPage").isJsonNull()
@@ -305,7 +307,10 @@ public class UserServiceImpl implements UserService {
 				user.setPhoneNumber(requestJson.get("phoneNumber").getAsString());
 				user.setPhoneCode(findPhoneCodeById(Long.valueOf(requestJson.get("phoneCodeId").getAsString())));
 				checkAndUpdateLevel2Completion(user);
+				
 				saveUser(user, false);
+				uvService.updateVerificationStatus(user.getUserId(), VerificationType.PHONE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+				
 				if (null != requestJson.get("currentPage") && !requestJson.get("currentPage").isJsonNull()
 						&& !requestJson.get("currentPage").getAsString().equals("")) {
 					return requestJson.get("currentPage").getAsString();
