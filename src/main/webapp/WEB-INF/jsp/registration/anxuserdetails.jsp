@@ -46,7 +46,7 @@
 			<form:hidden path="phoneNumber" required="required" class="form" />
 			<form:hidden path="phoneCode.phoneCodeId" required="required" class="form" />	
 			<c:if test="${empty msgDetails}">
-				<input type="submit" class="form-btn semibold" value="Save Changes" />
+				<input type="submit" class="form-btn semibold" value="Save Changes" onclick="showSpinner()"/>
 			</c:if>
 		</form:form>
 		<div class="clear"></div>
@@ -57,7 +57,7 @@
 <center>
 	Already have an account? <a href="../login" target="blank"><spring:message code="kyc.btn.signin"/> </a>
 </center>
-
+<jsp:include page="../common/spinner.jsp"></jsp:include>
 <script>
 
 	$(function() {
@@ -73,6 +73,8 @@
 			$("#birthDateId").datepicker("option", "dateFormat", $(this).val());
 		});
 	});
-	
+	function showSpinner(){
+		$('#spinnerId').show();
+	};
 </script>
 

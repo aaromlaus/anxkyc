@@ -264,3 +264,28 @@ a#previewBtn:hover {
 .navbar-nav>li>a:hover {
     background-color: #902222;
 }
+
+div.spinnerImg{
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    background: url(../images/spinner2.gif);
+    background-size: 100%;
+}
+
+
+.spinnerDiv{
+    z-index: 1000000;
+    background: #e9e9e9;  
+    display: none;       
+    position: absolute;   
+    top: 0;                 
+    right: 0;               
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+}
