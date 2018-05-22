@@ -35,7 +35,7 @@
 			<br>
 			<span class="reset-password__note"><spring:message code="kyc.account.registration.msg1"/></span> 
 			<br>
-			<span class="reset-password__note"><spring:message code="kyc.account.registration.msg2"/></span>
+			<span class="reset-password__note"><c:out value="${msgDetails}"></c:out></span>
 		
 			<button class="btn-sign-in"  onclick="login()"><spring:message code="kyc.label.signin"/></button>
 		</div>
