@@ -5,12 +5,10 @@
 
 <head>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/form.css">
 <script src="/js/myaccount.js"></script>
@@ -212,21 +210,9 @@
 										<td colspan="5" class="container">
 											<div class="col-sm-12 bg-grey-pad-6">
 												<div class="text-center">
-													<form:form method="POST" action="/profile/multiplefileupload/"
-														enctype="multipart/form-data">
-														<div class="level-2-grp">
-															<h3 class="row-header-headings">
-																<spring:message
-																	code="kyc.label.image.address.verification" />
-															</h3>
-															<input type="file" id="fileAddress" multiple="multiple"
-																accept="image/png, image/jpeg, image/gif" name="fileAddress">
-															<button type="submit" class="btn btn-primary start">
-																<i class="glyphicon glyphicon-upload"></i> <span><spring:message
-																		code="kyc.label.upload" /></span>
-															</button>
-														</div>
-													</form:form>
+													<span class="fa fa-home font-size-60 "></span><br/>
+													<p class="mar-top-10">Address Verification</p>
+													<a class="btn btn-primary mar-top-10" href="../../address/verification/">Verify</a>
 												</div>
 											</div>
 										</td>

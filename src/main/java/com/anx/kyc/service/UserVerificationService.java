@@ -10,5 +10,4 @@ public interface UserVerificationService {
 
 	public void updateVerificationStatus(AnxUser user, String verification, String status);
 
-
 }

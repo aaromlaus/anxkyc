@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -124,6 +125,21 @@ public class AnxUser implements Serializable {
 	
 	@Column(name="identification_completed", columnDefinition="tinyint(1) default 0")
 	private boolean identificationCompleted;
+	
+	@OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "current_add_id", referencedColumnName = "id")
+	private Address currentAddress;
+
+	@OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "permanent_add_id", referencedColumnName = "id")
+	private Address permanentAddress;
+	
+	@Column(name="same_address", columnDefinition="tinyint(1) default 0")
+	private boolean currentAddressSame;
+	
+	@OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_doc_id", referencedColumnName = "id")
+	private AddressVerificationDoc addressVerificationDoc;
 
 	private String birthDateStr;
 	
@@ -395,6 +411,38 @@ public class AnxUser implements Serializable {
 
 	public void setIdentificationCompleted(boolean identificationCompleted) {
 		this.identificationCompleted = identificationCompleted;
+	}
+
+	public Address getCurrentAddress() {
+		return currentAddress;
+	}
+
+	public void setCurrentAddress(Address currentAddress) {
+		this.currentAddress = currentAddress;
+	}
+
+	public Address getPermanentAddress() {
+		return permanentAddress;
+	}
+
+	public void setPermanentAddress(Address permanentAddress) {
+		this.permanentAddress = permanentAddress;
+	}
+
+	public AddressVerificationDoc getAddressVerificationDoc() {
+		return addressVerificationDoc;
+	}
+
+	public void setAddressVerificationDoc(AddressVerificationDoc addressVerificationDoc) {
+		this.addressVerificationDoc = addressVerificationDoc;
+	}
+
+	public boolean isCurrentAddressSame() {
+		return currentAddressSame;
+	}
+
+	public void setCurrentAddressSame(boolean currentAddressSame) {
+		this.currentAddressSame = currentAddressSame;
 	}
 
 

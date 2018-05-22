@@ -170,6 +170,26 @@ public class AnxUtil {
 		return idList;
 	}
 	
+
+	
+	public static Map<String,String> getDocTypeList(){
+		
+
+		Map<String,String> docTypeList = new HashMap<String,String>();
+		
+		docTypeList.put("bank_statement","Bank Statement (within the last 6 months)");
+        docTypeList.put("credit_card","Credit Card Billing Statement (within the last 6 months)");
+        docTypeList.put("utility_bill","Utility Bill (water, electricity, cable, phone - within the last 6 months)");
+        docTypeList.put("mobile_phone","Mobile Phone Bill (within the last 6 months)");
+        docTypeList.put("income_tax_return","Income Tax Return (Form 1700 or 1701)");
+        docTypeList.put("mail","Mail from a University, Government Institution or Embassy");
+        docTypeList.put("barangay_certification","Barangay Clearance / Barangay Certification of Residency");
+        docTypeList.put("transcript_of_records","Transcript of Records (within the last 6 months)");
+		
+		return docTypeList;
+	}
+	
+	
 	public static Date parseFormatterdDate(String date, String format) {
 		try {
 			return new SimpleDateFormat(format).parse(date);
