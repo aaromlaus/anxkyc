@@ -23,14 +23,14 @@
 			    ${msgDetails }
 			</div>
 		</c:if>
-		<form:form id="myFormId" method="POST" modelAttribute="anxUserForm" action="save" >
+		<form:form id="myFormId" method="POST" modelAttribute="anxUserForm" action="save" onsubmit="showSpinner();" >
 			<form:input path="birthDate" required="required" class="form" id="birthDateId" placeholder="Date of Birth" />
-			<form:input path="houseNumber" placeholder="House or Building #" required="required" class="form" />
-			<form:input path="street" placeholder="Street" required="required" class="form" />
-			<form:input path="city" placeholder="City" required="required" class="form" />
-			<form:input path="province" placeholder="Province" required="required" class="form" />
-			<form:input path="country" placeholder="Country" required="required" class="form" />
-			<form:input path="sourceOfFund" list="sourceOfFundList" placeHolder="Source of Fund" required="required" class="form" readonly="readonly" />
+			<form:input path="houseNumber" placeholder="House or Building #" required="required" class="form" id="houseNumberId"/>
+			<form:input path="street" placeholder="Street" required="required" class="form" id="streetId"/>
+			<form:input path="city" placeholder="City" required="required" class="form" id="cityId"/>
+			<form:input path="province" placeholder="Province" required="required" class="form" id="provinceId"/>
+			<form:input path="country" placeholder="Country" required="required" class="form" id="countryId"/>
+			<form:input path="sourceOfFund" list="sourceOfFundList" placeHolder="Source of Fund" required="required" class="form" readonly="readonly" id="sourceOfFundId" />
 			<datalist id="sourceOfFundList">
 				<option value="Salary" />
 				<option value="Family member or remittance" />
@@ -46,7 +46,7 @@
 			<form:hidden path="phoneNumber" required="required" class="form" />
 			<form:hidden path="phoneCode.phoneCodeId" required="required" class="form" />	
 			<c:if test="${empty msgDetails}">
-				<input type="submit" class="form-btn semibold" value="Save Changes" onclick="showSpinner()"/>
+				<input type="submit" class="form-btn semibold" value="Save Changes" />
 			</c:if>
 		</form:form>
 		<div class="clear"></div>
