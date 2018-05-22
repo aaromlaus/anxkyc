@@ -7,7 +7,10 @@
 }
 
 body {
-	background: #567;
+	/* background: #567; */
+	/* background: gainsboro; */
+	background-image: url("/images/bg.jpg");
+	background-size: 100%;
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -53,7 +56,7 @@ body {
 }
 
 #form-block h1{
-	background: #3399cc;
+	background: saddlebrown;
 	padding: 20px 0;
 	font-size: 140%;
 	font-weight: 300;
