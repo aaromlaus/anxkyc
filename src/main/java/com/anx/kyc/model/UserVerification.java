@@ -20,17 +20,11 @@ public class UserVerification implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="user_ver_id")
-	private String userVerificationId;
-	
 	@Column(name="user_id")
 	private String userId;
 	
 	@Column(name="verification")
 	private String verification;
-	
-	@Column(name="description")
-	private String description;
 	
 	@Column(name="status")
 	private String status;
@@ -44,14 +38,6 @@ public class UserVerification implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getUserVerificationId() {
-		return userVerificationId;
-	}
-
-	public void setUserVerificationId(String userVerificationId) {
-		this.userVerificationId = userVerificationId;
 	}
 
 	public String getUserId() {
@@ -68,14 +54,6 @@ public class UserVerification implements Serializable {
 
 	public void setVerification(String verification) {
 		this.verification = verification;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getStatus() {
