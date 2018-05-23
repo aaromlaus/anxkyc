@@ -83,24 +83,22 @@
 										<td><c:out value="${userLevels.requirement}" /></td>
 										<td><c:out value="${userLevels.cashIn}" /></td>
 										<td><c:out value="${userLevels.cashOut}" /></td>
-										<td><span
-											class="${(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup) ? 'glyphicon glyphicon-ok':''}"></span>&nbsp
+										<td><span class="${(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup) ? 'glyphicon glyphicon-ok':''}"></span>&nbsp
 										</td>
 									</tr>
 								</c:if>
-								<c:if
-									test="${userLevels.userLevelName.equalsIgnoreCase('level1')}">
-									<tr class="collapse out ${userLevels.userLevelId}"
-										id="${userLevels.userLevelId}">
-										<td colspan="5" class="container">
-											<div class="col-sm-12 bg-grey-pad-6">
-												<div class="text-center">
-													<span
-														class="glyphicon ${anxUser.phoneNumber.length() >0 ? 'glyphicon-phone':'glyphicon-envelope'}  font-size-60 ">
-
-													</span> <br />
-													<p class="mar-top-10">${anxUser.phoneNumber.length() >0 ? 'Phone Verification':'Email Verification'}</p>
-													<a class="btn btn-success mar-top-10" disabled>Completed</a>
+								<c:if test="${userLevels.userLevelName.equalsIgnoreCase('level1')}">
+									<tr>
+										<td colspan="5" class="container bg-grey-pad-6 zeroPadding">
+											<div  class="collapse out ${userLevels.userLevelId}" id="${userLevels.userLevelId}">
+												<div class="col-sm-12">
+													<div class="text-center">
+														<span  style="display:none" class="glyphicon ${anxUser.phoneNumber.length() >0 ? 'glyphicon-phone':'glyphicon-envelope'}  font-size-60 ">
+	
+														</span> <br />
+														<p class="mar-top-10">${anxUser.phoneNumber.length() >0 ? 'Phone Verification':'Email Verification'}</p>
+														<a class="btn btn-success mar-top-10" disabled>Completed</a>
+													</div>
 												</div>
 											</div>
 										</td>
@@ -108,111 +106,112 @@
 								</c:if>
 								<c:if
 									test="${userLevels.userLevelName.equalsIgnoreCase('level2')}">
-									<tr class="collapse out ${userLevels.userLevelId}"
-										id="${userLevels.userLevelId}">
-										<td colspan="5 " class="container bg-grey-pad-6">
-											<div class="col-sm-3 pad-l-r-0">
-												<div class="text-center">
-													<c:if
-														test="${anxUser.emailAddress.length() > 0 && anxUser.phoneNumber.length() > 0}">
-														<span class="glyphicon  glyphicon-envelope font-size-60">
-
-														</span>
-														<br />
-														<p>Email Verification</p>
-														<a class="btn btn-success mar-top-10">Completed</a>
-													</c:if>
-													<c:if
-														test="${anxUser.emailAddress.length() == 0 || anxUser.phoneNumber.length() == 0}">
-														<span
-															class="glyphicon  ${anxUser.emailAddress.length() >0 ? 'glyphicon-phone':'glyphicon-envelope'} font-size-60">
-
-														</span>
-														<br />
-														<p>${anxUser.emailAddress.length() > 0 ? 'Phone Verification':'Email Verification'}</p>
+									<tr>
+										<td colspan="5" class="container bg-grey-pad-6 zeroPadding">
+											<div class="collapse out ${userLevels.userLevelId}" id="${userLevels.userLevelId}">
+												<div class="col-sm-3 pad-l-r-0 ">
+													<div class="text-center">
+														<c:if
+															test="${anxUser.emailAddress.length() > 0 && anxUser.phoneNumber.length() > 0}">
+															<span class="glyphicon  glyphicon-envelope font-size-60" style="display:none">
+	
+															</span>
+															<br />
+															<p>Email Verification</p>
+															<a class="btn btn-success mar-top-10">Completed</a>
+														</c:if>
+														<c:if
+															test="${anxUser.emailAddress.length() == 0 || anxUser.phoneNumber.length() == 0}">
+															<span
+																class="glyphicon  ${anxUser.emailAddress.length() >0 ? 'glyphicon-phone':'glyphicon-envelope'} font-size-60">
+	
+															</span>
+															<br />
+															<p>${anxUser.emailAddress.length() > 0 ? 'Phone Verification':'Email Verification'}</p>
+															<c:if
+																test="${(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
+																<a class="btn btn-success mar-top-10" disabled>Completed</a>
+															</c:if>
+															<c:if
+																test="${!(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
+																<a class="btn btn-primary mar-top-10" data-toggle="modal"
+																	data-target="${anxUser.emailAddress.length() > 0 ? '#phoneVerification':'#sendEmailCode'}"
+																	onClick="clearErrorMessage();">Verify</a>
+															</c:if>
+														</c:if>
+													</div>
+												</div>
+												<div class="col-sm-4 pad-l-r-0">
+													<div class="text-center">
+														<span class="glyphicon glyphicon-user font-size-60"  style="display:none">
+	
+														</span> <br />
+														<p>Identification Verification</p>
 														<c:if
 															test="${(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
+	
 															<a class="btn btn-success mar-top-10" disabled>Completed</a>
 														</c:if>
-														<c:if
-															test="${!(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
-															<a class="btn btn-primary mar-top-10" data-toggle="modal"
-																data-target="${anxUser.emailAddress.length() > 0 ? '#phoneVerification':'#sendEmailCode'}"
-																onClick="clearErrorMessage();">Verify</a>
+														<c:if test="${!(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
+															<c:choose>
+																<c:when test="${(anxUser.identificationCompleted)}">
+																	<a class="btn btn-success mar-top-10" href="../../identification/">Completed</a>
+																</c:when>
+																<c:otherwise>
+																	<a class="btn btn-primary mar-top-10" href="../../identification/">Verify</a>
+																</c:otherwise>
+															</c:choose>
 														</c:if>
-													</c:if>
+													</div>
 												</div>
-											</div>
-											<div class="col-sm-4 pad-l-r-0">
-												<div class="text-center">
-													<span class="glyphicon glyphicon-user font-size-60">
-
-													</span> <br />
-													<p>Identification Verification</p>
-													<c:if
-														test="${(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
-
-														<a class="btn btn-success mar-top-10" disabled>Completed</a>
-													</c:if>
-													<c:if test="${!(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
-														<c:choose>
-															<c:when test="${(anxUser.identificationCompleted)}">
-																<a class="btn btn-success mar-top-10" href="../../identification/">Completed</a>
-															</c:when>
-															<c:otherwise>
-																<a class="btn btn-primary mar-top-10" href="../../identification/">Verify</a>
-															</c:otherwise>
-														</c:choose>
-													</c:if>
-												</div>
-											</div>
-											<div class="col-sm-5 pad-l-r-0">
-												<form:form method="POST" action="/profile/upload/"
-													enctype="multipart/form-data">
-													<div class="level-2-grp">
-														<h3 class="row-header-headings"><spring:message code="kyc.label.image.upload.verification"/></h3>
-														<div class="input-group image-preview">
-															<input type="text"
-																class="form-control image-preview-filename"
-																style="width: 100%;" disabled="disabled">
-															<!-- don't give a name === doesn't send on POST/GET -->
-															<div class="input-group-btn">
-																<!-- image-preview-clear button -->
-																<button type="button"
-																	class="btn btn-default image-preview-clear"
-																	style="display: none;">
-																	<span class="glyphicon glyphicon-remove"  style="padding:3px;"></span>
-																</button>
-																<!-- image-preview-input -->
-																<div class="btn btn-default image-preview-input">
-																	<span class="glyphicon glyphicon-folder-open"></span> <span
-																		class="image-preview-input-title" style="padding:3px;"></span> <input
-																		type="file" accept="image/png, image/jpeg, image/gif"
-																		name="file" />
-																	<!-- rename it -->
+												<div class="col-sm-5 pad-l-r-0">
+													<form:form method="POST" action="/profile/upload/"
+														enctype="multipart/form-data">
+														<div class="level-2-grp">
+															<h3 class="row-header-headings"><spring:message code="kyc.label.image.upload.verification"/></h3>
+															<div class="input-group image-preview">
+																<input type="text"
+																	class="form-control image-preview-filename"
+																	style="width: 100%;" disabled="disabled">
+																<!-- don't give a name === doesn't send on POST/GET -->
+																<div class="input-group-btn">
+																	<!-- image-preview-clear button -->
+																	<button type="button"
+																		class="btn btn-default image-preview-clear"
+																		style="display: none;">
+																		<span class="glyphicon glyphicon-remove"  style="padding:3px;"></span>
+																	</button>
+																	<!-- image-preview-input -->
+																	<div class="btn btn-default image-preview-input">
+																		<span class="glyphicon glyphicon-folder-open" ></span> <span
+																			class="image-preview-input-title" style="padding:3px;"></span> <input
+																			type="file" accept="image/png, image/jpeg, image/gif"
+																			name="file" />
+																		<!-- rename it -->
+																	</div>
+																	<button type="submit" class="btn btn-primary start"
+																		data-ng-click="submit()">
+																		<i class="glyphicon glyphicon-upload"></i> <span><spring:message code="kyc.label.upload"/></span>
+																	</button>
 																</div>
-																<button type="submit" class="btn btn-primary start"
-																	data-ng-click="submit()">
-																	<i class="glyphicon glyphicon-upload"></i> <span><spring:message code="kyc.label.upload"/></span>
-																</button>
 															</div>
 														</div>
-													</div>
-												</form:form>
+													</form:form>
+												</div>
 											</div>
 										</td>
 									</tr>
 								</c:if>
-								<c:if
-									test="${userLevels.userLevelName.equalsIgnoreCase('level3')}">
-									<tr class="collapse out ${userLevels.userLevelId}"
-										id="${userLevels.userLevelId}">
-										<td colspan="5" class="container">
-											<div class="col-sm-12 bg-grey-pad-6">
-												<div class="text-center">
-													<span class="fa fa-home font-size-60 "></span><br/>
-													<p class="mar-top-10">Address Verification</p>
-													<a class="btn btn-primary mar-top-10" href="../../address/verification/">Verify</a>
+								<c:if test="${userLevels.userLevelName.equalsIgnoreCase('level3')}">
+									<tr>
+										<td colspan="5" class="container bg-grey-pad-6 zeroPadding">
+											<div  class="collapse out ${userLevels.userLevelId}" id="${userLevels.userLevelId}">
+												<div class="col-sm-12">
+													<div class="text-center">
+														<span class="fa fa-home font-size-60 "  style="display:none"></span><br/>
+														<p class="mar-top-10">Address Verification</p>
+														<a class="btn btn-primary mar-top-10" href="../../address/verification/">Verify</a>
+													</div>
 												</div>
 											</div>
 										</td>
@@ -287,6 +286,16 @@
 					}
 					reader.readAsDataURL(file);
 				});
+	});
+	
+	$('.collapse').on('show.bs.collapse', function () {
+	    $(this).parent().removeClass("zeroPadding");
+	    $(this).find('.text-center span').fadeIn();
+	});
+
+	$('.collapse').on('hide.bs.collapse', function () {
+	    $(this).parent().addClass("zeroPadding");
+	    $(this).find('.text-center span').hide();
 	});
 </script>
 

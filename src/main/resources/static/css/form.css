@@ -192,12 +192,17 @@ input[type="submit"]:hover {
 
 .bg-grey-pad-6 {
 	background: #f0f0f0;
-	padding: 4% 4%;
+	padding: 4% 4% !important;
 }
 
 .sm-input{
     padding: 1% !important;
     margin-top: 3% !important;
+}
+
+.zeroPadding{
+	padding: 0 !important;
+    border: 0px !important;
 }
 
 
