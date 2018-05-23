@@ -11,6 +11,7 @@ body {
 	background: #535353;
 	background-image: url("/images/bg-min.jpg");
 	background-size: 100%;
+    background-attachment: fixed;
 	font-family: 'Open Sans', sans-serif;
 }
 
