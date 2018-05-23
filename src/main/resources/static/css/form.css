@@ -8,8 +8,8 @@
 
 body {
 	/* background: #567; */
-	/* background: gainsboro; */
-	background-image: url("/images/bg.jpg");
+	background: #535353;
+	background-image: url("/images/bg-min.jpg");
 	background-size: 100%;
 	font-family: 'Open Sans', sans-serif;
 }
