@@ -195,5 +195,10 @@ input[type="submit"]:hover {
 	padding: 4% 4%;
 }
 
+.sm-input{
+    padding: 1% !important;
+    margin-top: 3% !important;
+}
+
 
 

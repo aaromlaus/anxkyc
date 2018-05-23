@@ -181,7 +181,7 @@
 																<button type="button"
 																	class="btn btn-default image-preview-clear"
 																	style="display: none;">
-																	<span class="glyphicon glyphicon-remove"></span><spring:message code="kyc.label.clear"/>
+																	<span class="glyphicon glyphicon-remove"  style="padding:3px;"></span>
 																</button>
 																<!-- image-preview-input -->
 																<div class="btn btn-default image-preview-input">
@@ -264,7 +264,7 @@
 			$('.image-preview-filename').val("");
 			$('.image-preview-clear').hide();
 			$('.image-preview-input input:file').val("");
-			$(".image-preview-input-title").text("Browse");
+			$(".image-preview-input-title").text("");
 		});
 		// Create the preview image
 		$(".image-preview-input input:file").change(
@@ -278,7 +278,7 @@
 					var reader = new FileReader();
 					// Set preview image into the popover data-content
 					reader.onload = function(e) {
-						$(".image-preview-input-title").text("Change");
+						$(".image-preview-input-title").text("");
 						$(".image-preview-clear").show();
 						$(".image-preview-filename").val(file.name);
 						img.attr('src', e.target.result);
