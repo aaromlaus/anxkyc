@@ -19,5 +19,8 @@ public interface UserVerificationRepository extends JpaRepository<UserVerificati
     @Modifying(clearAutomatically = true)
     @Query("Update UserVerification u SET u.status = :status WHERE u.userId = :userId AND u.verification = :verification")
 	void updateVerificationStatus(@Param("userId") String userId,@Param("verification") String verification,@Param("status") String status);
+	
+	
+	List<UserVerification> findByUserId(@Param("userId") String userId);
 
 }

@@ -59,5 +59,10 @@ public class UserVerificationServiceImpl implements UserVerificationService {
 		}
 		return true;
 	}
+	
+	@Override
+	public List<UserVerification> getAllUserVerification( String userId){
+		return uvReposity.findByUserId(userId);
+	}
 
 }

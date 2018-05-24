@@ -60,7 +60,6 @@ public class UserIdentificationController {
 		String currentPrincipalName = authentication.getName();
 		AnxUser dbUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
 		copyFormFieldsValue(dbUser,anxUser);
-		dbUser.setIdentificationCompleted(true);
 		userService.saveUser(dbUser);
 		userVerificationService.updateVerificationStatus(dbUser, VerificationType.IDENTIFICATION_VERIFICATION.name(), VerificationStatusType.COMPLETED);
 		return "redirect:/profile/main";

@@ -1,5 +1,6 @@
 package com.anx.kyc.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ import com.anx.kyc.helper.AnxMessageHelper;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.model.UserLevel;
+import com.anx.kyc.model.UserVerification;
 import com.anx.kyc.service.FileUploadService;
 import com.anx.kyc.service.UserService;
 import com.anx.kyc.service.UserVerificationService;
@@ -54,6 +56,14 @@ public class UserDashboardController {
 		List<UserLevel> userLevels = userService.getAllUserLevel();
 		model.put("userLevels", userLevels);
 		model.put("anxUser", anxUser);
+		
+		List<UserVerification> userVerifications =userVerificationService.getAllUserVerification(anxUser.getUserId());
+		Map<String,String> verificationMap = new HashMap<String,String>();
+		for(UserVerification uv : userVerifications) {
+			verificationMap.put(uv.getVerification(), uv.getStatus());
+		}
+	
+		model.put("verificationLevel", verificationMap);
 		populate(model, session);
 		return "main/userdashboard";
 	}

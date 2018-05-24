@@ -154,7 +154,7 @@
 														</c:if>
 														<c:if test="${!(userLevels.userLevelGroup <= anxUser.userLevel.userLevelGroup)}">
 															<c:choose>
-																<c:when test="${(anxUser.identificationCompleted)}">
+																<c:when test="${verificationLevel.get('IDENTIFICATION_VERIFICATION') eq 'Completed'}">
 																	<a class="btn btn-success mar-top-10" href="../../identification/">Completed</a>
 																</c:when>
 																<c:otherwise>
@@ -210,7 +210,20 @@
 													<div class="text-center">
 														<span class="fa fa-home font-size-60 "  style="display:none"></span><br/>
 														<p class="mar-top-10">Address Verification</p>
-														<a class="btn btn-primary mar-top-10" href="../../address/verification/">Verify</a>
+														<c:choose>
+															<c:when test="${verificationLevel.get('ADDRESS_VERIFICATION') eq 'Not Started'}">
+																<a class="btn btn-primary mar-top-10" href="../../address/verification/">Verify</a>
+															</c:when>
+															<c:when test="${verificationLevel.get('ADDRESS_VERIFICATION') eq 'Pending'}">
+																<a class="btn btn-default mar-top-10" disabled>Pending Verification</a>
+															</c:when>
+															<c:when test="${verificationLevel.get('ADDRESS_VERIFICATION') eq 'Rejected'}">
+																<a class="btn btn-danger mar-top-10" href="../../address/verification/">Rejected</a>
+															</c:when>
+															<c:when test="${verificationLevel.get('ADDRESS_VERIFICATION') eq 'Completed'}">
+																<a class="btn btn-success mar-top-10" disabled>Completed</a>
+															</c:when>
+														</c:choose>
 													</div>
 												</div>
 											</div>

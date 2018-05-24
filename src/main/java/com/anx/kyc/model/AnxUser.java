@@ -123,9 +123,6 @@ public class AnxUser implements Serializable {
 	@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<IdentificationCard> card;
 	
-	@Column(name="identification_completed", columnDefinition="tinyint(1) default 0")
-	private boolean identificationCompleted;
-	
 	@OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "current_add_id", referencedColumnName = "id")
 	private Address currentAddress;
@@ -405,13 +402,6 @@ public class AnxUser implements Serializable {
 		this.birthDateStr = birthDateStr;
 	}
 
-	public boolean isIdentificationCompleted() {
-		return identificationCompleted;
-	}
-
-	public void setIdentificationCompleted(boolean identificationCompleted) {
-		this.identificationCompleted = identificationCompleted;
-	}
 
 	public Address getCurrentAddress() {
 		return currentAddress;
