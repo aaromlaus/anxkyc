@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.anx.kyc.common.AlertStyleMessages;
+import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.common.VerificationStatusType;
 import com.anx.kyc.common.VerificationType;
 import com.anx.kyc.helper.AnxMessageHelper;
@@ -83,7 +84,7 @@ public class UserDashboardController {
 		fileUploadService.uploadAndSaveImage(file,anxUser);
 		redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("user.upload.image.success"));
-		userVerificationService.updateVerificationStatus(anxUser, VerificationType.SELFIE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+		userVerificationService.updateVerificationStatus(anxUser, VerificationType.SELFIE_VERIFICATION.name(), VerificationStatusType.COMPLETED, UserLevelType.LEVEL_2, UserLevelType.LEVEL_2_PENDING);
 		return "redirect:/profile/main";
 	}
 
@@ -138,7 +139,7 @@ public class UserDashboardController {
 		for(int i =0; i < files.length ; i++) {
 			fileUploadService.uploadAndSaveImage(files[i],anxUser);			
 		}
-		userVerificationService.updateVerificationStatus(anxUser, VerificationType.ADDRESS_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+		userVerificationService.updateVerificationStatus(anxUser, VerificationType.ADDRESS_VERIFICATION.name(), VerificationStatusType.COMPLETED, UserLevelType.LEVEL_2, UserLevelType.LEVEL_2_PENDING);
 		return "redirect:/profile/main";
 	}
 

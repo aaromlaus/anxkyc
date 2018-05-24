@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.anx.kyc.common.AlertStyleMessages;
+import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.common.VerificationStatusType;
 import com.anx.kyc.common.VerificationType;
 import com.anx.kyc.helper.AnxMessageHelper;
@@ -99,7 +100,7 @@ public class RegistrationController {
 			userService.prepareAndSendUserRegistrationEmail(anxUser, verificationCode, request);
 			successMessage = amHelper.get("registration.email.success");
 		} else if(AnxUtil.isNotNullOrEmpty(anxUser.getPhoneNumber())) {
-			userVerService.updateVerificationStatus(anxUser, VerificationType.PHONE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+			userVerService.updateVerificationStatus(anxUser, VerificationType.PHONE_VERIFICATION.name(), VerificationStatusType.COMPLETED, UserLevelType.LEVEL_2, UserLevelType.LEVEL_2_PENDING);
 		}
 		
 		model.put("msgCss", AlertStyleMessages.SUCCESS.getValue());

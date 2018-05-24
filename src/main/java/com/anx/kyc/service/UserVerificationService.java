@@ -11,8 +11,7 @@ public interface UserVerificationService {
 	
 	public boolean checkLevelCompletion(String level, String userId);
 
-	public void updateVerificationStatus(AnxUser user, String verification, String status);
+	public void updateVerificationStatus(AnxUser user, String verification, String status, String userLevelFrom, String userLevelTo);
 
 	public List<UserVerification> getAllUserVerification(String userId);
-
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.common.VerificationStatusType;
 import com.anx.kyc.common.VerificationType;
 import com.anx.kyc.model.Address;
@@ -58,8 +59,7 @@ public class AddressVerificationController {
 		AnxUser dbUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
 		copyAddressDetails(dbUser,anxUser);
 		userService.saveUser(dbUser);
-		userVerificationService.updateVerificationStatus(dbUser, VerificationType.ADDRESS_VERIFICATION.name(), VerificationStatusType.PENDING);
-
+		userVerificationService.updateVerificationStatus(dbUser, VerificationType.ADDRESS_VERIFICATION.name(), VerificationStatusType.COMPLETED, UserLevelType.LEVEL_3, UserLevelType.LEVEL_3_PENDING);
 		
 		return "redirect:/profile/main/";
 	}

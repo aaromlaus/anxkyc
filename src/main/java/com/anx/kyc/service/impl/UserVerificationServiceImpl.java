@@ -39,9 +39,9 @@ public class UserVerificationServiceImpl implements UserVerificationService {
 	}
 	
 	@Override
-	public void updateVerificationStatus(AnxUser user, String verification, String status) {
+	public void updateVerificationStatus(AnxUser user, String verification, String status, String userLevelFrom, String userLevelTo) {
 		uvReposity.updateVerificationStatus(user.getUserId(), verification, status);
-		checkAndUpdateLevelCompletion(user, UserLevelType.LEVEL_2, UserLevelType.LEVEL_2_PENDING);
+		checkAndUpdateLevelCompletion(user, userLevelFrom, userLevelTo);
 	}
 	
 	private void checkAndUpdateLevelCompletion(AnxUser user, String userLevelFrom, String userLevelTo) {

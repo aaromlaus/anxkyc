@@ -160,7 +160,7 @@ public class UserServiceImpl implements UserService {
 				user.setActive(true);
 				user.setVerificationCode("");
 				saveUser(user, false);
-				uvService.updateVerificationStatus(user, VerificationType.EMAIL_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+				uvService.updateVerificationStatus(user, VerificationType.EMAIL_VERIFICATION.name(), VerificationStatusType.COMPLETED, UserLevelType.LEVEL_2, UserLevelType.LEVEL_2_PENDING);
 				return user;
 			}
 		}
@@ -268,7 +268,7 @@ public class UserServiceImpl implements UserService {
 				user.setEmailAddress(String.valueOf(session.getServletContext().getAttribute("myAccountEmail")));
 				
 				saveUser(user, false);
-				uvService.updateVerificationStatus(user, VerificationType.EMAIL_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+				uvService.updateVerificationStatus(user, VerificationType.EMAIL_VERIFICATION.name(), VerificationStatusType.COMPLETED, UserLevelType.LEVEL_2, UserLevelType.LEVEL_2_PENDING);
 				
 				session.getServletContext().removeAttribute("myAccountCode");
 				session.getServletContext().removeAttribute("myAccountEmail");
@@ -307,7 +307,7 @@ public class UserServiceImpl implements UserService {
 				user.setPhoneCode(findPhoneCodeById(Long.valueOf(requestJson.get("phoneCodeId").getAsString())));
 				
 				saveUser(user, false);
-				uvService.updateVerificationStatus(user, VerificationType.PHONE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+				uvService.updateVerificationStatus(user, VerificationType.PHONE_VERIFICATION.name(), VerificationStatusType.COMPLETED, UserLevelType.LEVEL_2, UserLevelType.LEVEL_2_PENDING);
 				
 				if (null != requestJson.get("currentPage") && !requestJson.get("currentPage").isJsonNull()
 						&& !requestJson.get("currentPage").getAsString().equals("")) {
