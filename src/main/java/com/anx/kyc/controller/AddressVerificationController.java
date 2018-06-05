@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.anx.kyc.common.UserLevelType;
+import com.anx.kyc.common.VerificationStatusType;
+import com.anx.kyc.common.VerificationType;
 import com.anx.kyc.model.Address;
 import com.anx.kyc.model.AddressVerificationDoc;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.service.UserService;
+import com.anx.kyc.service.UserVerificationService;
 import com.anx.kyc.util.AnxUtil;
 
 @Controller
@@ -22,6 +26,9 @@ public class AddressVerificationController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserVerificationService userVerificationService;
 
 	@RequestMapping("/")
 	public String showIdentityVerificationPage(Map<String, Object> model) {
@@ -52,9 +59,9 @@ public class AddressVerificationController {
 		AnxUser dbUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
 		copyAddressDetails(dbUser,anxUser);
 		userService.saveUser(dbUser);
-		System.out.println(anxUser);
+		userVerificationService.updateVerificationStatus(dbUser, VerificationType.ADDRESS_VERIFICATION.name(), VerificationStatusType.COMPLETED, UserLevelType.LEVEL_3, UserLevelType.LEVEL_3_PENDING);
 		
-		return "redirect:/address/verification/";
+		return "redirect:/profile/main/";
 	}
 	
 	private void copyAddressDetails(AnxUser to, AnxUser from) {

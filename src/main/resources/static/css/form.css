@@ -8,9 +8,10 @@
 
 body {
 	/* background: #567; */
-	/* background: gainsboro; */
-	background-image: url("/images/bg.jpg");
+	background: #535353;
+	background-image: url("/images/bg-min.jpg");
 	background-size: 100%;
+    background-attachment: fixed;
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -192,7 +193,17 @@ input[type="submit"]:hover {
 
 .bg-grey-pad-6 {
 	background: #f0f0f0;
-	padding: 4% 4%;
+	padding: 4% 4% !important;
+}
+
+.sm-input{
+    padding: 1% !important;
+    margin-top: 3% !important;
+}
+
+.zeroPadding{
+	padding: 0 !important;
+    border: 0px !important;
 }
 
 

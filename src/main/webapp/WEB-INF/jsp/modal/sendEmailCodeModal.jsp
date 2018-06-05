@@ -16,7 +16,7 @@
 					<div id="errorMessage"></div>
 					<p>
 						<input type="text" placeholder="Email Address"
-							class="my-account-input" id="emailVerificationAddress">
+							class="my-account-input sm-input" id="emailVerificationAddress">
 					</p>
 				</div>
 				<div class="modal-footer">

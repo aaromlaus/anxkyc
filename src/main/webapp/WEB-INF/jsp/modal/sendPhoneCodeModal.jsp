@@ -15,14 +15,14 @@
 					<div id="errorMessagePhone"></div>
 					<p>
 						<form:select
-							class="selectpicker phone-code-width my-account-input"
+							class="selectpicker phone-code-width my-account-input sm-input"
 							data-live-search="true" path="anxUser.phoneCode.phoneCodeId"
 							id="phoneCodeNameId">
 							<form:options items="${countryCodeList}" itemValue="phoneCodeId"
 								itemLabel="phoneCodeCountry" />
 						</form:select>
 						<input type="text" placeholder="Mobile number"
-							class="my-account-input phone-number-width" id="phoneNumber">
+							class="my-account-input phone-number-width sm-input" id="phoneNumber">
 					</p>
 				</div>
 				<div class="modal-footer">

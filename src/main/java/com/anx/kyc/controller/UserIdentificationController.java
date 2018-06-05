@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.common.VerificationStatusType;
 import com.anx.kyc.common.VerificationType;
 import com.anx.kyc.model.AnxUser;
@@ -60,9 +61,8 @@ public class UserIdentificationController {
 		String currentPrincipalName = authentication.getName();
 		AnxUser dbUser = userService.findByEmailAddressOrPhoneNumber(currentPrincipalName);
 		copyFormFieldsValue(dbUser,anxUser);
-		dbUser.setIdentificationCompleted(true);
 		userService.saveUser(dbUser);
-		userVerificationService.updateVerificationStatus(dbUser, VerificationType.IDENTIFICATION_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+		userVerificationService.updateVerificationStatus(dbUser, VerificationType.IDENTIFICATION_VERIFICATION.name(), VerificationStatusType.COMPLETED, UserLevelType.LEVEL_2, UserLevelType.LEVEL_2_PENDING);
 		return "redirect:/profile/main";
 	}
 	

@@ -1,5 +1,6 @@
 package com.anx.kyc.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.anx.kyc.common.AlertStyleMessages;
+import com.anx.kyc.common.UserLevelType;
 import com.anx.kyc.common.VerificationStatusType;
 import com.anx.kyc.common.VerificationType;
 import com.anx.kyc.helper.AnxMessageHelper;
 import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.model.PhoneCode;
 import com.anx.kyc.model.UserLevel;
+import com.anx.kyc.model.UserVerification;
 import com.anx.kyc.service.FileUploadService;
 import com.anx.kyc.service.UserService;
 import com.anx.kyc.service.UserVerificationService;
@@ -54,6 +57,14 @@ public class UserDashboardController {
 		List<UserLevel> userLevels = userService.getAllUserLevel();
 		model.put("userLevels", userLevels);
 		model.put("anxUser", anxUser);
+		
+		List<UserVerification> userVerifications =userVerificationService.getAllUserVerification(anxUser.getUserId());
+		Map<String,String> verificationMap = new HashMap<String,String>();
+		for(UserVerification uv : userVerifications) {
+			verificationMap.put(uv.getVerification(), uv.getStatus());
+		}
+	
+		model.put("verificationLevel", verificationMap);
 		populate(model, session);
 		return "main/userdashboard";
 	}
@@ -73,7 +84,7 @@ public class UserDashboardController {
 		fileUploadService.uploadAndSaveImage(file,anxUser);
 		redirectAttributes.addFlashAttribute("msgCss", AlertStyleMessages.SUCCESS.getValue());
 		redirectAttributes.addFlashAttribute("msgDetails", amHelper.get("user.upload.image.success"));
-		userVerificationService.updateVerificationStatus(anxUser, VerificationType.SELFIE_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+		userVerificationService.updateVerificationStatus(anxUser, VerificationType.SELFIE_VERIFICATION.name(), VerificationStatusType.COMPLETED, UserLevelType.LEVEL_2, UserLevelType.LEVEL_2_PENDING);
 		return "redirect:/profile/main";
 	}
 
@@ -128,7 +139,7 @@ public class UserDashboardController {
 		for(int i =0; i < files.length ; i++) {
 			fileUploadService.uploadAndSaveImage(files[i],anxUser);			
 		}
-		userVerificationService.updateVerificationStatus(anxUser, VerificationType.ADDRESS_VERIFICATION.name(), VerificationStatusType.COMPLETED);
+		userVerificationService.updateVerificationStatus(anxUser, VerificationType.ADDRESS_VERIFICATION.name(), VerificationStatusType.COMPLETED, UserLevelType.LEVEL_2, UserLevelType.LEVEL_2_PENDING);
 		return "redirect:/profile/main";
 	}
 

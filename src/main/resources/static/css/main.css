@@ -1,6 +1,8 @@
 body {
 	/* background: #567; */
-	background: gainsboro;
+	background: #535353;
+	background-image: url("/images/bg-min.jpg");
+    background-attachment: fixed;
 	font-family: 'Open Sans', sans-serif;
 }
 
