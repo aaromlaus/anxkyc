@@ -1,95 +1,18 @@
-CREATE TABLE role (
-role_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-role_name VARCHAR(255) NOT NULL,
-description VARCHAR(255),
-UNIQUE(role_name)
-);
-
-CREATE TRIGGER role_id_trigger
-  BEFORE INSERT ON role
-  FOR EACH ROW
-  SET new.role_id = CONCAT('RLE', DATE_FORMAT(CURRENT_TIMESTAMP, '%m%d%Y%H%i'), new.role_id);
 
 
-CREATE TABLE user_level(
-	user_level_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	user_level_group INT NOT NULL,
-	user_level_name VARCHAR(255) NOT NULL,
-	description TEXT,
-	requirement TEXT,
-	cash_in VARCHAR(100),
-	cash_out VARCHAR(100),
-	enabled boolean default false,
-	UNIQUE(user_level_name)
-);
-
-CREATE TABLE anx_user(
-id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-user_id VARCHAR(255),
-first_name VARCHAR(255),
-middle_name VARCHAR(255),
-last_name VARCHAR(255),
-email_address VARCHAR(255),
-phone_number VARCHAR(255),
-password VARCHAR(255),
-role_name VARCHAR(255),
-user_level_name VARCHAR(255),
-house_number VARCHAR(255),
-street VARCHAR(255),
-city VARCHAR(255),
-province VARCHAR(100),
-country VARCHAR(100),
-postal_code VARCHAR(100),
-source_of_fund VARCHAR(100),
-birth_date VARCHAR(100),
-phone_code_id INT,
-active TINYINT(1),
-verification_code VARCHAR(255),
-CONSTRAINT fk_anx_user_role FOREIGN KEY (role_name)
-    REFERENCES role(role_name),
-CONSTRAINT fk_anx_useruser_leveluser_level_user_level FOREIGN KEY (user_level_name)
-    REFERENCES user_level(user_level_name)
-);
-
-INSERT INTO user_level(user_level_group,user_level_name,description,requirement,cash_in,cash_out,enabled)
-values (1,'level1','Registered as Level 1','Phone or email verification','2,000 PHP','0 PHP',true),
- (1,'level2pending','Pending Level 2 Approval','Phone or email verification','2,000 PHP','0 PHP',true),
- (2,'level2','Registered as Level 2','ID, selfie, phone and email verification','50,000 PHP','50,000 PHP',true),
- (3,'level3','Registered as Level 3','Address verification','400,000 PHP','400,000 PHP',true),
- (4,'level4','Registered as Level 4','Custom limits application','Custom (up to 5 million PHP)','Custom(up to 5 million PHP)',true);
+INSERT INTO user_level(user_level_group,user_level_name,description,requirement,cash_in,cash_out)
+values (1,'level1','Registered as Level 1','Phone or email verification','2,000 PHP','0 PHP'),
+ (1,'level2pending','Pending Level 2 Approval','Phone or email verification','2,000 PHP','0 PHP'),
+ (2,'level2','Registered as Level 2','ID, selfie, phone and email verification','50,000 PHP','50,000 PHP'),
+ (3,'level3','Registered as Level 3','Address verification','400,000 PHP','400,000 PHP'),
+ (4,'level4','Registered as Level 4','Custom limits application','Custom (up to 5 million PHP)','Custom(up to 5 million PHP)');
 
 
  INSERT INTO role(role_name,description)
 values ('user','role for user'),
 ('admin','role for admin');
 
-CREATE TABLE phone_code(
-	phone_code_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	phone_code_name VARCHAR(50),
-	country VARCHAR(50)
-);
 
-CREATE TABLE user_image(
-	user_image_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	anx_user_id INT,
-	link VARCHAR(255),
-	user_level_details_id INT
-);
-
-CREATE TABLE user_verification (
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	user_ver_id VARCHAR(255),
-	user_id VARCHAR(255),
-	verification VARCHAR(255),
-	description VARCHAR(255),
-	status VARCHAR(255),
-	level VARCHAR(45)
-);
-
-CREATE TRIGGER user_ver_id_trigger
-  BEFORE INSERT ON user_verification
-  FOR EACH ROW
-  SET new.user_ver_id = CONCAT('UV', DATE_FORMAT(CURRENT_TIMESTAMP, '%m%d%Y%H%i'), new.user_ver_id);
 
 INSERT INTO phone_code(phone_code_name,country)
 VALUES
