@@ -1,5 +1,7 @@
 package com.anx.kyc.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.anx.kyc.common.UserLevelType;
+import com.anx.kyc.model.AnxUser;
 import com.anx.kyc.service.UserService;
 
 @Controller
@@ -19,7 +22,14 @@ public class AdminDashboardController {
 	
 	@RequestMapping(value="/")
 	public String administrator(Map<String, Object> model) {
-		model.put("userList", userService.getUsersByUserLevelName(UserLevelType.LEVEL_2_PENDING));
+		List<AnxUser> userList = new ArrayList<AnxUser>();
+		for(AnxUser lvl2User : userService.getUsersByUserLevelName(UserLevelType.LEVEL_2_PENDING)) {
+			userList.add(lvl2User);
+		}
+		for(AnxUser lvl3User : userService.getUsersByUserLevelName(UserLevelType.LEVEL_3_PENDING)) {
+			userList.add(lvl3User);
+		}
+		model.put("userList", userList);
 		return "admin/admindashboard";
 	}
 	

@@ -325,9 +325,17 @@ public class UserServiceImpl implements UserService {
 	public void updateAnxUserLevel(String userId, String status) {
 		AnxUser user = getUserById(userId);
 		if (status.equalsIgnoreCase("approve")) {
-			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_2));
+			if(user.getUserLevel().getUserLevelName().equals(UserLevelType.LEVEL_2_PENDING)) {
+				user.setUserLevel(getUserLevel(UserLevelType.LEVEL_2));
+			} else if(user.getUserLevel().getUserLevelName().equals(UserLevelType.LEVEL_3_PENDING)) {
+				user.setUserLevel(getUserLevel(UserLevelType.LEVEL_3));
+			}
 		} else if (status.equalsIgnoreCase("reject")) {
-			user.setUserLevel(getUserLevel(UserLevelType.LEVEL_1));
+			if(user.getUserLevel().getUserLevelName().equals(UserLevelType.LEVEL_2_PENDING)) {
+				user.setUserLevel(getUserLevel(UserLevelType.LEVEL_1));
+			} else if(user.getUserLevel().getUserLevelName().equals(UserLevelType.LEVEL_3_PENDING)) {
+				user.setUserLevel(getUserLevel(UserLevelType.LEVEL_2));
+			}
 		}
 		saveUser(user, false);
 	}
